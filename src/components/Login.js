@@ -1,6 +1,6 @@
 // src/components/Login.js
-import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Login() {

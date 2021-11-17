@@ -1,5 +1,5 @@
 // src/components/Dashboard.js
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Dashboard() {
@@ -19,6 +19,9 @@ export function Dashboard() {
     <div>
       {/* Change it to display the user ID too 👇*/}
       <p>Welcome, {user?.id}!</p>
+      <p>{user?.email}</p>
+      <p>{user?.created_at}</p>
+
       <button onClick={handleSignOut}>Sign out</button>
     </div>
   )

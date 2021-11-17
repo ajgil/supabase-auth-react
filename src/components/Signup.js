@@ -1,6 +1,6 @@
 // src/components/Signup.js
-import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Signup() {
@@ -8,7 +8,7 @@ export function Signup() {
   const passwordRef = useRef()
 
   // Get signUp function from the auth context
-  const { signUp } = useAuth()
+  const { signUp, signInWithFacebook, signInWithGoogle } = useAuth()
 
   const history = useHistory()
 
@@ -48,6 +48,15 @@ export function Signup() {
 
         <button type="submit">Sign up</button>
       </form>
+      <div className="App">
+      <h1>Social SingUp!</h1>
+      <h3>Google</h3>
+      <button onClick={signInWithGoogle}>Sign In</button>
+      </div>
+      <div className="App">
+      <h3>Facebook</h3>
+      <button onClick={signInWithFacebook}>Sign In</button>
+      </div>
     </>
   )
 }

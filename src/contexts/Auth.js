@@ -32,9 +32,13 @@ export function AuthProvider({ children }) {
       signUp: (data) => supabase.auth.signUp(data),
       signIn: (data) => supabase.auth.signIn(data),
       signOut: () => supabase.auth.signOut(),
+      signInWithGoogle: () => {
+        const {user, session, error} = supabase.auth.signIn({provider: 'google'})
+      },
+      signInWithFacebook: () => supabase.auth.signIn({provider: 'facebook'}),
       user,
     }
-  
+
     return (
       <AuthContext.Provider value={value}>
         {!loading && children}
