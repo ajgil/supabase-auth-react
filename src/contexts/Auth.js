@@ -32,13 +32,17 @@ export function AuthProvider({ children }) {
       signUp: (data) => supabase.auth.signUp(data),
       signIn: (data) => supabase.auth.signIn(data),
       signOut: () => supabase.auth.signOut(),
-      signInWithGoogle: () => {
-        const {user, session, error} = supabase.auth.signIn({provider: 'google', 
-        redirect_to:'http://localhost:3000/'})
-      },
+      signInWithGoogle: () => supabase.auth.signIn({
+          provider: 'google'
+        }, {
+          scopes: 'profile'
+        })
+      ,
       signInWithFacebook: () => supabase.auth.signIn({provider: 'facebook'}),
       user,
     }
+    console.log('auth user : ', user)
+    // redirectTo: 'http://localhost:3000'
 
     return (
       <AuthContext.Provider value={value}>
