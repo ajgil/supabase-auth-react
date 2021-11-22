@@ -18,9 +18,13 @@ export function Dashboard() {
   return (
     <div>
       {/* Change it to display the user ID too 👇*/}
-      <p>Welcome, {user?.id}!</p>
-      <p>{user?.email}</p>
+      <p>Welcome, {user?.user_metadata.full_name}!</p>
+      <p>Your id, {user?.id}!</p>
+      <p>Your email: {user?.email}</p>
       <p>{user?.created_at}</p>
+      <p>{user?.aud}</p>
+      <p>{user?.app_metadata.provider}</p>
+      <p>{user?.user_metadata.avatar_url}</p>
 
       <button onClick={handleSignOut}>Sign out</button>
     </div>
