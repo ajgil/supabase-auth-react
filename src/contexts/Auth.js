@@ -23,6 +23,12 @@ export function AuthProvider({ children }) {
         }
       )
   
+      // update mongodb - api server
+      // POST request using axios inside useEffect React hook
+      //const article = user
+      axios.post('https://hiklub-dev.herokuapp.com/api/v1/users/register', user)
+        .then(response => console.log(response.data.id));
+      
       return () => {
         listener?.unsubscribe()
       }
