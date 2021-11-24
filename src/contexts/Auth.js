@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { supabase } from '../supabase'
+import { supabase } from '../Supabase'
 import axios from "axios"
 
 const AuthContext = React.createContext()
@@ -23,12 +23,12 @@ export function AuthProvider({ children }) {
         }
       )
   
-      // update mongodb - api server
+      /* update mongodb - api server
       // POST request using axios inside useEffect React hook
       //const article = user
       axios.post('https://hiklub-dev.herokuapp.com/api/v1/users/register', user)
         .then(response => console.log(response.data.id));
-      
+      */
       return () => {
         listener?.unsubscribe()
       }
@@ -54,28 +54,6 @@ export function AuthProvider({ children }) {
     //console.log(user?.user_metadata.avatar_url)
     //user?.user_metadata.full_name
     // redirectTo: 'http://localhost:3000'
-
-    // backend connect 
-    
-    const headers = {
-      'Content-Type': 'application/json',
-    }
-    
-    const http = axios.create({
-      baseURL: process.env.API_URL,
-      withCredentials: true,
-    })
-
-    const userApi = ({ apiUser}) => {
-      return http
-        .post("/api/v1/users/register", { apiUser}, headers)
-        .then(data => { 
-          console.log('respuesta:', data)
-        })  
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
 
     return (
       <AuthContext.Provider value={value}>

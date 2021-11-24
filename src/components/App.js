@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
 import { Signup } from './Signup'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
-import { supabase } from '../supabase'
 
 import './App.css'
 export function App() {
