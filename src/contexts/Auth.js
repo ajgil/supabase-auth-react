@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { supabase } from '../Supabase'
-import axios from "axios"
+import { supabase } from '../supabase'
+//import axios from "axios"
 
 const AuthContext = React.createContext()
 
@@ -22,13 +22,6 @@ export function AuthProvider({ children }) {
           setLoading(false)
         }
       )
-  
-      /* update mongodb - api server
-      // POST request using axios inside useEffect React hook
-      //const article = user
-      axios.post('https://hiklub-dev.herokuapp.com/api/v1/users/register', user)
-        .then(response => console.log(response.data.id));
-      */
       return () => {
         listener?.unsubscribe()
       }
@@ -38,16 +31,30 @@ export function AuthProvider({ children }) {
     // Will be passed down to Signup, Login and Dashboard components
     const value = {
       signUp: (data) => supabase.auth.signUp(data),
+      
+      //Login --> supabase.auth.signIn({ email, password })
       signIn: (data) => supabase.auth.signIn(data),
+
       signOut: () => supabase.auth.signOut(),
-      signInWithGoogle: () => supabase.auth.signIn({
-          provider: 'google'
-        }, {
-          scopes: 'profile'
-        }),
+	    
+      // https://github.com/supabase/supabase/discussions/2842
+      // http://localhost:3000/#
+      // redirectTo: 'http://localhost:3000/provider?refresh=true'
+      signInWithGoogle: () => {
+		    const { error } = supabase.auth.signIn(
+            {
+              provider: 'google'
+            },
+            { redirectTo: 'http://localhost:3000/provider?refresh=true' }
+          )
+          if (error) {
+            alert(error.message);
+          }
+        },
+
       signInWithFacebook: () => supabase.auth.signIn({provider: 'facebook'}),
+      
       user,
-      //resApi: () => userApi(provider),
     }
     //console.log('auth user : ', user?.email)
     //console.log(user?.app_metadata.provider)

@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/Auth'
 export function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
+  const phoneNumberRef = useRef()
 
   // Get signUp function from the auth context
   const { signIn } = useAuth()
@@ -32,22 +33,44 @@ export function Login() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="input-email">Email</label>
-        <input id="input-email" type="email" ref={emailRef} />
+      <div>
+      <h2>Login & Registro Usuarios</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="input-email">Email</label>
+            <input id="input-email" type="email" ref={emailRef} />
 
-        <label htmlFor="input-password">Password</label>
-        <input id="input-password" type="password" ref={passwordRef} />
+            <label htmlFor="input-password">Password</label>
+            <input id="input-password" type="password" ref={passwordRef} />
+            <br />
+            <br />
+            <button type="submit">Login</button>
+          </form>
+          <br />
+                  {/* Add this 👇 */}
+          <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+      </div>
 
-        <br />
+      <div>
+        <h2>Login & Registro OdE</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="input-email">Email</label>
+          <input id="input-email" type="email" ref={emailRef} />
 
-        {/* Add this 👇 */}
-      <p>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
-      </p>
-      
-        <button type="submit">Login</button>
-      </form>
+          <label htmlFor="input-password">Password</label>
+          <input id="input-password" type="password" ref={passwordRef} />
+
+          <label htmlFor="input-password">Teléfono</label>
+          <input id="input-phoneNumber" type="phoneNumber" ref={phoneNumberRef} />
+          <br />
+          <br />
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      </div>
     </>
   )
 }
