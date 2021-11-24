@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/Auth'
 export function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const phoneNumberRef = useRef()
+
 
   // Get signUp function from the auth context
   const { signIn } = useAuth()
@@ -61,14 +61,12 @@ export function Login() {
           <label htmlFor="input-password">Password</label>
           <input id="input-password" type="password" ref={passwordRef} />
 
-          <label htmlFor="input-password">Teléfono</label>
-          <input id="input-phoneNumber" type="phoneNumber" ref={phoneNumberRef} />
           <br />
           <br />
           <button type="submit">Login</button>
         </form>
         <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+          Don't have an account? <Link to="/odesignup">Sign Up</Link>
         </p>
       </div>
     </>
