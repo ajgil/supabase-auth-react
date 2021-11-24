@@ -4,10 +4,6 @@
 // https://supabase.io/docs/guides/examples
 //https://ruanmartinelli.com/posts/supabase-authentication-react
 
-//  https://supabase.io/docs/learn/auth-deep-dive/auth-google-oauth
-// https://supabase.io/docs/guides/auth/auth-google
-
-
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
