@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
 
-export function Dashboard() {
+export function Dashboard(props) {
   // Get current user and signOut function from context
   const { user, signOut } = useAuth()
 
@@ -136,8 +136,14 @@ export function Dashboard() {
       <p>Usuario: {username}</p>
       <p>Website: {website}</p>
       <p>Avatar: {avatar_url}</p>
-      
-      <button onClick={handleSignOut}>Sign out</button>
+    </div>
+
+    <div>
+      <h2>Datos OdEs</h2>
+      <p>OdEs phone Number {props.phone}</p>
+    </div>
+    <div>
+    <button onClick={handleSignOut}>Sign out</button>
     </div>
     </>
   )

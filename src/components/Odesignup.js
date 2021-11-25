@@ -8,9 +8,9 @@ export function OdeSignup() {
   const odepasswordRef = useRef()
   const odephoneNumberRef = useRef()
   const tokenNumberRef = useRef()
-
+  
   // Get signUp function from the auth context
-  const { signUp, signUpPhone, verifyOTP } = useAuth()
+  const { singUpOde, signUpPhone, verifyOTP } = useAuth()
 
   const history = useHistory()
 
@@ -22,21 +22,9 @@ export function OdeSignup() {
     const password = odepasswordRef.current.value
     const phone = odephoneNumberRef.current.value
 
-    console.log('email:', email)
-    console.log('phone:', phone)
+    console.log('odeSingUp phone:', phone)
     // Calls `signUp` function from the context
-    const { error } = await signUp(
-      { 
-        email,
-        password 
-      },
-      {
-        data: { 
-          phone : phone
-        }
-      }
-
-        )
+    const { error } = await singUpOde({ email, password })
 
     if (error) {
       console.log(error)
@@ -78,21 +66,6 @@ export function OdeSignup() {
     }
   }
 
-  /*
-  const { user, session, error } = await supabase.auth.signUp(
-  {
-    email: 'example@email.com',
-    password: 'example-password',
-  },
-  {
-    data: { 
-      first_name: 'John', 
-      age: 27,
-    }
-  }
-)
-*/
-
   return (
     <>
       <div>
@@ -115,13 +88,13 @@ export function OdeSignup() {
         <h4>Register by phone number</h4>
         <form onSubmit={handlePhoneSubmit}>
           <label htmlFor="input-phone">Phone</label>
-          <input id="input-phone" type="text" ref={odephoneNumberRef.current} />
+          <input id="input-phone" type="text" ref={odephoneNumberRef} />
           <button type="submit">Sign up</button>
         </form>
         
         <form onSubmit={handleVerifyOTP}>
         <label htmlFor="input-phone">Insert Code</label>
-          <input id="input-phone" type="text" ref={tokenNumberRef.current}/>
+          <input id="input-phone" type="text" ref={tokenNumberRef}/>
           <button type="submit">Verify Token</button>
         </form>
       </div>
