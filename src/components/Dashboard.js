@@ -120,10 +120,11 @@ export function Dashboard() {
     </div>
     <div>
       {/* Change it to display the user ID too 👇*/}
-      <h2>Datos recuperados de la tabla Auth</h2>
+      <h2>Datos recuperados de la tabla User</h2>
       <p>Welcome, {user?.user_metadata.full_name}!</p>
       <p>Your id, {user?.id}!</p>
       <p>Your email: {user?.email}</p>
+      <p>Your phone: {user?.phone}</p>
       <p>{user?.created_at}</p>
       <p>{user?.aud}</p>
       <p>Provider: {user?.app_metadata.provider}</p>

@@ -11,7 +11,7 @@ export function App() {
 
   return (
     <div>
-      <h1>supabase-auth-react</h1>
+      <h1>Welcome to Hiklub</h1>
 
       {/* Add routes here👇 */}
       <Router>
