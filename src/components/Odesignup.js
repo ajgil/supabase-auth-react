@@ -30,8 +30,8 @@ export function OdeSignup() {
       console.log(error)
       alert('error signing in')
     } else {
-      // Redirect user to Dashboard
-      history.push('/')
+      // Redirect user to OdeDashboard
+      history.push('/odes')
     }
   }
 

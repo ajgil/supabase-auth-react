@@ -1,0 +1,14 @@
+async changeEmail(email) {
+    return await axios({
+      method: 'PUT',
+      url: `${SupabaseService.auth.authUrl}/user`,
+      headers: {
+        authorization: `Bearer ${SupabaseService.auth.accessToken}`,
+        apikey: SupabaseService.auth.supabaseKey,
+      },
+      data: {
+        email,
+      },
+    });
+  }
+  

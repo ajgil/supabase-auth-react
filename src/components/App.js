@@ -5,6 +5,7 @@ import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
 import { OdeSignup} from './Odesignup'
+import { OdeDashboard } from './OdeDashboard'
 
 import './App.css'
 export function App() {
@@ -19,6 +20,7 @@ export function App() {
         <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
+          <PrivateRoute extac path="/odes" component={OdeDashboard} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/odesignup" component={OdeSignup} />

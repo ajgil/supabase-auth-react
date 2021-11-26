@@ -32,8 +32,17 @@ export function AuthProvider({ children }) {
 
     const value = {
       // User SingUp
-      signUp: (data) => supabase.auth.signUp(data),
+      //signUp: (data) => supabase.auth.signUp(data),
 
+      // SignUp con control errores
+      signUp: (data) => {
+		    const { error } = supabase.auth.signUp({data})
+          if (error) {
+            alert(error.message);
+          }
+          alert("Check your email for your login link!")
+        },
+        
       //OdEs SingUp methods
       singUpOde: (data) => supabase.auth.signUp(data),
       signUpPhone: (data) => supabase.auth.signIn(data),
