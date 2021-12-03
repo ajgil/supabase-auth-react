@@ -25,6 +25,7 @@ export function Signup() {
     if (error) {
       alert('error signing in')
     } else {
+      alert("Check your email for your login link!")
       // Redirect user to Dashboard
       history.push('/')
     }
@@ -38,16 +39,16 @@ export function Signup() {
 
         <label htmlFor="input-password">Password</label>
         <input id="input-password" type="password" ref={passwordRef} />
-
-        <br />
-
-        {/* Add this 👇 */}
-        <p>
-          Already have an account? <Link to="/login">Log In</Link>
-        </p>
+        <br/>
+        <br/>
 
         <button type="submit">Sign up</button>
       </form>
+      
+      {/* Add this 👇 */}
+      <p>
+        Already have an account? <Link to="/login">Log In</Link>
+      </p>
       <div className="App">
       <h1>Social SingUp!</h1>
       <h3>Google</h3>

@@ -1,7 +1,7 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import { useAuth } from '../contexts/Auth'
+import { useAuth } from '../../contexts/Auth'
 
 export function OdeSignup() {
   const odeemailRef = useRef()
@@ -10,7 +10,7 @@ export function OdeSignup() {
   const tokenNumberRef = useRef()
   
   // Get signUp function from the auth context
-  const { singUpOde, signUpPhone, verifyOTP } = useAuth()
+  const { singUpOde, signUpPhone } = useAuth()
 
   const history = useHistory()
 
@@ -46,23 +46,11 @@ export function OdeSignup() {
       console.log(error)
       alert('error signing with phone number')
     } else {
+      console.log('add code token')
       // Redirect user to Dashboard
-      history.push('/')
-    }
-  }
-
-  async function handleVerifyOTP(e){
-    e.preventDefault()
-
-    const phone = odephoneNumberRef.current.value
-    const token = tokenNumberRef.current.value
-    const { error } = await verifyOTP({ phone, token })
-    if (error) {
-      console.log(error)
-      alert('error signing with phone number')
-    } else {
-      // Redirect user to Dashboard
-      history.push('/')
+      history.push('/verify')
+      alert('Proporciona el token recibido por SMS')
+      //handleVerifyOTP
     }
   }
 
@@ -81,21 +69,6 @@ export function OdeSignup() {
           <input id="input-phone" type="text" ref={odephoneNumberRef} />
           <br />
           <button type="submit">Sign up</button>
-        </form>
-      </div>
-
-      <div>
-        <h4>Register by phone number</h4>
-        <form onSubmit={handlePhoneSubmit}>
-          <label htmlFor="input-phone">Phone</label>
-          <input id="input-phone" type="text" ref={odephoneNumberRef} />
-          <button type="submit">Sign up</button>
-        </form>
-        
-        <form onSubmit={handleVerifyOTP}>
-        <label htmlFor="input-phone">Insert Code</label>
-          <input id="input-phone" type="text" ref={tokenNumberRef}/>
-          <button type="submit">Verify Token</button>
         </form>
       </div>
 

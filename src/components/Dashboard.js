@@ -5,18 +5,22 @@ import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
 
-export function Dashboard(props) {
+export function Dashboard() {
   // Get current user and signOut function from context
   const { user, signOut } = useAuth()
 
+  const [loading, setLoading] = useState(null)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
+  const [full_name, setFull_name] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const [provider, setProvider] = useState(null)
+  const [test, setTest] = useState([0])
 
   const history = useHistory()
 
   useEffect(() => {
     getProfile()
+    updateProperties()
 
   }, [])
 
@@ -25,7 +29,7 @@ export function Dashboard(props) {
 
       let { data, error } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`username, full_name, avatar_url, provider`)
         .eq('id', user.id)
         .single()
 
@@ -33,22 +37,66 @@ export function Dashboard(props) {
         throw error
       }
       setUsername(data.username)
-      setWebsite(data.website)
+      setFull_name(data.full_name)
       setAvatarUrl(data.avatar_url)
+      setProvider(data.provider)
     } catch (error) {
       alert(error.message)
     } finally {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProperties() {
+    try {
+      const updateProperties = {
+        id: user.id,
+        provider: user?.app_metadata.provider,
+        avatar_url: user?.user_metadata.avatar_url,
+        full_name: user?.user_metadata.full_name,
+        updated_at: new Date(),
+      }
+      let { error } = await supabase.from('profiles').upsert(updateProperties, {
+        returning: 'minimal', // Don't return the value after inserting
+      })
+
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
+    }
+  }
+  
+  async function updateProfile({ username, avatar_url }) {
     try {
 
       const updates = {
         id: user.id,
         username,
-        website,
         avatar_url,
+        updated_at: new Date(),
+      }
+
+      let { error } = await supabase.from('profiles').upsert(updates, {
+        returning: 'minimal', // Don't return the value after inserting
+      })
+
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
+    }
+  }
+
+  async function updateTest({ test }) {
+    try {
+
+      const updates = {
+        id: user.id,
+        affinity: test,
         updated_at: new Date(),
       }
 
@@ -74,21 +122,35 @@ export function Dashboard(props) {
   }
   return (
     <>
-    <div className="form-widget">
-      <Avatar
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url)
-          updateProfile({ username, website, avatar_url: url })
-        }}
-      />
+    <div>
+      {/* Change it to display the user ID too 👇*/}
+      <h2>Datos recuperados de la tabla de Perfiles de usuario</h2>
+      <p>Nombre: {full_name}</p>
+      <p>Usuario: {username}</p>
+      <p>Provider: {provider}</p>
+      <p>Avatar: {avatar_url}</p>
+      <h2>Datos recuperados de la tabla maestra Users</h2>
+      <p>Your id, {user?.id}!</p>
+      <p>Your email: {user?.email}</p>
+      <p>Your phone: {user?.phone}</p>
+      {/* 
+      <p>Welcome, {user?.user_metadata.full_name}!</p>
+      <p>Provider: {user?.app_metadata.provider}</p>
+      <p>Avatar: {user?.user_metadata.avatar_url}</p>
+      <p>{user?.created_at}</p>
+      <p>{user?.aud}</p>
+      */}
+    </div>
+
+    <h2>Actualizar perfil de usuario</h2>
+
+    <div>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={user.email} disabled />
       </div>
       <div>
-        <label htmlFor="username">Name</label>
+        <label htmlFor="username">Username</label>
         <input
           id="username"
           type="text"
@@ -96,51 +158,44 @@ export function Dashboard(props) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
 
       <div>
         <button
           className="button block primary"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ username })}
           //disabled={loading}
         >
           Update
           {/*loading ? 'Loading ...' : 'Update' */}
         </button>
       </div>
-
     </div>
+    
     <div>
-      {/* Change it to display the user ID too 👇*/}
-      <h2>Datos recuperados de la tabla User</h2>
-      <p>Welcome, {user?.user_metadata.full_name}!</p>
-      <p>Your id, {user?.id}!</p>
-      <p>Your email: {user?.email}</p>
-      <p>Your phone: {user?.phone}</p>
-      <p>{user?.created_at}</p>
-      <p>{user?.aud}</p>
-      <p>Provider: {user?.app_metadata.provider}</p>
-      <p>Avatar: {user?.user_metadata.avatar_url}</p>
+      <h2>Test Afinidad</h2>
+      <div>
+      <div>
+        <label htmlFor="username">Pregunta 1</label>
+        <input
+          id="test-1"
+          type="text"
+          value={test || ''}
+          onChange={(e) => setTest(e.target.value)}
+        />
+      </div>
 
-    </div>
-    <div>
-      <h2>Datos recuperados de la tabla de perfiles</h2>
-      <p>Usuario: {username}</p>
-      <p>Website: {website}</p>
-      <p>Avatar: {avatar_url}</p>
+      <div>
+        <button
+          className="button block primary"
+          onClick={() => updateTest({ test })}
+          disabled={loading}
+        >
+          Hacer test
+          loading ? 'Loading ...' : 'updateTest'
+        </button>
+      </div>
     </div>
 
-    <div>
-      <h2>Datos OdEs</h2>
-      <p>OdEs phone Number {props.phone}</p>
     </div>
     <div>
     <button onClick={handleSignOut}>Sign out</button>

@@ -42,7 +42,7 @@ export default function OdeEvents() {
 
       const { error, data } = await supabase
         .from("events_") //the table you want to work with
-        .select("title, done, id") //columns to select from the database
+        .select("event, done, id") //columns to select from the database
         .eq("user_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", true) //check if the done column is equal to true
         .order("id", { ascending: false }); // sort the data so the last item comes on top
@@ -99,13 +99,13 @@ export default function OdeEvents() {
   };
 
   // update column(s) on the database
-  const updateItem = async ({ title, id }) => {
+  const updateItem = async ({ event, id }) => {
     setLoading(true);
     try {
 
       const { error } = await supabase
         .from("events_")
-        .update({ title })
+        .update({ event })
         .eq("user_id", user?.id)
         .eq("id", id); //matching id of row to update
 

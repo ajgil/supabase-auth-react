@@ -4,8 +4,10 @@ import { Signup } from './Signup'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
-import { OdeSignup} from './Odesignup'
-import { OdeDashboard } from './OdeDashboard'
+import { OdeSignup} from './Odes/Odesignup'
+import { OdeLogin } from './Odes/OdeLogin'
+import { OdeDashboard } from './Odes/OdeDashboard'
+import { VerifyOTP } from './Odes/VerifyOTP'
 
 import './App.css'
 export function App() {
@@ -24,6 +26,8 @@ export function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/odesignup" component={OdeSignup} />
+          <Route path="/odelogin" component={OdeLogin} />
+          <Route path="/verify" component={VerifyOTP} />
         </Switch>
         </AuthProvider>
       </Router>
