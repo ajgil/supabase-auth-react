@@ -16,6 +16,8 @@ export function Dashboard() {
   const [provider, setProvider] = useState(null)
   const [test, setTest] = useState([0])
 
+  
+  
   const history = useHistory()
 
   useEffect(() => {
@@ -91,19 +93,24 @@ export function Dashboard() {
     }
   }
 
-  async function updateTest({ test }) {
+  async function updateTest() {
+    const test = 
+      ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
+
     try {
 
       const updates = {
         id: user.id,
         affinity: test,
         updated_at: new Date(),
+        test_completed: true,
       }
 
-      let { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal', // Don't return the value after inserting
+      let { error, returning } = await supabase.from('profiles').upsert(updates, {
+        returning: 'representation', // Return the value after inserting
       })
 
+      console.log('valor retornado: ',returning)
       if (error) {
         throw error
       }
@@ -157,6 +164,15 @@ export function Dashboard() {
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <br />
+        <label>Avatar</label>
+        <Avatar
+            url={avatar_url}
+            onUpload={url => {
+              setAvatarUrl(url);
+              updateProfile({ username, avatar_url: url });
+            }}
+          />
       </div>
 
       <div>
@@ -165,7 +181,7 @@ export function Dashboard() {
           onClick={() => updateProfile({ username })}
           //disabled={loading}
         >
-          Update
+          Update Profile
           {/*loading ? 'Loading ...' : 'Update' */}
         </button>
       </div>
@@ -187,7 +203,8 @@ export function Dashboard() {
       <div>
         <button
           className="button block primary"
-          onClick={() => updateTest({ test })}
+          //onClick={() => updateTest({ test })}
+          onClick={() => updateTest()}
           disabled={loading}
         >
           Hacer test
