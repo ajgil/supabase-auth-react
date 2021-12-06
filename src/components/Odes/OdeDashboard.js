@@ -11,10 +11,13 @@ export function OdeDashboard() {
 
   const odephoneNumberRef = useRef()
   const tokenNumberRef = useRef()
+  const userNameRef = useRef()
+  const odeWebsiteRef = useRef()
 
   const [username, setUsername] = useState(null)
   const [website, setWebsite] = useState(null)
   const [phone, setPhone] = useState(null)
+  const [verified, setVerified] = useState(false)
 
   const [event, setEvent] = useState("");
   const [description, setDescription] = useState("");
@@ -26,7 +29,7 @@ export function OdeDashboard() {
 
   useEffect(() => {
     if (user === null) {
-      history.replace("/login");
+      history.replace("/odelogin");
     }
     getProfile()
     getActiveEvents()
@@ -43,7 +46,8 @@ export function OdeDashboard() {
       console.log(error)
       alert('error signing with phone number')
     } else {
-      updateProfile(phone)
+      // cuando se haya verificado el phone se cambia verified a true
+      updateProfile({phone, verified : true })
       // Redirect odes to Dashboard
       history.push('/odes')
     }
@@ -53,33 +57,43 @@ export function OdeDashboard() {
     try {
 
       let { data, error } = await supabase
-        .from('odes_')
-        .select(`username, website, phone`)
+        .from('odes')
+        .select(`username, website, phone, verified`)
         .eq('id', user.id)
         .single()
 
       if (error) {
         throw error
       }
+      //console.log(data)
       setUsername(data.username)
       setWebsite(data.website)
       setPhone(data.phone)
+      setVerified(data.verified)
     } catch (error) {
       alert(error.message)
     } finally {
     }
   }
 
-  async function updateProfile({ phoneNumber }) {
+  async function updateProfile(e) {
+    e.preventDefault()
+    const username = userNameRef.current.value
+    const phone = odephoneNumberRef.current.value
+    const website = odeWebsiteRef.current.value
+
     try {
 
       const updates = {
         id: user.id,
-        phoneNumber,
+        username: username,
+        phone: phone,
+        website: website,
+        verified: true,
         updated_at: new Date(),
       }
 
-      let { error } = await supabase.from('odes_').upsert(updates, {
+      let { error } = await supabase.from('odes').upsert(updates, {
         returning: 'minimal', // Don't return the value after inserting
       })
 
@@ -159,13 +173,12 @@ export function OdeDashboard() {
       <h5>sin esta verificacion no debemos permitir crear eventos</h5>
         <form onSubmit={handleVerifyOTP}>
           <label htmlFor="input-phone">Phone</label>
-          <input 
-            id="input-phone" 
-            type="text" 
-            ref={odephoneNumberRef} />
-            <label htmlFor="input-phone">Insert Code</label>
-            <input id="input-phone" type="text" ref={tokenNumberRef}/>
-            <button type="submit">Verify Token and Sign Up</button>
+          <input id="input-phone" type="text" ref={odephoneNumberRef} />
+          
+          <label htmlFor="input-phone">Insert Code</label>
+          <input id="input-phone" type="text" ref={tokenNumberRef}/>
+
+          <button type="submit">Verify Token and Sign Up</button>
         </form>
     </div>
     
@@ -179,9 +192,23 @@ export function OdeDashboard() {
     <div>
       {/* Change it to display the user ID too 👇*/}
       <h2>Datos recuperados de la tabla principal de Odes</h2>
-      <p>ToDo - Crear tabla OdEs</p>
-      <p>
+      <p>Usuario: {username}</p>
+      <p>Phone: {phone}</p>
+      <p>Website: {website}</p>
+      <p>Verificado: {verified}</p>
+      <form onSubmit={updateProfile}>
+          <label htmlFor="input-username">username</label>
+          <input id="input-phone" type="text" ref={userNameRef}/>
 
+          <label htmlFor="input-phone">Phone</label>
+          <input id="input-phone" type="text" ref={odephoneNumberRef} />
+
+          <label htmlFor="input-website">Website</label>
+          <input id="input-website" type="text" ref={odeWebsiteRef} />
+
+          <button type="submit">Update ODE</button>
+        </form>
+      <p>
       </p>
     </div>
 
