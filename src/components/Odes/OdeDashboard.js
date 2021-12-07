@@ -134,9 +134,16 @@ export function OdeDashboard() {
     setAdding(true);
     try {
 
+      const updates = {
+        user_id: user.id,
+        event,
+        description,
+        release_date: new Date(),
+      }
+
       const { error } = await supabase
         .from("events_")
-        .insert({ event, user_id: user?.id, description }); //insert an object with the key value pair, the key being the column on the table
+        .insert( updates ); //insert an object with the key value pair, the key being the column on the table
 
       if (error) throw error;
 
