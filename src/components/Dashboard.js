@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
+import axios from 'axios'
 
 export function Dashboard() {
   // Get current user and signOut function from context
@@ -15,16 +16,43 @@ export function Dashboard() {
   const [avatar_url, setAvatarUrl] = useState(null)
   const [provider, setProvider] = useState(null)
   const [test, setTest] = useState([0])
+  const [ip, setIP] = useState(null);
+  const [location, setLocation] = useState({latitude:"", longitude:""})
+  const [countryCode, setCountryCode] = useState(null)
+  const [countryName, setCountryName] = useState(null)
+  const [mainState, setMainState] = useState(null)
 
-  
+  //const url = 'https://geolocation-db.com/jsonp';
+
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    console.log(res.data);
+    setIP(res.data.IPv4)
+    setLocation({...location, latitude:res.data.latitude, longitude: res.data.longitude})
+    setCountryCode(res.data.country_code)
+    setCountryName(res.data.country_name)
+    setMainState(res.data.state)
+  }
+
+  /*
+  const getDetails = async()=>{
+     const response = await fetch(url);
+     const details = await response.json();
+     setDetails(details);
+  }
+  */
   
   const history = useHistory()
 
   useEffect(() => {
     getProfile()
+    getData()
     updateProperties()
 
   }, [])
+
+  
 
   async function getProfile() {
     try {
@@ -49,12 +77,18 @@ export function Dashboard() {
   }
 
   async function updateProperties() {
+    //console.log('esta es la ip:', ip)
     try {
       const updateProperties = {
         id: user.id,
         provider: user?.app_metadata.provider,
         avatar_url: user?.user_metadata.avatar_url,
         full_name: user?.user_metadata.full_name,
+        public_ip: ip,
+        location: location,
+        country_code: countryCode,
+        country_name: countryName,
+        mainState: mainState,
         updated_at: new Date(),
       }
       let { error } = await supabase.from('profiles').upsert(updateProperties, {
