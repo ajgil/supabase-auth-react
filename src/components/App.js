@@ -8,6 +8,7 @@ import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
+import { Events } from '../contexts/Events'
 
 import './App.css'
 export function App() {
@@ -30,6 +31,9 @@ export function App() {
         </Switch>
         </AuthProvider>
       </Router>
+      {/* Mostrar eventos */}
+      <Events />
+
     </div>
   )
 }
