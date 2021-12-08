@@ -59,8 +59,19 @@ export function AuthProvider({ children }) {
           }
         },
 
-      signInWithFacebook: () => supabase.auth.signIn({provider: 'facebook'}),
-      
+      signInWithFacebook: () => {
+        const {error } = supabase.auth.signIn(
+          {
+            provider: 'facebook'
+          },
+            { redirectTo: 'http://localhost:3000/provider?refresh=true' }
+          )
+          if (error) {
+            console.log(error)
+            //alert(error.message);
+          }
+        },
+  
       user,
     }
     //console.log('auth user : ', user?.email)
