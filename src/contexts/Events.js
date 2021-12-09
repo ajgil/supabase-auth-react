@@ -4,6 +4,7 @@ import { supabase } from '../supabase'
 
 export function Events() {
     const [anonEvent, setAnonEvent] = useState([]); 
+    const [datos, setDatos] = useState([]);
     //const [loading, setLoading] = useState(false);
   
     useEffect(() => {
@@ -24,33 +25,43 @@ export function Events() {
   
         if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
   
-        if (data) setAnonEvent(data);
-        console.log('datos eventos: ', data)
-  
+        if (data) {
+          const datos = data.map(object => ({
+            id: object.id,
+            description: object.description,
+            done: object.done,
+            event: object.event
+          }));
+          setDatos(datos);
+          setAnonEvent(datos);
+          console.log('datos eventos anonimos:', datos)
+        }
       } catch (error) {
             console.log(error)
             alert(error.error_description || error.message);
       } finally {
         //setLoading(false);
       }
+      
     };
 
     return (
       <div>
         <h3>Datos recuperados de la tabla de events</h3>
         <ul>
+        {/* map over the datos array */}
+            {datos.map((dato) => (
+              // parent element needs to have a unique key
+              <div key={dato.id}>
+                <p> {dato.id} </p>
+                <p>{dato.event}</p>
+                <p>{dato.description}</p>
+              </div>
+            ))}
         </ul>
-        <div>
-          { anonEvent && anonEvent.length > 0 ? (
-            anonEvent.map((index,item) => {
-              <p key={index}>
-              <li>{item}</li>
-              </p>
-            })
-          ) : (
-            <p className="empty-events">You don't have any events created</p>
-          ) }
-        </div>
+          <div>
+            {/* <p className="empty-events">You don't have any events created</p> */}
+          </div>
       </div>
     )
   }
