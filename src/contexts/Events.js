@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from '../supabase'
 
 export function Events() {
-    const [anonEvent, setAnonEvent] = useState(""); 
+    const [anonEvent, setAnonEvent] = useState([]); 
     //const [loading, setLoading] = useState(false);
   
     useEffect(() => {
@@ -38,10 +38,14 @@ export function Events() {
     return (
       <div>
         <h3>Datos recuperados de la tabla de events</h3>
+        <ul>
+        </ul>
         <div>
           { anonEvent && anonEvent.length > 0 ? (
-            anonEvent.map((key) => {
-                  key={id}
+            anonEvent.map((index,item) => {
+              <p key={index}>
+              <li>{item}</li>
+              </p>
             })
           ) : (
             <p className="empty-events">You don't have any events created</p>
