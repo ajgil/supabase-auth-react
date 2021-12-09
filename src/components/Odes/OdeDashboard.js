@@ -19,7 +19,7 @@ export function OdeDashboard() {
   const [phone, setPhone] = useState(null)
   const [verified, setVerified] = useState(false)
 
-  const [event, setEvent] = useState("");
+  const [event, setEvent] = useState("")
   const [description, setDescription] = useState("");
   
   const [loading, setLoading] = useState(false);
@@ -132,6 +132,7 @@ export function OdeDashboard() {
   // add new row to the database
   const addEvent = async (event, description) => {
     setAdding(true);
+    console.log(user.id)
     try {
 
       const updates = {
@@ -150,6 +151,7 @@ export function OdeDashboard() {
       await getActiveEvents(); //get the new active items list
 
     } catch (error) {
+      console.log(error)
       alert(error.error_description || error.message);
     } finally {
       setAdding(false);
