@@ -47,7 +47,7 @@ export function Events() {
 
     return (
       <div>
-        <h3>Datos recuperados de la tabla de events</h3>
+        <h3>Datos recuperados de la tabla de eventos anónimos</h3>
         <ul>
         {/* map over the datos array */}
             {datos.map((dato) => (

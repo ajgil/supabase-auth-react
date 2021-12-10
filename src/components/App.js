@@ -8,10 +8,25 @@ import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
-import { Events } from '../contexts/Events'
+import { Events } from '../contexts/Events' //Anon Events solo se muestran en home
 
 import './App.css'
 export function App() {
+
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    console.log(res.data);
+    setIP(res.data.IPv4)
+    setLocation({...location, latitude:res.data.latitude, longitude: res.data.longitude})
+    setCountryCode(res.data.country_code)
+    setCountryName(res.data.country_name)
+    setMainState(res.data.state)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <div>
@@ -31,9 +46,10 @@ export function App() {
         </Switch>
         </AuthProvider>
       </Router>
-      {/* Mostrar eventos */}
+      {/* Mostrar eventos anónimos */}
+      {/* Mostrar eventos anónimos geolocalizados */}
+      {/* ToDo: si usuario logado no eventos anónimos */}
       <Events />
-
     </div>
   )
 }
