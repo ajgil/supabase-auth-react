@@ -13,7 +13,7 @@ import { Events } from '../contexts/Events' //Anon Events solo se muestran en ho
 import './App.css'
 export function App() {
 
-  //creating function to load ip address from the API
+  /*creating function to load ip address from the API
   const getData = async () => {
     const res = await axios.get('https://geolocation-db.com/json/')
     console.log(res.data);
@@ -27,7 +27,7 @@ export function App() {
   useEffect(() => {
     getData()
   }, [])
-
+  */
   return (
     <div>
       <h1>Welcome to Hiklub</h1>

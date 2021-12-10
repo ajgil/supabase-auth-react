@@ -128,14 +128,17 @@ export function Dashboard() {
   }
 
   async function updateTest() {
-    const test = 
-      ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
+    const test = ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
+
+    const test_2 = {
+      0:1, 1:1, 2:1, 3:2, 4:2, 5:2, 6:2, 7:3, 8:3, 9:3, 10:4, 11:4, 12:4, 13:5, 14:5
+    }
 
     try {
 
       const updates = {
         id: user.id,
-        affinity: test,
+        affinity: test_2,
         updated_at: new Date(),
         test_completed: true,
       }
