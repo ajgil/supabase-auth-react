@@ -128,17 +128,19 @@ export function Dashboard() {
   }
 
   async function updateTest() {
-    const test = ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
+    /*const test = ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
 
     const test_2 = {
       0:1, 1:1, 2:1, 3:2, 4:2, 5:2, 6:2, 7:3, 8:3, 9:3, 10:4, 11:4, 12:4, 13:5, 14:5
     }
+    */
+    const test_3 = [1, 1, 1, 2 , 2 , 2 , 2 , 3 , 3 , 3 , 4 , 4 , 4 , 5 , 5];
 
     try {
 
       const updates = {
         id: user.id,
-        affinity: test_2,
+        affinity2: test_3,
         updated_at: new Date(),
         test_completed: true,
       }
@@ -147,7 +149,7 @@ export function Dashboard() {
         returning: 'representation', // Return the value after inserting
       })
 
-      console.log('valor retornado: ',returning)
+      console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
       if (error) {
         throw error
       }
