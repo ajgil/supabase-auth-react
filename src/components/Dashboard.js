@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
+import { Eventos } from '../contexts/Eventos'
 import axios from 'axios'
 
 export function Dashboard() {
@@ -51,8 +52,6 @@ export function Dashboard() {
     updateProperties()
 
   }, [])
-
-  
 
   async function getProfile() {
     try {
@@ -128,17 +127,10 @@ export function Dashboard() {
   }
 
   async function updateTest() {
-    /*const test = ["1","1","1","2","2","2","2","3","3","3","4","4","4","5","5"];
-
-    const test_2 = {
-      0:1, 1:1, 2:1, 3:2, 4:2, 5:2, 6:2, 7:3, 8:3, 9:3, 10:4, 11:4, 12:4, 13:5, 14:5
-    }
-    */
    // ToDo -> comprobar que son 15 números
     const test_3 = [4, 3, 2, 1, 5, 1, 2, 3, 4, 5, 3, 1, 4, 2, 3];
 
     try {
-
       const updates = {
         id: user.id,
         affinity2: test_3,
@@ -167,6 +159,7 @@ export function Dashboard() {
     // Redirects the user to Login page
     history.push('/login')
   }
+
   return (
     <>
     <div>
@@ -190,7 +183,6 @@ export function Dashboard() {
     </div>
 
     <h2>Actualizar perfil de usuario</h2>
-
     <div>
       <div>
         <label htmlFor="email">Email</label>
@@ -253,6 +245,10 @@ export function Dashboard() {
       </div>
     </div>
 
+    <div>
+      <h2>Eventos</h2>
+    </div>
+        <Eventos />
     </div>
     <div>
     <button onClick={handleSignOut}>Sign out</button>

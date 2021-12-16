@@ -1,14 +1,18 @@
 // src/contexts/Events.js
 import React, { useEffect, useState } from "react";
 import { supabase } from '../supabase'
+import { useAuth } from '../contexts/Auth'
 
 export function AnonEvents() {
     const [anonEvent, setAnonEvent] = useState([]); 
     const [datos, setDatos] = useState([]);
+    const { user } = useAuth()
     //const [loading, setLoading] = useState(false);
   
     useEffect(() => {
-      getAnonEvents()
+      if (!user){
+        getAnonEvents()
+      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   
@@ -45,24 +49,32 @@ export function AnonEvents() {
       
     };
 
-    return (
+    if (!user){
+      return (
+        <div>
+          <h3>Datos recuperados de la tabla de eventos anónimos</h3>
+          <ul>
+          {/* map over the datos array */}
+              {datos.map((dato) => (
+                // parent element needs to have a unique key
+                <div key={dato.id}>
+                  <p> {dato.id} </p>
+                  <p>{dato.event}</p>
+                  <p>{dato.description}</p>
+                </div>
+              ))}
+          </ul>
+            <div>
+              {/* <p className="empty-events">You don't have any events created</p> */}
+            </div>
+        </div>
+      )
+    } else {
+    return(
       <div>
-        <h3>Datos recuperados de la tabla de eventos anónimos</h3>
-        <ul>
-        {/* map over the datos array */}
-            {datos.map((dato) => (
-              // parent element needs to have a unique key
-              <div key={dato.id}>
-                <p> {dato.id} </p>
-                <p>{dato.event}</p>
-                <p>{dato.description}</p>
-              </div>
-            ))}
-        </ul>
-          <div>
-            {/* <p className="empty-events">You don't have any events created</p> */}
-          </div>
+           {/* <p className="empty-events">You don't have any events created</p> */}
       </div>
     )
-  }
+    }
+}
   
