@@ -8,7 +8,7 @@ import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
-import { Events } from '../contexts/Events' //Anon Events solo se muestran en home
+import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 
 import './App.css'
 export function App() {
@@ -44,12 +44,13 @@ export function App() {
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
         </Switch>
+        <AnonEvents />
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos */}
       {/* Mostrar eventos anónimos geolocalizados */}
       {/* ToDo: si usuario logado no eventos anónimos */}
-      <Events />
+      
     </div>
   )
 }

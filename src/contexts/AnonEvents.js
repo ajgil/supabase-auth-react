@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from '../supabase'
 
-export function Events() {
+export function AnonEvents() {
     const [anonEvent, setAnonEvent] = useState([]); 
     const [datos, setDatos] = useState([]);
     //const [loading, setLoading] = useState(false);

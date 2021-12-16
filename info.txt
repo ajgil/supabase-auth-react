@@ -11,4 +11,15 @@ async changeEmail(email) {
       },
     });
   }
-  
+
+"react-router-dom": "^5.2.0",
+"react-router-dom": "^6.1.1",
+
+// Redirect no está disponible en react router dom v 6
+
+Funcionalidad
+* Without logged in, the user can’t access the pages that require authorization.
+* The user can’t access the pages that don’t have permission even if logged in.
+* Without logged in, the user can’t make an authenticated request.
+
+Necesitamos tener 3 roles, usuarios, odes y admins
