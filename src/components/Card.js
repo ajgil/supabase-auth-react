@@ -11,7 +11,7 @@ import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
 export default function BasicCard() {
-  const [evento, handleEvento] = useState([]);
+  const [evento, setEvento] = useState([]);
   const { user } = useAuth()
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function BasicCard() {
       //setLoading(true);
       try {
           const { error, data } = await supabase
-              .from('events_')
+              .from('eventos')
               .select('*');
 
           if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
@@ -31,12 +31,12 @@ export default function BasicCard() {
           const datos = data.map(object => ({
               id: object.id,
               ode_id: object.ode_id,
-              event: object.event,
+              evento: object.evento,
               description: object.description,
               release_date: object.release_date,
               done: object.done
           }));
-          handleEvento(datos);
+          setEvento(datos);
           //console.log('datos eventos:', datos)
           }
       } catch (error) {
@@ -47,14 +47,15 @@ export default function BasicCard() {
       }
   };
 
-  const joinEvent = async () => {
+  async function joinEvent (id, ode_id) {
     try {
       const updates = {
-        id: evento.id,
-        ode: evento.ode_id,
+        id: id,
+        ode_id: ode_id,
         user_id: user?.id
         //updated_at: new Date(),
       }
+      console.log('updates', updates)
 
       //insert an object with the key value pair, the key being the column on the table
       const { error } = await supabase
@@ -76,36 +77,48 @@ export default function BasicCard() {
     <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
-          {/* map over the datos array */}
-          {evento.map((dato) => (
-            <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+          { evento.length < 1 ? (
+            <Card>
               <CardContent>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                  {/* dato.id */}
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                      {dato.event}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {dato.description}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      OdE: {dato.ode_id}
-                  </Typography>
-                  <Typography variant="body2">
-                      Fecha de lanzamiento: {dato.release_date}
-                  <br />
-                  {/* dato.user_id */}
-                  </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  No hay eventos hiklub
+                </Typography>
               </CardContent>
-              <CardActions>
-                  <Button size="small" onClick={() => joinEvent()}>Join Event</Button>
-              </CardActions>
-            </Card>        
-          ))}
+            </Card>
+          ) : (
+             evento.map((item, index) => (
+              <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    {/* dato.id */}
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        {item.evento}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        {item.description}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        OdE: {item.ode_id}
+                    </Typography>
+                    <Typography variant="body2">
+                        Fecha de lanzamiento: {item.release_date}
+                    <br />
+                        {/* 
+                        data={item}
+                        key={index.toString()}
+                        dato.user_id 
+                        */}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small" onClick={() => joinEvent(evento.id, evento.ode_id)}>Join Event</Button>
+                </CardActions>
+              </Card>
+            )))}
         </Grid>
       </Grid>
     </Box>
-  </>
+    </>
   )
 }

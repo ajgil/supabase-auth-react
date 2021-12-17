@@ -19,7 +19,7 @@ export function Eventos() {
     /*
     https://supabase.com/docs/reference/javascript/select#query-foreign-tables
         const { data, error } = await supabase
-        .from('events_')
+        .from('eventos')
         .select(`
             id,
             supplier:supplier_id ( name ),
@@ -27,7 +27,7 @@ export function Eventos() {
         `)
 
         const { data, error } = await supabase
-        .from('events_')
+        .from('eventos')
         .select(`
             id,
             user_id,
@@ -37,8 +37,8 @@ export function Eventos() {
             id
             ),
         `)
-        .from("events_, profiles:id = eq.$user.id") //the table you want to work with
-                  .from("profiles", "events_") //the table you want to work with
+        .from("eventos, profiles:id = eq.$user.id") //the table you want to work with
+                  .from("profiles", "eventos") //the table you want to work with
           .select('*') //columns to select from the database
           .eq('profiles.id', user.id)
           ; // sort the data so the last item comes on top;
@@ -49,7 +49,7 @@ export function Eventos() {
       try {
   
         const { error, data } = await supabase
-            .from('events_')
+            .from('eventos')
             .select('id, user_id, event, description');
 
         if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block

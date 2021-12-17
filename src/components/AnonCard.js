@@ -11,7 +11,7 @@ import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
 export default function AnonCard() {
-  const [eventos, handleEventos] = useState([]);
+  const [evento, setEvento] = useState([]);
   const { user } = useAuth()
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function AnonCard() {
       //setLoading(true);
       try {
           const { error, data } = await supabase
-              .from('events_')
+              .from('eventos')
               .select('*');
 
           if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
@@ -36,7 +36,7 @@ export default function AnonCard() {
               release_date: object.release_date,
               done: object.done
           }));
-          handleEventos(datos);
+          setEvento(datos);
           console.log('datos eventos:', datos)
           }
       } catch (error) {
@@ -47,46 +47,60 @@ export default function AnonCard() {
       }
   };
 
-
   if (!user){
   return (
     <>
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
-            {/* map over the datos array */}
-            {eventos.map((dato) => (
+    <Box sx={{ width: '100%' }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={6}>
+          { evento.length < 1 ? (
+            <Card>
+              <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
+                  No hay eventos hiklub
+                </Typography>
+              </CardContent>
+            </Card>
+          ) : (
+             evento.map((item, index) => (
               <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {/* dato.id */}
                     </Typography>
                     <Typography variant="h5" component="div">
-                        {dato.event}
+                        {item.evento}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {dato.description}
+                        {item.description}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        OdE: {item.ode_id}
                     </Typography>
                     <Typography variant="body2">
-                        Fecha de lanzamiento: {dato.release_date}
+                        Fecha de lanzamiento: {item.release_date}
                     <br />
-                    {/* dato.user_id */}
-                    </Typography>
+                        {/* 
+                        data={item}
+                        key={index.toString()}
+                        dato.user_id 
+                        */}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small">Register to Join</Button>
                 </CardActions>
-              </Card>        
-            ))}
-          </Grid>
+              </Card>
+            )))}
         </Grid>
-      </Box>
+      </Grid>
+    </Box>
     </>
   )
   } else {
     return(
       <>
-    </>
+      </>
     )
   }
 }

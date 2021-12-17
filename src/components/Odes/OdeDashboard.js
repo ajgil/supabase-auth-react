@@ -19,7 +19,7 @@ export function OdeDashboard() {
   const [phone, setPhone] = useState(null)
   const [verified, setVerified] = useState(false)
 
-  const [event, setEvent] = useState("")
+  const [evento, setEvento] = useState("")
   const [description, setDescription] = useState("");
   
   const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ export function OdeDashboard() {
       let { data, error } = await supabase
         .from('odes')
         .select(`username, website, phone, verified`)
-        .eq('id', user.id)
+        .eq('id', user?.id)
         .single()
 
       if (error) {
@@ -85,7 +85,7 @@ export function OdeDashboard() {
     try {
 
       const updates = {
-        id: user.id,
+        id: user?.id,
         username: username,
         phone: phone,
         website: website,
@@ -111,15 +111,15 @@ export function OdeDashboard() {
     try {
 
       const { error, data } = await supabase
-        .from("events_") //the table you want to work with
-        .select("event, done, id") //columns to select from the database
-        .eq("user_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
+        .from("eventos") //the table you want to work with
+        .select("evento, done, id") //columns to select from the database
+        .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
 
       if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
 
-      if (data) setEvent(data);
+      if (data) setEvento(data);
       console.log('datos eventos: ', data)
 
     } catch (error) {
@@ -130,20 +130,20 @@ export function OdeDashboard() {
   };
 
   // add new row to the database
-  const addEvent = async (event, description) => {
+  const addEvent = async (evento, description) => {
     setAdding(true);
     console.log(user.id)
     try {
 
       const updates = {
-        user_id: user.id,
-        event,
+        ode_id: user.id,
+        evento,
         description,
         release_date: new Date(),
       }
 
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .insert( updates ); //insert an object with the key value pair, the key being the column on the table
 
       if (error) throw error;
@@ -161,8 +161,8 @@ export function OdeDashboard() {
   const handleAddEvent = async (e) => {
     e.preventDefault();
     try {
-      await addEvent(event, description);
-      setEvent("");
+      await addEvent(evento, description);
+      setEvento("");
     } catch (err) {
       console.log(err);
     }
@@ -222,7 +222,7 @@ export function OdeDashboard() {
     </div>
 
     <div>
-      <h2>Datos recuperados de la tabla de events</h2>
+      <h2>Mis Eventos</h2>
       <div>
         {/* event && event.length > 0 ? (
           event.map((event) => {
@@ -243,8 +243,8 @@ export function OdeDashboard() {
             type="text"
             name="event"
             required
-            value={event}
-            onChange={(e) => setEvent(e.target.value)}
+            value={evento}
+            onChange={(e) => setEvento(e.target.value)}
             placeholder="Enter new Event"
           />
         </div>

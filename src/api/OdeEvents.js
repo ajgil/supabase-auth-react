@@ -17,7 +17,7 @@ export default function OdeEvents() {
     try {
 
       const { error, data } = await supabase
-        .from("events_") //the table you want to work with
+        .from("eventos") //the table you want to work with
         .select("title, done, id") //columns to select from the database
         .eq("user_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
@@ -41,7 +41,7 @@ export default function OdeEvents() {
     try {
 
       const { error, data } = await supabase
-        .from("events_") //the table you want to work with
+        .from("eventos") //the table you want to work with
         .select("event, done, id") //columns to select from the database
         .eq("user_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", true) //check if the done column is equal to true
@@ -63,7 +63,7 @@ export default function OdeEvents() {
     try {
 
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .delete() //delete the row
         .eq("id", id) //the id of row to delete
         .eq("user_id", user?.id) //check if the item being deleted belongs to the user
@@ -84,7 +84,7 @@ export default function OdeEvents() {
     try {
 
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .insert({ event, user_id: user?.id }); //insert an object with the key value pair, the key being the column on the table
 
       if (error) throw error;
@@ -104,7 +104,7 @@ export default function OdeEvents() {
     try {
 
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .update({ event })
         .eq("user_id", user?.id)
         .eq("id", id); //matching id of row to update
@@ -124,7 +124,7 @@ export default function OdeEvents() {
     setLoading(true);
     try {
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .update({ done: true })
         .eq("user_id", user?.id)
         .eq("id", id); //match id to toggle
@@ -144,7 +144,7 @@ export default function OdeEvents() {
     setLoading(true);
     try {
       const { error } = await supabase
-        .from("events_")
+        .from("eventos")
         .update({ done: false })
         .eq("user_id", user?.id)
         .eq("id", id); //match id of row to toggle

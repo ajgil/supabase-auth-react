@@ -23,7 +23,7 @@ export function AnonEvents() {
       try {
   
         const { error, data } = await supabase
-          .from("events_") //the table you want to work with
+          .from("eventos") //the table you want to work with
           .select('*') //columns to select from the database
           .eq("done", false) //check if the done column is equal to false
           .order("id", { ascending: false }); // sort the data so the last item comes on top;
