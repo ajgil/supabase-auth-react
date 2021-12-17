@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
+//import  BasicCard from '../components/Card'
 
 export function Eventos() {
     const [evento, setEvento] = useState([]); 
@@ -10,7 +11,7 @@ export function Eventos() {
     //const [loading, setLoading] = useState(false);
   
     useEffect(() => {
-        console.log(user.id)
+        //console.log(user.id)
         getEventos()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -49,12 +50,7 @@ export function Eventos() {
   
         const { error, data } = await supabase
             .from('events_')
-            .select(`
-                id,
-                user_id,
-                event,
-                description
-            `);
+            .select('id, user_id, event, description');
 
         if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
   
@@ -68,7 +64,6 @@ export function Eventos() {
             done: object.done
           }));
           setDatos(datos);
-          //setAnonEvent(datos);
           console.log('datos eventos:', datos)
         }
       } catch (error) {
@@ -94,7 +89,7 @@ export function Eventos() {
                 </div>
               ))}
           </ul>
+          {/* <BasicCard /> */}
         </div>
       )
 }
-  

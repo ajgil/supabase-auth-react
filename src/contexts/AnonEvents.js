@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
+import { Eventos } from './Eventos'
 
 export function AnonEvents() {
     const [anonEvent, setAnonEvent] = useState([]); 
@@ -22,7 +23,7 @@ export function AnonEvents() {
       try {
   
         const { error, data } = await supabase
-          .from("anon_events") //the table you want to work with
+          .from("events_") //the table you want to work with
           .select('*') //columns to select from the database
           .eq("done", false) //check if the done column is equal to false
           .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -72,6 +73,7 @@ export function AnonEvents() {
     } else {
     return(
       <div>
+        <Eventos />
            {/* <p className="empty-events">You don't have any events created</p> */}
       </div>
     )
