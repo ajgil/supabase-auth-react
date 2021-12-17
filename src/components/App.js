@@ -10,6 +10,7 @@ import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import  BasicCard from '../components/Card'
+import AnonCard from '../components/AnonCard'
 
 import './App.css'
 export function App() {
@@ -46,7 +47,7 @@ export function App() {
           <Route path="/verify" component={VerifyOTP} />
         </Switch>
         {/* <AnonEvents /> */}
-        <BasicCard />
+        <AnonCard />
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos */}

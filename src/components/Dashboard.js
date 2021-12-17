@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
-//import { Eventos } from '../contexts/Eventos'
+import BasicCard from './Card'
 import axios from 'axios'
 
 export function Dashboard() {
@@ -248,7 +248,7 @@ export function Dashboard() {
     <div>
       <h2>Eventos</h2>
     </div>
-        {/* <Eventos /> */}
+        <BasicCard />
     </div>
     <div>
     <button onClick={handleSignOut}>Sign out</button>
