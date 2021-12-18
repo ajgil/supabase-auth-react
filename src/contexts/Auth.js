@@ -1,3 +1,4 @@
+import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
 import { supabase } from '../supabase'
 //import axios from "axios"
@@ -29,13 +30,39 @@ export function AuthProvider({ children }) {
     }, [])
   
     // Will be passed down to Signup, Login and Dashboard components
+    /*
+    singUpOde: (datos) => supabase.auth.signUp({
+        datos,
+        data: { ode: true }
+      }),
+    
+      const { user, session, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+    },{
+        data:{
+            phone: phone,
+            name: name,
+            company: company
+        }
+    })
+      
+    
+    */
 
     const value = {
       // User SingUp
       signUp: (data) => supabase.auth.signUp(data),
         
       //OdEs SingUp methods
-      singUpOde: (data) => supabase.auth.signUp(data),
+      singUpOde: (data) => supabase.auth.signUp({
+          data
+        },{
+          data:{
+            ode: true
+          }
+      }),
+
       signUpPhone: (data) => supabase.auth.signIn(data),
       verifyOTP: (data) => supabase.auth.verifyOTP(data),
       

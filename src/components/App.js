@@ -9,8 +9,8 @@ import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
-import  BasicCard from '../components/Card'
 import AnonCard from '../components/AnonCard'
+import { Booking } from '../components/Booking'
 
 import './App.css'
 export function App() {
@@ -39,7 +39,8 @@ export function App() {
         <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
-          <PrivateRoute extac path="/odes" component={OdeDashboard} />
+          <PrivateRoute exact path="/odes" component={OdeDashboard} />
+          <PrivateRoute exact path="/booking" component={Booking} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/odesignup" component={OdeSignup} />
@@ -50,9 +51,7 @@ export function App() {
         <AnonCard />
         </AuthProvider>
       </Router>
-      {/* Mostrar eventos anónimos */}
       {/* Mostrar eventos anónimos geolocalizados */}
-      {/* ToDo: si usuario logado no eventos anónimos */}
       
     </div>
   )

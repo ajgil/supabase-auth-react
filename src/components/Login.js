@@ -33,6 +33,7 @@ export function Login() {
     }
   }
 
+  /*
   async function handleSubmitOde(e) {
     e.preventDefault()
 
@@ -49,9 +50,10 @@ export function Login() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/')
+      history.push('/ode')
     }
   }
+  */
 
   return (
     <>

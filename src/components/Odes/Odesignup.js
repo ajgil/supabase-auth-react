@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
+import { supabase } from '../../supabase'
 
 export function OdeSignup() {
   const odeemailRef = useRef()
@@ -10,7 +11,7 @@ export function OdeSignup() {
   const tokenNumberRef = useRef()
   
   // Get signUp function from the auth context
-  const { singUpOde, signUpPhone } = useAuth()
+  const { signUpPhone } = useAuth()
 
   const history = useHistory()
 
@@ -22,9 +23,17 @@ export function OdeSignup() {
     const password = odepasswordRef.current.value
     const phone = odephoneNumberRef.current.value
 
-    console.log('odeSingUp phone:', phone)
+    //console.log('odeSingUp pass:', password)
     // Calls `signUp` function from the context
-    const { error } = await singUpOde({ email, password })
+    //const { error } = await singUpOde({ email, password })
+    const { error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      },{
+          data:{
+              ode: true
+          }
+      })
 
     if (error) {
       console.log(error)

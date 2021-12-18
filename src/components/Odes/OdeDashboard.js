@@ -3,6 +3,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { supabase } from "../../supabase";
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 export function OdeDashboard() {
   // Get current user and signOut function from context
@@ -19,7 +24,8 @@ export function OdeDashboard() {
   const [phone, setPhone] = useState(null)
   const [verified, setVerified] = useState(false)
 
-  const [evento, setEvento] = useState("")
+  const [evento, setEvento] = useState([])
+  const [item, setItem] = useState([])
   const [description, setDescription] = useState("");
   
   const [loading, setLoading] = useState(false);
@@ -97,6 +103,7 @@ export function OdeDashboard() {
         returning: 'minimal', // Don't return the value after inserting
       })
 
+      console.log('Ode actualizado')
       if (error) {
         throw error
       }
@@ -112,14 +119,14 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("evento, done, id") //columns to select from the database
+        .select("evento, description, done, release_date, id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
 
       if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
 
-      if (data) setEvento(data);
+      if (data) setItem(data);
       console.log('datos eventos: ', data)
 
     } catch (error) {
@@ -196,6 +203,8 @@ export function OdeDashboard() {
       <h2>Datos recuperados de la tabla principal de User</h2>
       <p>Your id, {user?.id}!</p>
       <p>Your email: {user?.email}</p>
+      <p>Metadatos: {user?.raw_user_meta_data}</p>
+      {/*socialMediaList.map(s => (<li>{s}</li>))*/}
     </div>
 
     <div>
@@ -223,16 +232,45 @@ export function OdeDashboard() {
 
     <div>
       <h2>Mis Eventos</h2>
-      <div>
-        {/* event && event.length > 0 ? (
-          event.map((event) => {
-                event={event},
-                key={id}
-          })
-        ) : (
-          <p className="empty-events">You don't have any events created</p>
-        ) */}
-      </div>
+      <Box sx={{ width: '100%' }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={6}>
+          { item.length < 1 ? (
+            <Card>
+              <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  No hay eventos hiklub
+                </Typography>
+              </CardContent>
+            </Card>
+          ) : (
+             item.map((items, index) => (
+              <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    {/* dato.id */}
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        {items.evento}
+                    </Typography>
+                    <Typography sx={{ fontSize: 13 }} color="text.secondary">
+                        {items.description}
+                    </Typography>
+                    <Typography variant="body2">
+                        Fecha de lanzamiento: {items.release_date}
+                    <br />
+                        {/* 
+                        data={item}
+                        key={index.toString()}
+                        dato.user_id 
+                        */}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )))}
+        </Grid>
+      </Grid>
+    </Box>
     </div>
 
     <div>
