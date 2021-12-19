@@ -160,6 +160,17 @@ export function Dashboard() {
     history.push('/login')
   }
 
+  async function handleBookings(e) {
+    e.preventDefault()
+
+    if (error) {
+      alert('error signing in')
+      console.log(error)
+    } else {
+      // Redirect user to Dashboard
+      history.push('/bookings')
+    }
+  }
   return (
     <>
     <div>
@@ -248,6 +259,10 @@ export function Dashboard() {
     <div>
     </div>
       <ListEventContainer />
+    </div>
+    <div>
+      <h2>Mis Eventos </h2>
+      {/*<UserBookings /> */}
     </div>
     <div>
     <button onClick={handleSignOut}>Sign out</button>

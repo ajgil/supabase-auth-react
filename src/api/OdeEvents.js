@@ -34,7 +34,6 @@ export default function OdeEvents() {
     }
   };
 
-
   // get all completed items by the user
   const getInactiveItems = async () => {
     setLoading(true);

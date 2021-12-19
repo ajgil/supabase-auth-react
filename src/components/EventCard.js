@@ -13,7 +13,7 @@ import { useAuth } from '../contexts/Auth'
 
 export default function EventCard({id, evento, description, ode_id}) {
 
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
   /*
   const onClickHandler = (event, source) => {
     // Do something with event
@@ -51,11 +51,8 @@ export default function EventCard({id, evento, description, ode_id}) {
 
   */
 
-  
   const handleJoinEvent = (event, id, ode_id) => {
     event.preventDefault()
-    //console.log(id)
-    //console.log(ode_id)
     joinEvent()
 
     async function joinEvent() {
