@@ -9,7 +9,7 @@ export default function List({ eventdata }) {
             <h1>List datos eventos </h1>
                 
             {eventdata.map((evento, index) => {
-                return <EventCard evento={evento.evento} description={evento.description}
+                return <EventCard key={index} id={evento.id} evento={evento.evento} description={evento.description}
                 ode_id={evento.ode_id}/>
             })}
         </>

@@ -11,13 +11,85 @@ import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
-export default function EventCard({evento, description, ode_id}) {
+export default function EventCard({id, evento, description, ode_id}) {
+
+  const { user, signOut } = useAuth()
+  /*
+  const onClickHandler = (event, source) => {
+    // Do something with event
+    console.log(event);
+
+    // Use the passed parameter
+    setText(`${source} has been clicked`);
+  };
+
+  async function updateTest() {
+   // ToDo -> comprobar que son 15 números
+    const test_3 = [4, 3, 2, 1, 5, 1, 2, 3, 4, 5, 3, 1, 4, 2, 3];
+
+    try {
+      const updates = {
+        id: user.id,
+        affinity2: test_3,
+        updated_at: new Date(),
+        test_completed: true,
+      }
+
+      let { error, returning } = await supabase.from('profiles').upsert(updates, {
+        returning: 'representation', // Return the value after inserting
+      })
+
+      console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
+    }
+  }
+
+  */
+
+  
+  const handleJoinEvent = (event, id, ode_id) => {
+    event.preventDefault()
+    //console.log(id)
+    //console.log(ode_id)
+    joinEvent()
+
+    async function joinEvent() {
+      try {
+        const insert = {
+          ode_id: ode_id,
+          user_id: user?.id,
+          evento_id: id
+        }
+  
+        let { error, returning } = await supabase.from('bookings').insert(insert, {
+          returning: 'minimal', // Return the value after inserting
+        })
+        
+        //console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
+        console.log('evento creado !')
+        if (error) {
+          throw error
+        }
+      } catch (error) {
+        alert(error.message)
+      } finally {
+      }
+    }
+  }
 
   return(
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> 
             <Card>
               <CardContent>
+              <Typography variant="h5" component="div">
+                  {id}
+              </Typography>
               <Typography variant="h5" component="div">
                   {evento}
               </Typography>
@@ -30,7 +102,7 @@ export default function EventCard({evento, description, ode_id}) {
               </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>*/}
-                    <Button size="small">Join Event</Button>
+                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id)}>Join Event</Button>
                 </CardActions>
               </Card>
       </Grid>
