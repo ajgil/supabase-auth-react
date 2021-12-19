@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-//import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -48,11 +48,13 @@ export default function BasicCard() {
       }
   };
 
-  async function joinEvent (id, ode_id) {
+  console.log('evento', evento)
+  async function joinEvent () {
     try {
+      console.log('evento y ode', evento.id, evento.ode_id)
       const updates = {
-        id: id,
-        ode_id: ode_id,
+        id: evento.id,
+        ode_id: evento.ode_id,
         user_id: user?.id
         //updated_at: new Date(),
       }
@@ -113,8 +115,8 @@ export default function BasicCard() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                    <Link href="/booking">Join Event</Link>
-                    {/*<Button size="small" onClick={() => joinEvent(evento.id, evento.ode_id)}>Join Event</Button>*/}
+                    {/*<Link href="/booking">Join Event</Link>*/}
+                    <Button size="small" onClick={() => joinEvent()}>Join Event</Button>
                 </CardActions>
               </Card>
             )))}

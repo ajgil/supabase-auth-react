@@ -37,7 +37,6 @@ export default function AnonCard() {
               done: object.done
           }));
           setEvento(datos);
-          console.log('datos eventos:', datos)
           }
       } catch (error) {
               console.log(error)
@@ -47,6 +46,7 @@ export default function AnonCard() {
       }
   };
 
+  //console.log('AnonCard:', evento)
   if (!user){
   return (
     <>

@@ -13,6 +13,7 @@ import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
 
 import './App.css'
+
 export function App() {
 
   /*creating function to load ip address from the API
@@ -47,7 +48,9 @@ export function App() {
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
         </Switch>
-        {/* <AnonEvents /> */}
+        {/* <AnonEvents /> 
+        <ListEventContainer />
+        */}
         <AnonCard />
         </AuthProvider>
       </Router>

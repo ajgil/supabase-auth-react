@@ -28,6 +28,7 @@ export function Booking() {
       <p>{user?.aud}</p>
       */}
     </div>
+    {/*<EventDetails /> */}
     </>
   )
 }
