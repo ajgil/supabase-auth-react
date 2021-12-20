@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
 import ListEventContainer from '../container/ListEventContainer'
+import UserBookingsContainer from "../container/UserBookingsContainer"
 import axios from 'axios'
 
 export function Dashboard() {
@@ -160,9 +161,11 @@ export function Dashboard() {
     history.push('/login')
   }
 
+  /*
   async function handleBookings(e) {
     e.preventDefault()
 
+  
     if (error) {
       alert('error signing in')
       console.log(error)
@@ -171,6 +174,7 @@ export function Dashboard() {
       history.push('/bookings')
     }
   }
+  */
   return (
     <>
     <div>
@@ -261,8 +265,9 @@ export function Dashboard() {
       <ListEventContainer />
     </div>
     <div>
-      <h2>Mis Eventos </h2>
-      {/*<UserBookings /> */}
+      <h2>Mis Eventos</h2>
+      <h3>Accede al chat</h3>
+      <UserBookingsContainer />
     </div>
     <div>
     <button onClick={handleSignOut}>Sign out</button>

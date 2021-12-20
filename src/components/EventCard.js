@@ -68,7 +68,7 @@ export default function EventCard({id, evento, description, ode_id}) {
         })
         
         //console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
-        console.log('evento creado !')
+        console.log('Apuntado al evento !')
         if (error) {
           throw error
         }

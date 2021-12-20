@@ -3,7 +3,7 @@ import EventCard from './EventCard'
 
 export default function List({ eventdata }) {
 
-    console.log('List eventdata', eventdata)
+    //console.log('List eventdata', eventdata)
     return (
         <>
             <h1>List datos eventos </h1>
