@@ -11,6 +11,8 @@ import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
+import HiklubChat from './Chat/HiklubChat'
+import HiklubChat2 from './Chat/HiklubChat2'
 
 import './App.css'
 
@@ -47,6 +49,8 @@ export function App() {
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
+          <Route path="/hiklubchat" component={HiklubChat} />
+          <Route path="/hiklubchat2" component={HiklubChat} />
         </Switch>
         {/* <AnonEvents /> 
         <ListEventContainer />
