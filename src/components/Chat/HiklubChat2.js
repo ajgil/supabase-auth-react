@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
-import { useAuth } from '../../contexts/Auth'
+//import { useAuth } from '../../contexts/Auth'
 import 'stream-chat-react/dist/css/index.css';
 
 const HiklubChat2 = () => {
-    const { user } = useAuth()
+    //const { user } = useAuth()
 
     const chatClient = StreamChat.getInstance('dj4bn8c565ua', '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum');
     const userToken = chatClient.devToken('artis');
 
-    const connectResponse =  chatClient.connectAnonymousUser(); 
- 
-    console.log(connectResponse.me);
+    //const connectResponse =  chatClient.connectAnonymousUser(); 
+    //console.log(connectResponse.me);
 
     useEffect(() => {
         const connectUser = async () => {
@@ -26,8 +25,8 @@ const HiklubChat2 = () => {
             console.log('User connected')
 
         // Crear el channel
-            const channel = chatClient.createChannel("messaging", "notjustdev", {name: "notjustdev"})
-            await channel.watch()
+            const channel2 = chatClient.createChannel("messaging", "notjustdev", {name: "notjustdev"})
+            await channel2.watch()
             
         }
     
@@ -53,7 +52,7 @@ const HiklubChat2 = () => {
     );
       */
 
-    const channel = chatClient.channel('hiklub team', 'team:hiklub_team_daa783b2-6a00-4e66-8627-53be4689bf8d', {
+    const channel = chatClient.channel('messaging', 'custom_channel_id', {
     // add as many custom fields as you'd like
     image: 'https://www.drupal.org/files/project-images/react.png',
     name: 'hiklub team',

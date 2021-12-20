@@ -50,13 +50,14 @@ export function App() {
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
           <Route path="/hiklubchat" component={HiklubChat} />
-          <Route path="/hiklubchat2" component={HiklubChat} />
+        {/*  <Route path="/hiklubchat2" component={HiklubChat} /> */}
         </Switch>
         {/* <AnonEvents /> 
         <ListEventContainer />
         */}
         <AnonCard />
         </AuthProvider>
+        <HiklubChat2 />
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
       
