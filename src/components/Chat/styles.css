@@ -1,0 +1,44 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /**
+   * Fix the height of the giphy images
+   */
+  .str-chat__message-attachment-card--giphy .str-chat__message-attachment-card--header img {
+    height: 100px;
+  }
+  
+  /**
+   * Fix the height of the URL card images
+   */
+  .str-chat__message-attachment-card--image .str-chat__message-attachment-card--header img {
+    height: 200px;
+  }
+  
+  /**
+   * Fix the height of the uploaded  images
+   */
+  .str-chat__message-attachment--image img {
+    height: 200px !important;
+  }
+  
+  /**
+   * Don't set any margins that can alter the height of the message. 
+   * They are hard to measure due to collapsing and confuse the virtualized list rendering.
+   * Use padding instead.
+   */
+  .str-chat__message--me,
+  .str-chat__message-simple--me {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 10px !important;
+  }
+  
