@@ -8,7 +8,7 @@ const HiklubChat2 = () => {
     //const { user } = useAuth()
 
     const chatClient = StreamChat.getInstance('dj4bn8c565ua', '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum');
-    const userToken = chatClient.devToken('artis');
+    const userToken = chatClient.createToken('artis');
 
     //const connectResponse =  chatClient.connectAnonymousUser(); 
     //console.log(connectResponse.me);

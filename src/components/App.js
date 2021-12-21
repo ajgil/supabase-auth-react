@@ -54,10 +54,12 @@ export function App() {
         </Switch>
         {/* <AnonEvents /> 
         <ListEventContainer />
+        <HiklubChat2 />
+        
         */}
         <AnonCard />
+        <HiklubChat />
         </AuthProvider>
-        <HiklubChat2 />
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
       
