@@ -7,9 +7,11 @@ import 'stream-chat-react/dist/css/index.css';
 const HiklubChat2 = () => {
     //const { user } = useAuth()
 
-    const chatClient = StreamChat.getInstance('dj4bn8c565ua', '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum');
-    const userToken = chatClient.createToken('artis');
+    const chatClient = StreamChat.getInstance('dj4bn8c565ua');
 
+    const userToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWpnaWwifQ._KcsksbHTpVSftqO1Krn78m4c0VmWZw2UvlVHBA27X0";
+
+    
     //const connectResponse =  chatClient.connectAnonymousUser(); 
     //console.log(connectResponse.me);
 

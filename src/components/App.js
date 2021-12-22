@@ -13,7 +13,6 @@ import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
 import HiklubChat from './Chat/HiklubChat'
 import HiklubChat2 from './Chat/HiklubChat2'
-
 import './App.css'
 
 export function App() {
@@ -55,10 +54,9 @@ export function App() {
         {/* <AnonEvents /> 
         <ListEventContainer />
         <HiklubChat2 />
-        
+        <HiklubChat />
         */}
         <AnonCard />
-        <HiklubChat />
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
