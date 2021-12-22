@@ -197,8 +197,9 @@ export function Dashboard() {
       */}
     </div>
 
-    <h2>Actualizar perfil de usuario</h2>
+    
     <div>
+      <h2>Actualizar perfil de usuario</h2>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={user.email} disabled />
@@ -221,7 +222,6 @@ export function Dashboard() {
             }}
           />
       </div>
-
       <div>
         <button
           className="button block primary"
@@ -237,7 +237,6 @@ export function Dashboard() {
     <div>
       <h2>Test Afinidad</h2>
       <div>
-      <div>
         <label htmlFor="username">Pregunta 1</label>
         <input
           id="test-1"
@@ -246,7 +245,6 @@ export function Dashboard() {
           onChange={(e) => setTest(e.target.value)}
         />
       </div>
-
       <div>
         <button
           className="button block primary"
@@ -259,18 +257,16 @@ export function Dashboard() {
         </button>
       </div>
     </div>
-
     <div>
-    </div>
       <ListEventContainer />
-    </div>
+    </div>  
     <div>
       <h2>Mis Eventos</h2>
       <h3>Accede al chat</h3>
       <UserBookingsContainer />
     </div>
     <div>
-    <button onClick={handleSignOut}>Sign out</button>
+      <button onClick={handleSignOut}>Sign out</button>
     </div>
     </>
   )

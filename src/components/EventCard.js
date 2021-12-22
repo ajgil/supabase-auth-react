@@ -11,7 +11,7 @@ import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
-export default function EventCard({id, evento, description, ode_id}) {
+export default function EventCard({id, evento, description, ode_id, free_event, price}) {
 
   const { user } = useAuth()
   /*
@@ -96,10 +96,20 @@ export default function EventCard({id, evento, description, ode_id}) {
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   OdE: {ode_id}
               </Typography>
+              {/*If free_event = true then Free text else paid and price*/}
+                {free_event === 'true' ? (
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                It is free!
+              </Typography>
+              ):(
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Price: {price} €
+              </Typography>
+              )}
               </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>*/}
-                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id)}>Join Event</Button>
+                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id)}>Join this amazing Event</Button>
                 </CardActions>
               </Card>
       </Grid>

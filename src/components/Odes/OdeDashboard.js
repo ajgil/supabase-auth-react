@@ -130,7 +130,7 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("evento, description, done, release_date, id") //columns to select from the database
+        .select("evento, description, done,free_event, price, release_date, id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -344,7 +344,8 @@ export function OdeDashboard() {
           />
         </FormControl>
         ):(
-          <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />
+          //return null 
+          <div />
         )}
         </div>
         <div>

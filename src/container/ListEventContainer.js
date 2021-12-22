@@ -25,6 +25,8 @@ export default function ListEventContainer() {
                 ode_id: object.ode_id,
                 evento: object.evento,
                 description: object.description,
+                free_event: object.free_event,
+                price: object.price,
                 release_date: object.release_date,
                 done: object.done
             }));
