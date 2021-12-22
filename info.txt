@@ -28,6 +28,9 @@ https://database.dev/
 https://mui.com/guides/routing/#link
 
 
+process.env.REACT_APP_SUPABASE_PUBLIC_URL,
+
+
 // CREAR una api route secret env
 node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 2bc583c614acf887b28f41e5c5548abd7df1dac62efb46a8e2e83d77b1d7db13
