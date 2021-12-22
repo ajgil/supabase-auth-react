@@ -26,3 +26,8 @@ Necesitamos tener 3 roles, usuarios, odes y admins
 https://database.dev/
 
 https://mui.com/guides/routing/#link
+
+
+// Supabase JWT Secret 
+// Used to decode your JWTs You can also use this to mint your own JWTs
+// a6bc41f9-a1a7-4278-932c-938dcfaab1af
