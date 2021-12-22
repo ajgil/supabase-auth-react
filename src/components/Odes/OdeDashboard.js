@@ -8,6 +8,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 
 export function OdeDashboard() {
   // Get current user and signOut function from context
@@ -27,6 +36,8 @@ export function OdeDashboard() {
   const [evento, setEvento] = useState([])
   const [item, setItem] = useState([])
   const [description, setDescription] = useState("");
+  const [freeEvent, setFreeEvent] = useState(Boolean)
+  const [price, setPrice] = useState("")
   
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -146,6 +157,8 @@ export function OdeDashboard() {
         ode_id: user.id,
         evento,
         description,
+        free_event: freeEvent,
+        price,
         release_date: new Date(),
       }
 
@@ -168,11 +181,20 @@ export function OdeDashboard() {
   const handleAddEvent = async (e) => {
     e.preventDefault();
     try {
-      await addEvent(evento, description);
+      await addEvent(evento, description, freeEvent, price);
       setEvento("");
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleChange = (event) => {
+    setFreeEvent(event.target.value);
+    console.log(freeEvent)
+  };
+  const handleChangePrice = (event) => {
+    setPrice(event.target.value);
+    console.log(price)
   };
 
   async function handleSignOut() {
@@ -295,6 +317,35 @@ export function OdeDashboard() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter event description"
           />
+        </div>
+        <div>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Free / Paid Event</FormLabel>
+          <RadioGroup
+            aria-label="price"
+            name="controlled-radio-buttons-group"
+            value={freeEvent}
+            onChange={handleChange}
+          >
+            <FormControlLabel value="true" control={<Radio />} label="Free" />
+            <FormControlLabel value="false" control={<Radio />} label="Paid" />
+          </RadioGroup>
+        </FormControl>
+        { freeEvent === 'false' ? (
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          {/* <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} /> */}
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            value={price}
+            onChange={handleChangePrice}
+            startAdornment={<InputAdornment position="start">€</InputAdornment>}
+            label="Amount"
+          />
+        </FormControl>
+        ):(
+          <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />
+        )}
         </div>
         <div>
           <button disabled={adding}>
