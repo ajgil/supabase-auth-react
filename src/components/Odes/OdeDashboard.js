@@ -17,6 +17,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
+import initStripe from "stripe";
+import { add } from "date-fns";
+import axios from 'axios';
+import qs from 'querystring'
+//import { getServiceSupabase } from "../../utils/supabase";
 
 export function OdeDashboard() {
   // Get current user and signOut function from context
@@ -33,16 +38,20 @@ export function OdeDashboard() {
   const [phone, setPhone] = useState(null)
   const [verified, setVerified] = useState(false)
 
-  const [evento, setEvento] = useState([])
+  const [title, setTitle] = useState([])
   const [item, setItem] = useState([])
   const [description, setDescription] = useState("");
   const [freeEvent, setFreeEvent] = useState(Boolean)
   const [price, setPrice] = useState("")
+  const [productId, setProductId] = useState("")
+  const productIdRef = React.useRef()
   
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   
   const history = useHistory()
+
+  const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
   useEffect(() => {
     if (user === null) {
@@ -130,7 +139,7 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("evento, description, done,free_event, price, release_date, id") //columns to select from the database
+        .select("title, description, done,free_event, price, release_date, id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -148,20 +157,55 @@ export function OdeDashboard() {
   };
 
   // add new row to the database
-  const addEvent = async (evento, description) => {
+  const addEvent = async (title, description) => {
     setAdding(true);
-    console.log(user.id)
+    //console.log(user.id)
     try {
+      const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
+      if (price) {
+          const params = new URLSearchParams({ name: title, description: description });
+          //params.set('hello', 'world');
+          axios.post('https://api.stripe.com/v1/products', params
+          ,{
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(function(response) {
+            console.log(response)
+            setProductId(response.data.id)
+            productIdRef.current = response.data.id;
+         })
+      }
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      const priceParams = new URLSearchParams({
+        "currency": "eur",
+        "product": productIdRef.current,
+        "unit_amount": price * 100,  // The unit amount in cents to be charged,
+      })
+
+      axios.post('https://api.stripe.com/v1/prices', priceParams
+          ,{
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(function(response) {
+            console.log(response)
+         })
 
       const updates = {
         ode_id: user.id,
-        evento,
+        title,
         description,
         free_event: freeEvent,
         price,
         release_date: new Date(),
+        product_id: productIdRef.current
       }
 
+      console.log('updates', updates)
       const { error } = await supabase
         .from("eventos")
         .insert( updates ); //insert an object with the key value pair, the key being the column on the table
@@ -181,8 +225,8 @@ export function OdeDashboard() {
   const handleAddEvent = async (e) => {
     e.preventDefault();
     try {
-      await addEvent(evento, description, freeEvent, price);
-      setEvento("");
+      await addEvent(title, description, freeEvent, price);
+      setTitle("");
     } catch (err) {
       console.log(err);
     }
@@ -190,11 +234,9 @@ export function OdeDashboard() {
 
   const handleChange = (event) => {
     setFreeEvent(event.target.value);
-    console.log(freeEvent)
   };
   const handleChangePrice = (event) => {
     setPrice(event.target.value);
-    console.log(price)
   };
 
   async function handleSignOut() {
@@ -273,7 +315,7 @@ export function OdeDashboard() {
                     {/* dato.id */}
                     </Typography>
                     <Typography variant="h5" component="div">
-                        {items.evento}
+                        {items.title}
                     </Typography>
                     <Typography sx={{ fontSize: 13 }} color="text.secondary">
                         {items.description}
@@ -301,10 +343,10 @@ export function OdeDashboard() {
         <div>
           <input
             type="text"
-            name="event"
+            name="title"
             required
-            value={evento}
-            onChange={(e) => setEvento(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter new Event"
           />
         </div>

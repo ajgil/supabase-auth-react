@@ -51,8 +51,12 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
 
   */
 
-  const handleJoinEvent = (event, id, ode_id) => {
+  const handleJoinEvent = (event, id, ode_id, price) => {
     event.preventDefault()
+    if (price) {
+      // go payment
+      
+    }
     joinEvent()
 
     async function joinEvent() {
@@ -79,6 +83,7 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
     }
   }
 
+  console.log('Free Event', free_event)
   return(
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> 
@@ -97,19 +102,20 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
                   OdE: {ode_id}
               </Typography>
               {/*If free_event = true then Free text else paid and price*/}
-                {free_event === 'true' ? (
+                {free_event ? (
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 It is free!
               </Typography>
               ):(
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Price: {price} €
+                Nos lleva a pasarela de pago
               </Typography>
               )}
               </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>*/}
-                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id)}>Join this amazing Event</Button>
+                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id, price)}>Join this amazing Event</Button>
                 </CardActions>
               </Card>
       </Grid>

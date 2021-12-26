@@ -1,7 +1,7 @@
 //import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
 import { supabase } from '../supabase'
-//import axios from "axios"
+import axios from "axios"
 
 const AuthContext = React.createContext()
 
@@ -28,7 +28,14 @@ export function AuthProvider({ children }) {
       }
 
     }, [])
-  
+
+    useEffect(() => {
+      axios.post("/api/set-supabase-cookie", {
+        event: user ? "SIGNED_IN" : "SIGNED_OUT",
+        session: supabase.auth.session(),
+      });
+    }, [user]);
+
     // Will be passed down to Signup, Login and Dashboard components
     /*
     singUpOde: (datos) => supabase.auth.signUp({
