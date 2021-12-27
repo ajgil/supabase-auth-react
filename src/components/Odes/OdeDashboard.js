@@ -20,7 +20,6 @@ import TextField from '@mui/material/TextField';
 import initStripe from "stripe";
 import { add } from "date-fns";
 import axios from 'axios';
-import qs from 'querystring'
 //import { getServiceSupabase } from "../../utils/supabase";
 
 export function OdeDashboard() {
@@ -97,7 +96,7 @@ export function OdeDashboard() {
       setPhone(data.phone)
       setVerified(data.verified)
     } catch (error) {
-      alert(error.message)
+        alert(error)
     } finally {
     }
   }
@@ -139,7 +138,7 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("title, description, done,free_event, price, release_date, id") //columns to select from the database
+        .select("title, description, done, free_event, price, release_date, id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -235,6 +234,7 @@ export function OdeDashboard() {
   const handleChange = (event) => {
     setFreeEvent(event.target.value);
   };
+
   const handleChangePrice = (event) => {
     setPrice(event.target.value);
   };
@@ -309,7 +309,7 @@ export function OdeDashboard() {
             </Card>
           ) : (
              item.map((items, index) => (
-              <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+              <Card key={index} style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {/* dato.id */}
@@ -329,6 +329,16 @@ export function OdeDashboard() {
                         dato.user_id 
                         */}
                   </Typography>
+                   {/*If free_event = true then Free text else paid and price*/}
+                    {items.free_event ? (
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Gratuito
+                    </Typography>
+                    ):(
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Precio: {items.price} €
+                    </Typography>
+                    )}
                 </CardContent>
               </Card>
             )))}

@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
+import initStripe from "stripe";
 //import { GetEventos } from '../api/GetEvents'
 
 export default function EventCard({id, evento, description, ode_id, free_event, price}) {
@@ -48,18 +49,43 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
     } finally {
     }
   }
-
   */
 
-  const handleJoinEvent = (event, id, ode_id, price) => {
+  const handleJoinEvent = (event, id, ode_id, free_event, price) => {
     event.preventDefault()
-    if (price) {
-      // go payment
-      
+    if (free_event) {
+      joinFreeEvent()
     }
-    joinEvent()
+    else {
+      // go to payment
+      joinPaidEvent()
+      console.log('entra en el pago')
+    }
+    
+    async function joinPaidEvent() {
+      const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+    
+      console.log('stripe env', stripe)
+      const lineItems = [
+        {
+          price: price,
+          quantity: 1,
+        },
+      ];
+    
+      const session = await stripe.checkout.sessions.create({
+        //customer: stripe_customer,
+        mode: "payment",
+        payment_method_types: ["card"],
+        line_items: lineItems,
+        success_url: "http://localhost:3000/payment/success",
+        cancel_url: "http://localhost:3000/payment/cancelled",
+      });
+    
+      console.log('session', session)
+    }
 
-    async function joinEvent() {
+    async function joinFreeEvent() {
       try {
         const insert = {
           ode_id: ode_id,
@@ -115,7 +141,7 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
               </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>*/}
-                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id, price)}>Join this amazing Event</Button>
+                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id, free_event, price)}>Join this amazing Event</Button>
                 </CardActions>
               </Card>
       </Grid>
