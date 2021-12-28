@@ -40,3 +40,6 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 // dominio propio
 
 npm install ngrok -g
+
+
+https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
