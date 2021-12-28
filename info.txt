@@ -43,3 +43,5 @@ npm install ngrok -g
 
 
 https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
+
+https://github.com/MelvinManni/react_supabase/blob/master/src/ItemsContext.js
