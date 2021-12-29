@@ -16,6 +16,7 @@ export default function List({ eventdata }) {
                 free_event={evento.free_event}
                 price={evento.price}
                 release_date={evento.release_date}
+                price_id={evento.price_id}
                 />
             })}
         </>

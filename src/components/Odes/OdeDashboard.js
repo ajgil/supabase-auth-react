@@ -42,15 +42,14 @@ export function OdeDashboard() {
   const [description, setDescription] = useState("");
   const [freeEvent, setFreeEvent] = useState(Boolean)
   const [price, setPrice] = useState("")
-  const [productId, setProductId] = useState("")
-  const productIdRef = React.useRef()
+  //const [productId, setProductId] = useState("")
+  const productIdRef = useRef()
+  const priceIdRef = useRef()
   
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   
   const history = useHistory()
-
-  const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
   useEffect(() => {
     if (user === null) {
@@ -138,7 +137,7 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("title, description, done, free_event, price, release_date, id") //columns to select from the database
+        .select("title, description, done,free_event, price, release_date, id, price_id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -172,11 +171,11 @@ export function OdeDashboard() {
           }
         }).then(function(response) {
             console.log(response)
-            setProductId(response.data.id)
+            //setProductId(response.data.id)
             productIdRef.current = response.data.id;
          })
       }
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 3500));
       
       const priceParams = new URLSearchParams({
         "currency": "eur",
@@ -192,7 +191,10 @@ export function OdeDashboard() {
           }
         }).then(function(response) {
             console.log(response)
+            priceIdRef.current = response.data.id;
          })
+
+         await new Promise(resolve => setTimeout(resolve, 2500));
 
       const updates = {
         ode_id: user.id,
@@ -201,7 +203,8 @@ export function OdeDashboard() {
         free_event: freeEvent,
         price,
         release_date: new Date(),
-        product_id: productIdRef.current
+        product_id: productIdRef.current,
+        price_id: priceIdRef.current
       }
 
       console.log('updates', updates)

@@ -11,10 +11,14 @@ import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
 import initStripe from "stripe";
 //import { GetEventos } from '../api/GetEvents'
+import axios from 'axios'
 
-export default function EventCard({id, evento, description, ode_id, free_event, price}) {
+
+export default function EventCard({id, evento, description, ode_id, free_event, price, price_id}) {
 
   const { user } = useAuth()
+  const [priceId, setPriceId] = useState()
+  setPriceId(price_id)
   /*
   const onClickHandler = (event, source) => {
     // Do something with event
@@ -53,36 +57,22 @@ export default function EventCard({id, evento, description, ode_id, free_event, 
 
   const handleJoinEvent = (event, id, ode_id, free_event, price) => {
     event.preventDefault()
-    if (free_event) {
-      joinFreeEvent()
-    }
-    else {
-      // go to payment
-      joinPaidEvent()
-      console.log('entra en el pago')
-    }
-    
-    async function joinPaidEvent() {
-      const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
-    
-      console.log('stripe env', stripe)
-      const lineItems = [
-        {
-          price: price,
-          quantity: 1,
-        },
-      ];
-    
-      const session = await stripe.checkout.sessions.create({
-        //customer: stripe_customer,
-        mode: "payment",
-        payment_method_types: ["card"],
-        line_items: lineItems,
-        success_url: "http://localhost:3000/payment/success",
-        cancel_url: "http://localhost:3000/payment/cancelled",
-      });
-    
-      console.log('session', session)
+    if (price) {
+      // go payment
+      const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
+      const params = new URLSearchParams({
+        "price": priceId
+      })
+
+      axios.post('https://rmlnkikje1.execute-api.us-east-1.amazonaws.com/dev/checkout', params
+          ,{
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(function(response) {
+            console.log(response)
+         })
     }
 
     async function joinFreeEvent() {
