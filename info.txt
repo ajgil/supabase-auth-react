@@ -90,6 +90,12 @@ https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
 
 https://github.com/MelvinManni/react_supabase/blob/master/src/ItemsContext.js
 
+https://github.com/beezeebly/gatsby-stripe-checkout-amplify-example/blob/master/amplify/backend/function/stripeCheckout/src/index.js
+
+https://dev.to/beezfedia/using-the-new-stripe-checkout-in-gatsby-aws-amplify-return-a-session-server-side-3egi
+
+https://medium.com/dzolo38/https-medium-com-dzolo38-implement-the-new-stripe-checkout-workflow-with-a-react-amplify-project-serverless-78eccaac26e0
+
 ficheros que utilizan supabase
 anonCard
 Dashboard

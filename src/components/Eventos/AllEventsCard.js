@@ -17,7 +17,7 @@ import axios from 'axios'
 export default function AllEventsCard() {
 
   const { user, activeEvents } = useAuth()
-  const productIdRef = useRef()
+  const productIdRef = useRef(null)
 
   const handleJoinEvent = (event, id, ode_id, free_event, price) => {
     event.preventDefault()
@@ -47,29 +47,30 @@ export default function AllEventsCard() {
     }
   }
 
-  const payment = (event_id, ode_id) => {
+  async function getPriceId(id, ode_id) {
+    try {
 
-    async function getPriceId() {
-        try {
+    const { error, data } = await supabase
+      .from('stripe_products_prices').select('price_id')
+      .eq("ode_id", ode_id)
+      .eq("evento_id", id);
+      //.single();
 
-        const { error, data } = await supabase
-          .from("stripe_products_prices")
-          .select("price_id")
-          .eq("ode_id", ode_id)
-          .eq("event_id", event_id);
+    if (error) throw error;
 
-        if (error) throw error;
+    if (data) data.map((item) => {
+      productIdRef.current = item.price_id
+    })
 
-        if (data) data.map((item) => {
-          productIdRef.current = item.price_id
-        })
+    console.log('productId',productIdRef)
+  } catch (error) {
+    alert(error.error_description || error.message);
+  } finally {
+  }
+  payment()
+};
 
-      } catch (error) {
-        alert(error.error_description || error.message);
-      } finally {
-      }
-    };
-
+  const payment = () => {
     // go payment
     const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
     const params = new URLSearchParams({
@@ -111,23 +112,23 @@ export default function AllEventsCard() {
               </CardContent>
             </Card>
           ) : (
-            activeEvents.map((item, index) => (
+            activeEvents.map((evento, index) => (
               <Card key={index} style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {/* dato.id */}
                     </Typography>
                     <Typography variant="h5" component="div">
-                        {item.title}
+                        {evento.title}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {item.description}
+                        {evento.description}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        OdE: {item.ode_id}
+                        OdE: {evento.ode_id}
                     </Typography>
                     <Typography variant="body2">
-                        Fecha de lanzamiento: {item.release_date}
+                        Fecha de lanzamiento: {evento.release_date}
                         <br />
                             {/* 
                             data={item}
@@ -136,23 +137,23 @@ export default function AllEventsCard() {
                             */}
                     </Typography>
                       {/*If free_event = true then Free text else paid and price*/}
-                      {item.free_event ? (
+                      {evento.free_event ? (
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                       It is free!
                     </Typography>
                     ):(
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Price: {item.price} €
+                      Price: {evento.price} €
                       Nos lleva a pasarela de pago
                     </Typography>
                     )}
                 </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>   onClick={() => joinEvent()} */}
-                    {item.free_event ? (
+                    {evento.free_event ? (
                     <Button size="small" >Join Event</Button>
                     ):(
-                    <Button size="small" color="secondary" onClick={() => payment(item.id, item.ode_id)}>Go to payment</Button>
+                    <Button size="small" color="secondary" onClick={() => getPriceId(evento.id, evento.ode_id)}>Go to payment</Button>
                     )}
                 </CardActions>
               </Card>
