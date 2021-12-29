@@ -14,11 +14,9 @@ import initStripe from "stripe";
 import axios from 'axios'
 
 
-export default function EventCard({id, evento, description, ode_id, free_event, price, price_id}) {
+export default function EventCard({id, evento, description, ode_id, free_event, price}) {
 
   const { user } = useAuth()
-  const [priceId, setPriceId] = useState()
-  setPriceId(price_id)
   /*
   const onClickHandler = (event, source) => {
     // Do something with event

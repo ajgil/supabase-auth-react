@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-import { supabase } from "../../supabase";
+import { supabase } from '../../lib/supabase'
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -42,9 +42,9 @@ export function OdeDashboard() {
   const [description, setDescription] = useState("");
   const [freeEvent, setFreeEvent] = useState(Boolean)
   const [price, setPrice] = useState("")
-  //const [productId, setProductId] = useState("")
   const productIdRef = useRef()
   const priceIdRef = useRef()
+  const eventoIdRef = useRef()
   
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -137,7 +137,7 @@ export function OdeDashboard() {
 
       const { error, data } = await supabase
         .from("eventos") //the table you want to work with
-        .select("title, description, done,free_event, price, release_date, id, price_id") //columns to select from the database
+        .select("title, description, done,free_event, price, release_date, id") //columns to select from the database
         .eq("ode_id", user?.id) //comparison function to return only data with the user id matching the current logged in user
         .eq("done", false) //check if the done column is equal to false
         .order("id", { ascending: false }); // sort the data so the last item comes on top;
@@ -175,7 +175,7 @@ export function OdeDashboard() {
             productIdRef.current = response.data.id;
          })
       }
-      await new Promise(resolve => setTimeout(resolve, 3500));
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       const priceParams = new URLSearchParams({
         "currency": "eur",
@@ -194,26 +194,29 @@ export function OdeDashboard() {
             priceIdRef.current = response.data.id;
          })
 
-         await new Promise(resolve => setTimeout(resolve, 2500));
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-      const updates = {
+      // Insertar evento
+      const update_eventos = {
         ode_id: user.id,
         title,
         description,
         free_event: freeEvent,
         price,
         release_date: new Date(),
-        product_id: productIdRef.current,
-        price_id: priceIdRef.current
       }
 
-      console.log('updates', updates)
-      const { error } = await supabase
+      //console.log('updates', updates)
+      const { error, data } = await supabase
         .from("eventos")
-        .insert( updates ); //insert an object with the key value pair, the key being the column on the table
+        .insert( update_eventos ); //insert an object with the key value pair, the key being the column on the table
 
       if (error) throw error;
 
+      if (data) data.map((item) => {
+        eventoIdRef.current = item.id
+      })
+      //console.log(eventoIdRef.current)
       await getActiveEvents(); //get the new active items list
 
     } catch (error) {
@@ -222,6 +225,22 @@ export function OdeDashboard() {
     } finally {
       setAdding(false);
     }
+
+    // Actualiza tabla stripe_productos
+    const update_stripe = {
+      ode_id: user.id,
+      evento_id: eventoIdRef.current,
+      product_id: productIdRef.current,
+      price_id: priceIdRef.current
+    }
+    //console.log(update_stripe)
+
+    const { error } = await supabase
+    .from("stripe_products_prices")
+    .insert( update_stripe ); //insert an object with the key value pair, the key being the column on the table
+
+    if (error) console.log(error) 
+      alert(error.error_description || error.message);
   };
 
   const handleAddEvent = async (e) => {

@@ -1,95 +1,52 @@
 // src/contexts/Events.js
-import React, { useEffect, useState } from "react";
-import { supabase } from '../supabase'
-import { useAuth } from '../contexts/Auth'
-//import  BasicCard from '../components/Card'
+import React, { createContext, useState, useEffect } from "react";
+import { supabase } from '../lib/supabase'
+//import { useAuth } from '../contexts/Auth'
 
-export function Eventos() {
-    const [evento, setEvento] = useState([]); 
+// Initializing context
+export const EventosContext = createContext();
+
+export function EventosContextProvider({ children }) {
+    const [activeEvents, setActiveEvents] = useState([]); 
     const [datos, setDatos] = useState([]);
-    const { user } = useAuth()
-    //const [loading, setLoading] = useState(false);
+    //const { user } = useAuth()
+    const [loading, setLoading] = useState(false);
   
-    useEffect(() => {
-        //console.log(user.id)
-        getEventos()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-  
-    /*
-    https://supabase.com/docs/reference/javascript/select#query-foreign-tables
-        const { data, error } = await supabase
-        .from('eventos')
-        .select(`
-            id,
-            supplier:supplier_id ( name ),
-            purchaser:purchaser_id ( name )
-        `)
 
-        const { data, error } = await supabase
-        .from('eventos')
-        .select(`
-            id,
-            user_id,
-            event,
-            description,
-            profiles:profiles (
-            id
-            ),
-        `)
-        .from("eventos, profiles:id = eq.$user.id") //the table you want to work with
-                  .from("profiles", "eventos") //the table you want to work with
-          .select('*') //columns to select from the database
-          .eq('profiles.id', user.id)
-          ; // sort the data so the last item comes on top;
-    */
-
-    const getEventos = async () => {
-      //setLoading(true);
+    const getActiveEvents = async () => {
+      setLoading(true);
       try {
   
         const { error, data } = await supabase
             .from('eventos')
-            .select('id, user_id, event, description');
+            .select('id, title, description, free_event, price');
 
         if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
   
-        if (data) {
-          const datos = data.map(object => ({
-            id: object.id,
-            user_id: object.user_id,
-            event: object.event,
-            description: object.description,
-            release_date: object.release_date,
-            done: object.done
-          }));
-          setDatos(datos);
-          console.log('datos eventos:', datos)
-        }
+        if (data) setDatos(data => {
+          setActiveEvents(data);
+        });
+        //console.log('get active events', activeEvents)
       } catch (error) {
             console.log(error)
             alert(error.error_description || error.message);
       } finally {
-        //setLoading(false);
+        setLoading(false);
       }
     };
 
+    useEffect(()=> {
+      getActiveEvents()
+    },[])
+
       return (
-        <div>
-          <h3>Tabla Eventos!</h3>
-          <ul>
-          {/* map over the datos array */}
-              {datos.map((dato) => (
-                // parent element needs to have a unique key
-                <div key={dato.id}>
-                  <p> {dato.user_id} </p>
-                  <p>{dato.event}</p>
-                  <p>{dato.description}</p>
-                  <p>{dato.release_date}</p>
-                </div>
-              ))}
-          </ul>
-          {/* <BasicCard /> */}
-        </div>
-      )
+        <EventosContext.Provider
+          value={{
+            list:activeEvents,
+            getActiveEvents
+          }}
+        >
+          {children}
+        </EventosContext.Provider>
+      );
 }

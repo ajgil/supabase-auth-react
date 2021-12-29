@@ -1,16 +1,17 @@
 // src/components/Dashboard.js
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
-import { supabase } from '../supabase'
+import { supabase } from '../lib/supabase'
 import Avatar from './Avatar'
 //import ListEventContainer from '../container/ListEventContainer'
+import AllEventsCard from './Eventos/AllEventsCard'
 import UserBookingsContainer from "../container/UserBookingsContainer"
 import axios from 'axios'
 
 export function Dashboard() {
   // Get current user and signOut function from context
-  const { user, signOut } = useAuth()
+  const { user, signOut, activeEvents } = useAuth()
 
   const [loading, setLoading] = useState(null)
   const [username, setUsername] = useState(null)
@@ -53,6 +54,8 @@ export function Dashboard() {
     updateProperties()
 
   }, [])
+
+  //console.log('eventos activos dasboard usuario', activeEvents)
 
   async function getProfile() {
     try {
@@ -257,9 +260,11 @@ export function Dashboard() {
         </button>
       </div>
     </div>
-    <div>
-      {/*<ListEventContainer />*/}
-    </div>  
+      <div>
+        <h2>Eventos cerca de ti</h2>
+        {/*<ListEventContainer />  */}
+        <AllEventsCard />
+      </div>  
     <div>
       <h2>Mis Eventos</h2>
       <h3>Accede al chat</h3>

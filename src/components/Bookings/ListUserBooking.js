@@ -31,7 +31,7 @@ export default function ListUserBooking({id, evento, description}) {
   const [dense, setDense] = useState(false);
   //const [secondary, setSecondary] = useState(false);
 
-  console.log('List userBooking', id, evento, description)
+  //console.log('List userBooking', id, evento, description)
 
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
@@ -61,7 +61,7 @@ export default function ListUserBooking({id, evento, description}) {
                     secondary={description}
                     //secondary={bookingData.description ? 'Secondary text' : null}
                   />
-                </ListItem>,
+                </ListItem>
             </List>
           </Demo>
         </Grid>

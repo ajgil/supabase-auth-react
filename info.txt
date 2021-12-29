@@ -12,6 +12,50 @@ async changeEmail(email) {
     });
   }
 
+SUPABASE 
+    /*
+    https://supabase.com/docs/reference/javascript/select#query-foreign-tables
+        const { data, error } = await supabase
+        .from('eventos')
+        .select(`
+            id,
+            supplier:supplier_id ( name ),
+            purchaser:purchaser_id ( name )
+        `)
+
+        const { data, error } = await supabase
+        .from('eventos')
+        .select(`
+            id,
+            user_id,
+            event,
+            description,
+            profiles:profiles (
+            id
+            ),
+        `)
+        .from("eventos, profiles:id = eq.$user.id") //the table you want to work with
+                  .from("profiles", "eventos") //the table you want to work with
+          .select('*') //columns to select from the database
+          .eq('profiles.id', user.id)
+          ; // sort the data so the last item comes on top;
+
+
+          const datos = data.map(object => ({
+            id: object.id,
+            user_id: object.user_id,
+            event: object.event,
+            description: object.description,
+            release_date: object.release_date,
+            done: object.done
+          }));
+          setDatos(datos);
+          console.log('datos eventos:', datos)
+
+    */
+    
+
+
 "react-router-dom": "^5.2.0",
 "react-router-dom": "^6.1.1",
 
@@ -45,3 +89,12 @@ npm install ngrok -g
 https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
 
 https://github.com/MelvinManni/react_supabase/blob/master/src/ItemsContext.js
+
+ficheros que utilizan supabase
+anonCard
+Dashboard
+Auth
+OdeSingUp
+OdeDashboard
+Avatar
+UserBookingContainer

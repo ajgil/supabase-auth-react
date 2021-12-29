@@ -30,8 +30,7 @@ export default function ListEventContainer() {
                     free_event: object.free_event,
                     price: object.price,
                     release_date: object.release_date,
-                    done: object.done,
-                    price_id: object.price_id
+                    done: object.done
             }));
             setEventdata(datos);
             console.log('datos eventos:', datos)

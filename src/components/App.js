@@ -38,20 +38,20 @@ export function App() {
       <Router>
         {/* Wrap routes in the AuthProvider 👇 */}
         <AuthProvider>
-        <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
-          <PrivateRoute exact path="/odes" component={OdeDashboard} />
-          <PrivateRoute exact path="/booking" component={Booking} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/odesignup" component={OdeSignup} />
-          <Route path="/odelogin" component={OdeLogin} />
-          <Route path="/verify" component={VerifyOTP} />
-        </Switch>
-        {/* <AnonEvents /> 
-        <ListEventContainer />
-        */}
-        <AnonCard />
+            <Switch>
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="/odes" component={OdeDashboard} />
+              <PrivateRoute exact path="/booking" component={Booking} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route path="/odesignup" component={OdeSignup} />
+              <Route path="/odelogin" component={OdeLogin} />
+              <Route path="/verify" component={VerifyOTP} />
+            </Switch>
+            {/*
+            <ListEventContainer />
+            */}
+            <AnonCard />
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}

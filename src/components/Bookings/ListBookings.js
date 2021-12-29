@@ -3,7 +3,7 @@ import ListUserBooking from './ListUserBooking'
 
 export default function ListBookings({ bookingData }) {
 
-    console.log('ListBookings', bookingData)
+    //console.log('ListBookings', bookingData)
     return (
         <>      
             {bookingData.map((book, index) => {
