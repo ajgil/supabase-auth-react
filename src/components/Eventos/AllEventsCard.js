@@ -22,8 +22,7 @@ export default function AllEventsCard() {
   const handleJoinEvent = (event, id, ode_id, free_event, price) => {
     event.preventDefault()
     if (price) {
-      
-
+    }
     async function joinFreeEvent() {
       try {
         const insert = {
@@ -51,25 +50,25 @@ export default function AllEventsCard() {
   const payment = (event_id, ode_id) => {
 
     async function getPriceId() {
-      try {
+        try {
 
-      const { error, data } = await supabase
-        .from("stripe_products_prices")
-        .select("price_id")
-        .eq("ode_id", ode_id)
-        .eq("event_id", event_id);
+        const { error, data } = await supabase
+          .from("stripe_products_prices")
+          .select("price_id")
+          .eq("ode_id", ode_id)
+          .eq("event_id", event_id);
 
-      if (error) throw error;
+        if (error) throw error;
 
-      if (data) data.map((item) => {
-        productIdRef.current = item.price_id
-      })
+        if (data) data.map((item) => {
+          productIdRef.current = item.price_id
+        })
 
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-    }
-  };
+      } catch (error) {
+        alert(error.error_description || error.message);
+      } finally {
+      }
+    };
 
     // go payment
     const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
@@ -86,7 +85,6 @@ export default function AllEventsCard() {
       }).then(function(response) {
           console.log(response)
        })
-  }
   }
 /*
    {loading ? (
