@@ -12,38 +12,42 @@ import { useAuth } from '../../contexts/Auth'
 import initStripe from "stripe";
 //import { GetEventos } from '../api/GetEvents'
 import axios from 'axios'
-
+import { API } from "aws-amplify"
+import { loadStripe } from "@stripe/stripe-js"
 
 export default function AllEventsCard() {
 
   const { user, activeEvents } = useAuth()
   const productIdRef = useRef(null)
 
-  const handleJoinEvent = (event, id, ode_id, free_event, price) => {
+  const stripePromise = loadStripe('pk_test_51K9SOrEXK2ZVYO77dAUljO0OOiALGlNngJy7plFyi76fTZAU2A31Gtlz1m7I45lLx6PI5s0U6klFcW9jKO0iFPh700SNRjqX17')
+
+
+  const handleJoinEvent = (event, id, ode_id) => {
     event.preventDefault()
-    if (price) {
-    }
-    async function joinFreeEvent() {
-      try {
-        const insert = {
-          ode_id: ode_id,
-          user_id: user?.id,
-          evento_id: id
-        }
-  
-        let { error, returning } = await supabase.from('bookings').insert(insert, {
-          returning: 'minimal', // Return the value after inserting
-        })
-        
-        //console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
-        console.log('Apuntado al evento !')
-        if (error) {
-          throw error
-        }
-      } catch (error) {
-        alert(error.message)
-      } finally {
+    joinFreeEvent()
+  }
+
+  async function joinFreeEvent(id, ode_id) {
+    try {
+      const insert = {
+        ode_id: ode_id,
+        user_id: user?.id,
+        evento_id: id
       }
+
+      let { error } = await supabase.from('bookings').insert(insert, {
+        returning: 'minimal', // Return the value after inserting
+      })
+      
+      //console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
+      console.log('Apuntado al evento !')
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
     }
   }
 
@@ -67,37 +71,27 @@ export default function AllEventsCard() {
     alert(error.error_description || error.message);
   } finally {
   }
-  payment()
+  redirectToCheckout()
 };
 
-  const payment = () => {
-    // go payment
-    const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
-    const params = new URLSearchParams({
-      "price": productIdRef.current
-    })
+  const redirectToCheckout = async () => {
+    const fetchSession = async () => {
+      const apiName = "stripeAPI"
+      const apiEndpoint = "/checkout"
+      const body = {
+        quantity: 1,
+        priceId: productIdRef.current,
+      }
+      const session = await API.post(apiName, apiEndpoint, { body })
+      return session
+    }
 
-    axios.post('https://rmlnkikje1.execute-api.us-east-1.amazonaws.com/dev/checkout', params
-        ,{
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(function(response) {
-          console.log(response)
-       })
+    const session = await fetchSession()
+    const sessionId = session.id
+    const stripe = await stripePromise
+    stripe.redirectToCheckout({ sessionId })
   }
-/*
-   {loading ? (
-          "Loading..."
-        ) : activeEvents.length < 1 ? (
-          <p className="text-center m-5"> Nothing to display ☹️ </p>
-        ) : (
-          activeEvents.map((item, index) => (
-          
-          ))
-        )}
-  */
+
   return(
     <>
       <Box sx={{ width: '100%' }}>
@@ -144,14 +138,13 @@ export default function AllEventsCard() {
                     ):(
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                       Price: {evento.price} €
-                      Nos lleva a pasarela de pago
                     </Typography>
                     )}
                 </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>   onClick={() => joinEvent()} */}
                     {evento.free_event ? (
-                    <Button size="small" >Join Event</Button>
+                    <Button size="small" onClick={() => joinFreeEvent(evento.id, evento.ode_id)}>Join Event</Button>
                     ):(
                     <Button size="small" color="secondary" onClick={() => getPriceId(evento.id, evento.ode_id)}>Go to payment</Button>
                     )}

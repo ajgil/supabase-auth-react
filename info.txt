@@ -54,8 +54,6 @@ SUPABASE
 
     */
     
-
-
 "react-router-dom": "^5.2.0",
 "react-router-dom": "^6.1.1",
 
@@ -71,9 +69,7 @@ https://database.dev/
 
 https://mui.com/guides/routing/#link
 
-
 process.env.REACT_APP_SUPABASE_PUBLIC_URL,
-
 
 // CREAR una api route secret env --> desde terminal
 node -e "console.log(crypto.randomBytes(32).toString('hex'))"
@@ -84,7 +80,6 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 // dominio propio
 
 npm install ngrok -g
-
 
 https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
 
@@ -104,3 +99,16 @@ OdeSingUp
 OdeDashboard
 Avatar
 UserBookingContainer
+
+STRIPE AMPLIFY DEV
+checkout endpoint 
+https://juw1zt4xbl.execute-api.us-east-1.amazonaws.com/dev
+
+webhook endpoint
+https://juw1zt4xbl.execute-api.us-east-1.amazonaws.com/dev/webhook
+
+webhook checkout session ended secret
+whsec_MsYERYY4jsntoMFx28Lqd59IX8Z7o1jV
+
+Test anonCard
+4242 4242 4242 4242
