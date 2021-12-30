@@ -9,9 +9,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../contexts/Auth'
-import initStripe from "stripe";
-//import { GetEventos } from '../api/GetEvents'
-import axios from 'axios'
+//import { Success } from '../checkout/success'
 import { API } from "aws-amplify"
 import { loadStripe } from "@stripe/stripe-js"
 
@@ -19,6 +17,8 @@ export default function AllEventsCard() {
 
   const { user, activeEvents } = useAuth()
   const productIdRef = useRef(null)
+  const eventoIdRef = useRef(null)
+  const odeIdRef = useRef(null)
 
   const stripePromise = loadStripe('pk_test_51K9SOrEXK2ZVYO77dAUljO0OOiALGlNngJy7plFyi76fTZAU2A31Gtlz1m7I45lLx6PI5s0U6klFcW9jKO0iFPh700SNRjqX17')
 
@@ -54,6 +54,8 @@ export default function AllEventsCard() {
 
   async function getPriceId(id, ode_id) {
     try {
+      eventoIdRef.current = id
+      odeIdRef.current = ode_id
 
     const { error, data } = await supabase
       .from('stripe_products_prices').select('price_id')
