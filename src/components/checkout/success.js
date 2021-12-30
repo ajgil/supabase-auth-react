@@ -1,7 +1,7 @@
 import { useRef, useState, forwardRef } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-
+//import { AllEventsCard } from '../Eventos/AllEventsCard'
 export function Success (props, ref) {
   //const odephoneNumberRef = useRef()
   //const odePhoneNumber = useParams()
@@ -12,6 +12,8 @@ export function Success (props, ref) {
   const { user } = useAuth()
 
   const history = useHistory()
+
+  //AllEventsCard.joinFreeEvent()
 
   return <p> Payment done. Pincha aqui para seguir Hikeando </p>
 }

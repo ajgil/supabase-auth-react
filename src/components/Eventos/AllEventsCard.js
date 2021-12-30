@@ -28,7 +28,7 @@ export default function AllEventsCard() {
     joinFreeEvent()
   }
   */
- 
+
   async function joinFreeEvent(id, ode_id) {
     try {
       const insert = {
