@@ -22,12 +22,13 @@ export default function AllEventsCard() {
 
   const stripePromise = loadStripe('pk_test_51K9SOrEXK2ZVYO77dAUljO0OOiALGlNngJy7plFyi76fTZAU2A31Gtlz1m7I45lLx6PI5s0U6klFcW9jKO0iFPh700SNRjqX17')
 
-
+  /*
   const handleJoinEvent = (event, id, ode_id) => {
     event.preventDefault()
     joinFreeEvent()
   }
-
+  */
+ 
   async function joinFreeEvent(id, ode_id) {
     try {
       const insert = {
