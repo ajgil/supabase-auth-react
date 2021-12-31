@@ -1,22 +1,37 @@
-import { useRef, useState, forwardRef } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useHistory,   } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-//import { AllEventsCard } from '../Eventos/AllEventsCard'
+//import { InsertPaymentEvent } from '../../helpers/Helpers'
 
-const Success = forwardRef((props , ref) => {
+const Success = () => {
 
-  console.log('Ref', ref)
-
-  //console.log('props', props.value)
+  //console.log(`evento id ${evento_id} ode id ${ode_id}`)
 
   // Get signUp function from the auth context
   const { user } = useAuth()
 
   const history = useHistory()
 
-  //AllEventsCard.joinFreeEvent()
+  useEffect(() => {
+    InsertPaymentEvent()
+  }, [])
 
   return <p> Payment done. Pincha aqui para seguir Hikeando </p>
-})
-
+}
 export default Success
+
+export const SetPaymentSuccess = (id, ode_id) => {
+        
+  const [eventoId, setEventId] = useState()
+  const [odeId, setOdeId] = useState()
+
+  const eventoIdRef = useRef(null)
+  const odeIdRef = useRef(null)
+  eventoIdRef.current = id
+  odeIdRef.current = ode_id
+
+  //setEventId(id)
+  //setOdeId(ode_id)
+  
+  return console.log('setPaymentEvent helpers')
+}
