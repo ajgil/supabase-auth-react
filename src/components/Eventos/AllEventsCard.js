@@ -12,7 +12,6 @@ import { useAuth } from '../../contexts/Auth'
 import { API } from "aws-amplify"
 import { loadStripe } from '@stripe/stripe-js'
 //import { SetPaymentEvent } from '../../helpers/Helpers' 
-import { SetPaymentSuccess } from '../checkout/OldSuccess'
 
 export default function AllEventsCard() {
 
@@ -56,7 +55,7 @@ export default function AllEventsCard() {
       //eventoIdRef.current = id
       //odeIdRef.current = ode_id
       //SetPaymentEvent(id, ode_id)
-      SetPaymentSuccess(id, ode_id)
+      Success(id, ode_id)
       //localStorage.setItem('eventoId', JSON.stringify(eventoIdRef.current))
       //localStorage.setItem('odeId', JSON.stringify(odeIdRef.current))
 
