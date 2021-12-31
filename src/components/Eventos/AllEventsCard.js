@@ -9,16 +9,15 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../contexts/Auth'
-//import { Success } from '../checkout/success'
 import { API } from "aws-amplify"
-import { loadStripe } from "@stripe/stripe-js"
+import { loadStripe } from '@stripe/stripe-js'
+//import { SetPaymentEvent } from '../../helpers/Helpers' 
+import { SetPaymentSuccess } from '../checkout/Success'
 
 export default function AllEventsCard() {
 
   const { user, activeEvents } = useAuth()
   const productIdRef = useRef(null)
-  const eventoIdRef = useRef(null)
-  const odeIdRef = useRef(null)
 
   const stripePromise = loadStripe('pk_test_51K9SOrEXK2ZVYO77dAUljO0OOiALGlNngJy7plFyi76fTZAU2A31Gtlz1m7I45lLx6PI5s0U6klFcW9jKO0iFPh700SNRjqX17')
 
@@ -54,8 +53,12 @@ export default function AllEventsCard() {
 
   async function getPriceId(id, ode_id) {
     try {
-      eventoIdRef.current = id
-      odeIdRef.current = ode_id
+      //eventoIdRef.current = id
+      //odeIdRef.current = ode_id
+      //SetPaymentEvent(id, ode_id)
+      SetPaymentSuccess(id, ode_id)
+      //localStorage.setItem('eventoId', JSON.stringify(eventoIdRef.current))
+      //localStorage.setItem('odeId', JSON.stringify(odeIdRef.current))
 
     const { error, data } = await supabase
       .from('stripe_products_prices').select('price_id')

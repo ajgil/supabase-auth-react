@@ -12,6 +12,9 @@ async changeEmail(email) {
     });
   }
 
+JSON.stringify(): Convierte JS Object a JSON Object.
+JSON.parse(): Convierte JSON Object a JS Object.
+
 SUPABASE 
     /*
     https://supabase.com/docs/reference/javascript/select#query-foreign-tables
@@ -90,6 +93,8 @@ https://github.com/beezeebly/gatsby-stripe-checkout-amplify-example/blob/master/
 https://dev.to/beezfedia/using-the-new-stripe-checkout-in-gatsby-aws-amplify-return-a-session-server-side-3egi
 
 https://medium.com/dzolo38/https-medium-com-dzolo38-implement-the-new-stripe-checkout-workflow-with-a-react-amplify-project-serverless-78eccaac26e0
+
+https://www.zeromolecule.com/blog/5-utility-react-hooks-for-every-project/
 
 ficheros que utilizan supabase
 anonCard
