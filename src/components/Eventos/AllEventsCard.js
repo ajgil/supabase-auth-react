@@ -54,10 +54,8 @@ export default function AllEventsCard() {
     try {
       //eventoIdRef.current = id
       //odeIdRef.current = ode_id
-      //SetPaymentEvent(id, ode_id)
-      Success(id, ode_id)
-      //localStorage.setItem('eventoId', JSON.stringify(eventoIdRef.current))
-      //localStorage.setItem('odeId', JSON.stringify(odeIdRef.current))
+      localStorage.setItem('eventoId', JSON.stringify(id))
+      localStorage.setItem('odeId', ode_id)
 
     const { error, data } = await supabase
       .from('stripe_products_prices').select('price_id')
@@ -95,6 +93,7 @@ export default function AllEventsCard() {
     const sessionId = session.id
     const stripe = await stripePromise
     stripe.redirectToCheckout({ sessionId })
+
   }
 
   return(
