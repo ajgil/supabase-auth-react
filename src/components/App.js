@@ -11,7 +11,7 @@ import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
-import Success from '../components/checkout/Success'
+import Success from './checkout/OldSuccess'
 import './App.css'
 
 export function App() {

@@ -12,7 +12,7 @@ import { useAuth } from '../../contexts/Auth'
 import { API } from "aws-amplify"
 import { loadStripe } from '@stripe/stripe-js'
 //import { SetPaymentEvent } from '../../helpers/Helpers' 
-import { SetPaymentSuccess } from '../checkout/Success'
+import { SetPaymentSuccess } from '../checkout/OldSuccess'
 
 export default function AllEventsCard() {
 
