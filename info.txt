@@ -117,3 +117,6 @@ whsec_MsYERYY4jsntoMFx28Lqd59IX8Z7o1jV
 
 Test anonCard
 4242 4242 4242 4242
+
+https://www.bitcoininsider.org/article/67526/react-native-chat-chuck-norris
+https://github.com/GetStream/react-native-chat-chucky
