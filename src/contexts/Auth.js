@@ -1,6 +1,6 @@
 import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
-import { supabase } from '../Supabase'
+import { supabase } from '../supabase'
 //import axios from "axios"
 
 const AuthContext = React.createContext()

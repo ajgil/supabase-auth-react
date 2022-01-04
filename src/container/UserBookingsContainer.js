@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from '../Supabase'
+import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
 import ListBookings from '../components/Bookings/ListBookings'
 //import ListUserBoooking from "../components/Bookings/ListUserBooking";

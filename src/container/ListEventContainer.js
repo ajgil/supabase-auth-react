@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from '../Supabase'
+import { supabase } from '../supabase'
 import List from '../components/List'
 
 export default function ListEventContainer() {

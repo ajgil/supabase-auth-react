@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-import { supabase } from '../../Supabase'
+import { supabase } from '../../supabase'
 
 export function OdeSignup() {
   const odeemailRef = useRef()
