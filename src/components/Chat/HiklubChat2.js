@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StreamChat } from 'stream-chat';
+import { StreamChat } from "stream-chat";
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
 //import { useAuth } from '../../contexts/Auth'
 import 'stream-chat-react/dist/css/index.css';

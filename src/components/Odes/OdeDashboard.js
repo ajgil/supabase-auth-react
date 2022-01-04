@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-import { supabase } from "../../supabase";
+import { supabase } from "../../Supabase";
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';

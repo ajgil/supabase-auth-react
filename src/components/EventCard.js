@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { supabase } from '../supabase'
+import { supabase } from '../Supabase'
 import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
