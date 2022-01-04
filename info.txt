@@ -31,3 +31,11 @@ https://mui.com/guides/routing/#link
 // Supabase JWT Secret 
 // Used to decode your JWTs You can also use this to mint your own JWTs
 // a6bc41f9-a1a7-4278-932c-938dcfaab1af
+
+
+Test anonCard
+4242 4242 4242 4242
+
+https://www.bitcoininsider.org/article/67526/react-native-chat-chuck-norris
+https://github.com/GetStream/react-native-chat-chucky
+
