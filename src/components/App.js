@@ -9,7 +9,7 @@ import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
 import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
-import AnonCard from '../components/AnonCard'
+//import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
 //import HiklubChat from './Chat/HiklubChat'
 //import HiklubChat2 from './Chat/HiklubChat2'
@@ -56,8 +56,9 @@ export function App() {
         <ListEventContainer />
         <HiklubChat2 />
         <HiklubChat />
+         <AnonCard />
         */}
-        <AnonCard />
+       
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
