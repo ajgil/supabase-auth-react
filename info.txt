@@ -34,3 +34,6 @@ https://www.google.es/search?q=serverless+getstream+chat&biw=1309&bih=750&sxsrf=
 STREAM_KEY: 'dj4bn8c565ua'
 STREAM_SECRET: '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum'
 STREAM_APP_ID: '1158197'
+
+https://getstream.io/blog/build-a-medical-pager-app/
+https://github.com/adrianhajdin/project_medical_pager_chat/blob/master/server/controllers/auth.js
