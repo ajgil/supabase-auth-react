@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { StreamChat } from "stream-chat";
+import { StreamChat } from 'stream-chat'
 import axios from "axios";
 import ChatView from './ChatView';
 import { useAuth } from "../../contexts/Auth";
@@ -10,13 +10,12 @@ export default function ChatUserController() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [username, setUsername] = useState()
  
-    const apiKey = "dj4bn8c565ua";
+    const apiKey = "7rfypad6gc33";
 
     const client = StreamChat.getInstance(apiKey);
 
-
     axios
-      .post('https://7dno22e0xa.execute-api.us-east-1.amazonaws.com/dev/users/create', {
+      .post('https://7dno22e0xa.execute-api.us-east-1.amazonaws.com/dev/signup', {
         username: user.id,
       })
       .then(res => {
