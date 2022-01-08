@@ -2,12 +2,17 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from "react-router-dom";
+import Footer from './components/footer'
+import Navbar from './components/navbar';
 
 import { App } from './components/App'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+    <Navbar/>
     <App />
-  </React.StrictMode>,
+    <Footer/>
+  </BrowserRouter>,
   document.getElementById('root')
 )

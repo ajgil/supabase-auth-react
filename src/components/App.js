@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-import { Signup } from './Signup'
+//import { Signup } from './Signup'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
@@ -13,6 +13,9 @@ import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
 //import ChatUserController from '../components/Chat/ChatUserController'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
+import Home from '../pages/Home'
+import PreLogIn from '../pages/preLogIn'
+import Register from '../pages/register'
 
 import './App.css'
 
@@ -35,28 +38,35 @@ export function App() {
   */
   return (
     <div>
-      <h1>Welcome to Hiklub</h1>
-      {/* Add routes here👇 */}
+      
+      {/* <h1>Welcome to Hiklub</h1>
+      Add routes here👇 */}
       <Router>
-        {/* Wrap routes in the AuthProvider 👇 */}
+        {/* Wrap routes in the AuthProvider 👇
+        <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
-          <Route path="/signup" component={Signup} />
+          
           <Route path="/login" component={Login} />
+          <Route path="/PreLogIn" component={PreLogIn} />
+          <Route path="/Register" element={Register} />
+
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
+          <Route path="/" component={Home} />
           
         </Switch>
         {/* 
         <Route path="/chat" component={ChatEjemplo} />
         <AnonEvents /> 
         <ListEventContainer />
-        */}
         <AnonCard />
+        */}
+        
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
