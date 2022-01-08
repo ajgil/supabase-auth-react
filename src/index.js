@@ -9,7 +9,7 @@ import Navbar from './components/navbar';
 ReactDOM.render(
   <BrowserRouter>
     <Navbar/>
-    <App />
+      <App />
     <Footer/>
   </BrowserRouter>,
   document.getElementById('root')

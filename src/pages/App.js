@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { PrivateRoute } from '../components/PrivateRoute'
+import { PrivateRoute } from '../contexts/PrivateRoute'
 import { Signup } from '../components/oldSignup'
 import { Dashboard } from '../components/Dashboard'
 import { AuthProvider } from '../contexts/Auth'
@@ -10,9 +10,9 @@ import { VerifyOTP } from '../components/Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
-import Home from '../pages/Home'
-import LogIn from '../pages/LogIn'
-import PreLogIn from './preLogIn'
+import Home from './Home'
+import LogIn from './LogIn'
+import PreLogIn from '../pages/preLogIn'
 import Register from './register'
 //import ChatUserController from '../components/Chat/ChatUserController'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
@@ -45,15 +45,17 @@ export function App() {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
-          */}
-          <Route path="/" component={Home} />
-          <Route path="PreLogIn" element={<PreLogIn />} />
-          <Route path="logIn" component={LogIn} />
-          <Route path="Register" element={<Register />} />
+          <Route path="/PreLogIn" element={PreLogIn} />
+          <Route path="/logIn" component={LogIn} />
+          <Route path="/Register" element={Register} />
           <Route path="/signup" component={Signup} />
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
+          */}
+          <Route path="/" component={Home} />
+          <Route path="/PreLogIn" element={PreLogIn} />
+          <Route path="/odesignup" component={OdeSignup} />
           <Route
             path="*"
             element={

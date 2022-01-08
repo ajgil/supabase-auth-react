@@ -9,7 +9,7 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import HikLogoNoTxt from '../resources/hikLogoNoText.jpg';
-import SignUp from '../components/signUp';
+import SignUpUsers from '../components/SignUpUsers';
 import SignUpODES from '../components/SignUpODES';
 import '../styles/register.scss';
 
@@ -68,7 +68,7 @@ const Register = () => {
             </Tabs>
           </AppBar>
           <div role="tabpanel" hidden={value !== 0} id={`simple-tabpanel-${0}`}>
-					<SignUp/>
+					<SignUpUsers/>
 				</div>
 				<div role="tabpanel" hidden={value !== 1} id={`simple-tabpanel-${1}`}>
           <SignUpODES/>
