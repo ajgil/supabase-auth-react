@@ -1,6 +1,6 @@
 // src/components/Login.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 
 export function OdeLogin() {
@@ -11,7 +11,7 @@ export function OdeLogin() {
   // Get signUp function from the auth context
   const { signIn } = useAuth()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   async function handleSubmitOde(e) {
     e.preventDefault()
@@ -30,7 +30,7 @@ export function OdeLogin() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/odes')
+      navigate.push('/odes')
     }
   }
 

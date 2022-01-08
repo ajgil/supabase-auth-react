@@ -1,20 +1,23 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { PrivateRoute } from './PrivateRoute'
-import { Signup } from './Signup'
-import { Login } from './Login'
-import { Dashboard } from './Dashboard'
+import { Routes, Route } from 'react-router-dom'
+import { PrivateRoute } from '../components/PrivateRoute'
+import { Signup } from '../components/oldSignup'
+import { Dashboard } from '../components/Dashboard'
 import { AuthProvider } from '../contexts/Auth'
-import { OdeSignup} from './Odes/Odesignup'
-import { OdeLogin } from './Odes/OdeLogin'
-import { OdeDashboard } from './Odes/OdeDashboard'
-import { VerifyOTP } from './Odes/VerifyOTP'
+import { OdeSignup} from '../components/Odes/Odesignup'
+import { OdeLogin } from '../components/Odes/OdeLogin'
+import { OdeDashboard } from '../components/Odes/OdeDashboard'
+import { VerifyOTP } from '../components/Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
+import Home from '../pages/Home'
+import LogIn from '../pages/LogIn'
+import PreLogIn from './preLogIn'
+import Register from './register'
 //import ChatUserController from '../components/Chat/ChatUserController'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
 
-import './App.css'
+//import './App.css'
 
 export function App() {
 
@@ -35,30 +38,39 @@ export function App() {
   */
   return (
     <div>
-      <h1>Welcome to Hiklub</h1>
       {/* Add routes here👇 */}
-      <Router>
-        {/* Wrap routes in the AuthProvider 👇 */}
-        <AuthProvider>
-        <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
+      <Routes>
+         {/*<AuthProvider> */}
+           {/* Wrap routes in the AuthProvider 👇 
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
+          */}
+          <Route path="/" component={Home} />
+          <Route path="PreLogIn" element={<PreLogIn />} />
+          <Route path="logIn" component={LogIn} />
+          <Route path="Register" element={<Register />} />
           <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
-          
-        </Switch>
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
         {/* 
         <Route path="/chat" component={ChatEjemplo} />
         <AnonEvents /> 
         <ListEventContainer />
-        */}
+       
         <AnonCard />
         </AuthProvider>
-      </Router>
+         */}
+      </Routes>
       {/* Mostrar eventos anónimos geolocalizados */}
       
     </div>

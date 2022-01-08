@@ -1,6 +1,6 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState, useRef } from "react";
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { supabase } from "../../supabase";
 import { StreamChat } from 'stream-chat';
@@ -14,7 +14,7 @@ import Grid from '@mui/material/Grid';
 let chatClient;
 export function OdeDashboard() {
   // Get current OdE and signOut function from context
-  const { user, signOut, verifyOTP } = useAuth()
+  const { user, odeProfile, signOut, verifyOTP } = useAuth()
   // Una vez logado el Ode por primera vez hemos de verificar el numero teléfono
 
   const odephoneNumberRef = useRef()
@@ -37,11 +37,11 @@ export function OdeDashboard() {
 
   const [channel, setChannel] = useState(null);
   
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (user === null) {
-      history.replace("/odelogin");
+      navigate.replace("/odelogin");
     }
     getProfile()
     getActiveEvents()
@@ -49,6 +49,7 @@ export function OdeDashboard() {
   }, []);
 
   console.log('user',user)
+  console.log('odeProfile',odeProfile)
   if (user.user_metadata.ode) console.log('metadata true')
   //console.log('objeto OdE', ode)
   // Verifica telefono
@@ -65,7 +66,7 @@ export function OdeDashboard() {
       // cuando se haya verificado el phone se cambia verified a true
       updateProfile({phone, verified : true })
       // Redirect odes to Dashboard
-      history.push('/odes')
+      navigate.push('/odes')
     }
   }
   //Obtiene el perfil - ToDo: crear un objeto y exportarlo desde el contexto auth
@@ -234,7 +235,7 @@ export function OdeDashboard() {
     await signOut()
 
     // Redirects the user to Login page
-    history.push('/login')
+    navigate.push('/login')
   }
   if (channel) {
     return( <p> Ir al chat </p>)

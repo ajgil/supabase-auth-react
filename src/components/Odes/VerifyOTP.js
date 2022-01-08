@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import { useRef, useState, forwardRef } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 
 export function VerifyOTP(props, ref) {
@@ -12,7 +12,7 @@ export function VerifyOTP(props, ref) {
   // Get signUp function from the auth context
   const { verifyOTP } = useAuth()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   async function handleVerifyOTP(e){
     e.preventDefault()
@@ -25,7 +25,7 @@ export function VerifyOTP(props, ref) {
       alert('error signing with phone number')
     } else {
       // Redirect user to Dashboard
-      history.push('/')
+      navigate.push('/')
     }
   }
 

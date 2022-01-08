@@ -1,4 +1,3 @@
-import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
 import { supabase } from '../supabase'
 //import axios from "axios"
@@ -6,28 +5,54 @@ import { supabase } from '../supabase'
 const AuthContext = React.createContext()
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState()
-    const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(supabase.auth.user())
+  const [odeProfile, setOdeProfile ] = useState('null')
+  const [userProfile, setUserProfile ] = useState('null')
+  const [isLoading, setIsLoading] = useState(true)
   
-    useEffect(() => {
-      // Check active sessions and sets the user
-      const session = supabase.auth.session()
-  
-      setUser(session?.user ?? null)
-      setLoading(false)
-  
-      // Listen for changes on auth state (logged in, signed out, etc.)
-      const { data: listener } = supabase.auth.onAuthStateChange(
-        async (event, session) => {
-          setUser(session?.user ?? null)
-          setLoading(false)
-        }
-      )
-      return () => {
-        listener?.unsubscribe()
-      }
+  useEffect(() => {
+    const getUserProfile = async () => {
+      const sessionUser = supabase.auth.user();
 
-    }, [])
+      if (sessionUser) {
+
+        if (sessionUser.user_metadata.ode) {
+
+          const { data: OdeProfile } = await supabase
+            .from("odes")
+            .select("*")
+            .eq("id", sessionUser.id)
+            .single();
+
+          setUser({
+            ...sessionUser,
+            ...OdeProfile,
+          });
+
+        } else {
+          const { data: UserProfile } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", sessionUser.id)
+            .single();
+
+            setUser({
+            ...sessionUser,
+            ...UserProfile,
+          });
+
+        }
+        setIsLoading(false);
+      }
+    };
+
+    getUserProfile();
+
+    supabase.auth.onAuthStateChange(() => {
+      getUserProfile();
+    });
+
+  }, [])
   
     // Will be passed down to Signup, Login and Dashboard components
     /*
@@ -100,6 +125,7 @@ export function AuthProvider({ children }) {
         },
   
       user,
+      isLoading
     }
     //console.log('auth user : ', user?.email)
     //console.log(user?.app_metadata.provider)
@@ -109,7 +135,7 @@ export function AuthProvider({ children }) {
 
     return (
       <AuthContext.Provider value={value}>
-        {!loading && children}
+        {!isLoading && children}
       </AuthContext.Provider>
     )
   }

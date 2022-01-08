@@ -1,6 +1,6 @@
 // src/components/Dashboard.js
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
@@ -10,7 +10,7 @@ import axios from 'axios'
 
 export function Dashboard() {
   // Get current user and signOut function from context
-  const { user, signOut } = useAuth()
+  const { user, userProfile, signOut } = useAuth()
 
   const [loading, setLoading] = useState(null)
   const [username, setUsername] = useState(null)
@@ -45,7 +45,7 @@ export function Dashboard() {
   }
   */
   
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     //getProfile()
@@ -158,7 +158,7 @@ export function Dashboard() {
     await signOut()
 
     // Redirects the user to Login page
-    history.push('/login')
+    navigate.push('/login')
   }
 
   /*
@@ -171,18 +171,19 @@ export function Dashboard() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/bookings')
+      navigate.push('/bookings')
     }
   }
   */
  console.log('user',user)
+ console.log('userProfile', userProfile)
  if (user.user_metadata.ode) console.log('metadata true')
   return (
     <>
     <div>
       {/* Change it to display the user ID too 👇*/}
       <h2>Datos recuperados de la tabla de Perfiles de usuario</h2>
-      <p>Nombre: {full_name}</p>
+      <p>Nombre: {userProfile.full_name}</p>
       <p>Usuario: {username}</p>
       <p>Provider: {provider}</p>
       <p>Avatar: {avatar_url}</p>

@@ -1,6 +1,6 @@
 // src/components/Login.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Login() {
@@ -11,7 +11,7 @@ export function Login() {
   // Get signUp function from the auth context
   const { signIn } = useAuth()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -29,7 +29,7 @@ export function Login() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/')
+      navigate.push('/')
     }
   }
 
@@ -50,7 +50,7 @@ export function Login() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/ode')
+      navigate.push('/ode')
     }
   }
   */

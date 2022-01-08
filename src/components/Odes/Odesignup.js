@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { supabase } from '../../supabase'
 
@@ -13,7 +13,7 @@ export function OdeSignup() {
   // Get signUp function from the auth context
   const { signUpPhone } = useAuth()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -40,7 +40,7 @@ export function OdeSignup() {
       alert('error signing in')
     } else {
       // Redirect user to OdeDashboard
-      history.push('/odes')
+      navigate.push('/odes')
     }
   }
 
@@ -57,7 +57,7 @@ export function OdeSignup() {
     } else {
       console.log('add code token')
       // Redirect user to Dashboard
-      history.push('/verify')
+      navigate.push('/verify')
       alert('Proporciona el token recibido por SMS')
       //handleVerifyOTP
     }

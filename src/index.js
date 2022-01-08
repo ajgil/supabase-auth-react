@@ -1,13 +1,16 @@
 // src/index.js
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-import { App } from './components/App'
+import { BrowserRouter } from "react-router-dom";
+import { App } from './pages/App'
+import Footer from './components/footer'
+import Navbar from './components/navbar';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+    <Navbar/>
     <App />
-  </React.StrictMode>,
+    <Footer/>
+  </BrowserRouter>,
   document.getElementById('root')
 )

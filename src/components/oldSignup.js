@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Signup() {
@@ -10,7 +10,7 @@ export function Signup() {
   // Get signUp function from the auth context
   const { signUp, signInWithFacebook, signInWithGoogle } = useAuth()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -27,7 +27,7 @@ export function Signup() {
     } else {
       alert("Check your email for your login link!")
       // Redirect user to Dashboard
-      history.push('/')
+      navigate.push('/')
     }
   }
 

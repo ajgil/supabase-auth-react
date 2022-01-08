@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 export function Booking() {
@@ -9,7 +9,7 @@ export function Booking() {
   // Get Event Details
   // Get Ode id and username
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
 
   return (

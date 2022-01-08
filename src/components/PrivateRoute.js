@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Navigate, Route } from 'react-router-dom'
 
 import { useAuth } from '../contexts/Auth'
 
@@ -11,7 +11,7 @@ export function PrivateRoute({ component: Component, ...rest }) {
       {...rest}
       render={(props) => {
         return (
-           user ? <Component {...props} /> : <Redirect to="/login" />
+           user ? <Component {...props} /> : Navigate('/logIn')
         )
       }}
     ></Route>
