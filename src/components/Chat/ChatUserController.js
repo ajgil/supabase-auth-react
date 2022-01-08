@@ -15,7 +15,7 @@ export default function ChatUserController() {
     const client = StreamChat.getInstance(apiKey);
 
     axios
-      .post('https://7dno22e0xa.execute-api.us-east-1.amazonaws.com/dev/signup', {
+      .post('https://7dno22e0xa.execute-api.us-east-1.amazonaws.com/dev/users/create', {
         username: user.id,
       })
       .then(res => {
@@ -42,7 +42,7 @@ export default function ChatUserController() {
             });
           return;
         }
-        alert('Authentication', 'Could not authenticate you. Try again')
+        //alert('Authentication', 'Could not authenticate you. Try again')
         console.log('Authentication', 'Could not authenticate you. Try again')
         //sacar una alerta
       })

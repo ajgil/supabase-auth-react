@@ -37,3 +37,24 @@ STREAM_APP_ID: '1158197'
 
 https://getstream.io/blog/build-a-medical-pager-app/
 https://github.com/adrianhajdin/project_medical_pager_chat/blob/master/server/controllers/auth.js
+
+
+
+user 
+{id: '9e1c9f15-fd61-4d8f-b246-d85bf8847d48', aud: 'authenticated', role: 'authenticated', email: 'lafiebreamarilla@hotmail.com', email_confirmed_at: '2021-12-18T13:10:47.39397Z', …}
+app_metadata: {provider: 'email', providers: Array(1)}
+aud: "authenticated"
+confirmation_sent_at: "2021-12-18T13:10:14.116749Z"
+confirmed_at: "2021-12-18T13:10:47.39397Z"
+created_at: "2021-12-18T13:10:14.112014Z"
+email: "lafiebreamarilla@hotmail.com"
+email_confirmed_at: "2021-12-18T13:10:47.39397Z"
+id: "9e1c9f15-fd61-4d8f-b246-d85bf8847d48"
+identities: [{…}]
+last_sign_in_at: "2022-01-07T22:38:17.503893Z"
+phone: ""
+role: "authenticated"
+updated_at: "2022-01-08T08:04:34.461124Z"
+user_metadata:
+ode: true
+[[Prototype]]: Object

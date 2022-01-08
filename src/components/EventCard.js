@@ -10,10 +10,13 @@ import Grid from '@mui/material/Grid';
 import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
+import axios from 'axios';
+import { StreamChat } from 'stream-chat'
 
 export default function EventCard({id, evento, description, ode_id}) {
 
   const { user } = useAuth()
+  const [token, setToken] = useState('null')
   /*
   const onClickHandler = (event, source) => {
     // Do something with event
@@ -69,6 +72,19 @@ export default function EventCard({id, evento, description, ode_id}) {
         
         //console.log('valor retornado: ',returning) //devuelve undefined -- Mirar
         console.log('Apuntado al evento !')
+        console.log(user.id)
+
+        // add al usuario al chat
+        const username = user.id
+          axios.post('https://7dno22e0xa.execute-api.us-east-1.amazonaws.com/dev/users/create', {
+            username,
+          })
+            .then(res => {
+              console.log('res', res)
+              if (res.data.status) setToken(res.data.token)
+              console.log('token', res.data.token)
+            });
+
         if (error) {
           throw error
         }
@@ -76,8 +92,11 @@ export default function EventCard({id, evento, description, ode_id}) {
         alert(error.message)
       } finally {
       }
+    
     }
   }
+
+
 
   return(
     <>

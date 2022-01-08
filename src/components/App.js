@@ -11,7 +11,8 @@ import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
-import ChatUserController from '../components/Chat/ChatUserController'
+//import ChatUserController from '../components/Chat/ChatUserController'
+//import ChatEjemplo from '../components/Chat/ChatEjemplo'
 
 import './App.css'
 
@@ -48,9 +49,11 @@ export function App() {
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
-          <Route path="/chat" component={ChatUserController} />
+          
         </Switch>
-        {/* <AnonEvents /> 
+        {/* 
+        <Route path="/chat" component={ChatEjemplo} />
+        <AnonEvents /> 
         <ListEventContainer />
         */}
         <AnonCard />

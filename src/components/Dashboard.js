@@ -48,9 +48,9 @@ export function Dashboard() {
   const history = useHistory()
 
   useEffect(() => {
-    getProfile()
+    //getProfile()
     getData()
-    updateProperties()
+    //updateProperties()
 
   }, [])
 
@@ -175,6 +175,8 @@ export function Dashboard() {
     }
   }
   */
+ console.log('user',user)
+ if (user.user_metadata.ode) console.log('metadata true')
   return (
     <>
     <div>
@@ -188,6 +190,7 @@ export function Dashboard() {
       <p>Your id, {user?.id}!</p>
       <p>Your email: {user?.email}</p>
       <p>Your phone: {user?.phone}</p>
+      <p>you metadata:</p>
       {/* 
       <p>Welcome, {user?.user_metadata.full_name}!</p>
       <p>Provider: {user?.app_metadata.provider}</p>
