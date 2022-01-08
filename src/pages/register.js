@@ -9,7 +9,7 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import HikLogoNoTxt from '../resources/hikLogoNoText.jpg';
-import SignUp from '../components/SignUp';
+import SignUp from '../components/signUp';
 import SignUpODES from '../components/SignUpODES';
 import '../styles/register.scss';
 
