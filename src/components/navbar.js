@@ -53,10 +53,10 @@ const Navbar = () => {
             <Link to='/Register'>
             <StyledButtonsLogSign className="signUpButtonHome" >Registrarse</StyledButtonsLogSign>
             </Link>
-            <Link to ="/PreLogIn">
+            <Link to="/PreLogIn">
             <StyledButtonsLogSign className="button-LogIn">Iniciar Sesión</StyledButtonsLogSign>
             </Link>
-            <Link to ="/odelogin">
+            <Link to="/odelogin">
             <StyledButtonEvent style={{ backgroundColor: "#93C01F" }} className="button-Event" variant='contained'>Crear Evento</StyledButtonEvent>
             </Link>
         </Toolbar>

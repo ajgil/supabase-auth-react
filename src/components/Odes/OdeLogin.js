@@ -42,8 +42,11 @@ export function OdeLogin() {
           <label htmlFor="input-email">Email</label>
           <input id="input-email" type="email" ref={emailRef} />
 
-          <label htmlFor="input-text">Phone</label>
-          <input id="input-text" type="text" ref={phoneRef} />
+          {/* 
+            <label htmlFor="input-text">Phone</label>
+            <input id="input-text" type="text" ref={phoneRef} />
+          */}
+
 
           <label htmlFor="input-password">Password</label>
           <input id="input-password" type="password" ref={passwordRef} />
@@ -53,7 +56,7 @@ export function OdeLogin() {
           <button type="submit">Login</button>
         </form>
         <p>
-          Don't have an account? <Link to="/odesignup">Sign Up as OdE</Link>
+          Todavía no estás registrado? Crea una cuenta OdE <Link to="/odesignup">Registrate como OdE</Link>
         </p>
       </div>
     </>

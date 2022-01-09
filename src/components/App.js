@@ -16,6 +16,7 @@ import { Booking } from '../components/Booking'
 import Home from '../pages/Home'
 import PreLogIn from '../pages/preLogIn'
 import Register from '../pages/register'
+import BasicTabs from './BasicTabs'
 
 import './App.css'
 
@@ -52,8 +53,14 @@ export function App() {
           
           <Route path="/login" component={Login} />
           <Route path="/PreLogIn" component={PreLogIn} />
+          
+          {/* Rutas que no funcionan :
           <Route path="/Register" element={Register} />
+          He creado un basicTab alternativo y tampoco se muestra
+          <Route path="/registeralt" element={BasicTabs} />
 
+          */}
+          
           <Route path="/odesignup" component={OdeSignup} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />

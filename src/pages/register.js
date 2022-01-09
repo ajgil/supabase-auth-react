@@ -38,7 +38,10 @@ const Register = () => {
     });
   };*/
 
+  console.log('Estoy en register')
   return (
+    <>
+    <h1>register</h1>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -74,6 +77,7 @@ const Register = () => {
 				</div>
         </Box>
       </Container>
+      </>
   );
 }
 export default Register;
