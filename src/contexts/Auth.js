@@ -12,6 +12,9 @@ export function AuthProvider({ children }) {
     useEffect(() => {
       // Check active sessions and sets the user
       const session = supabase.auth.session()
+
+      // Add properties OdEs or Klubers to user
+      
   
       setUser(session?.user ?? null)
       setLoading(false)
