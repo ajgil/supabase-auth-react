@@ -49,3 +49,10 @@ const updateCardFav = (favId) =>
       supabase.auth.update({
       data: { user_faved: favId },
 });
+
+https://github.com/cornflourblue/react-role-based-authorization-example
+
+https://github.com/isaidspaghetti/stream-hubspot-contacts
+https://github.com/isaidspaghetti/stream-support-dashboard
+
+https://codesandbox.io/s/njzig?file=/src/App.tsx
