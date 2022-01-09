@@ -5,22 +5,29 @@ import { useAuth } from '../contexts/Auth'
 
 
 export function PrivateRoute ({ component: Component, ...rest }) {
-  <Route {...rest} render={props => {
-    const { user } = useAuth()
-    if (!user) {
-    return( <Redirect to="/home" />)
-    }
-    if(user.user_metadata){
-      // role not authorised so redirect to home page
-      return <Redirect to='/odes' />
-    }
-    if(!user.user_metadata){
-      // role not authorised so redirect to home page
-      return <Redirect to='/' />
-    }
-    // authorised so return component
-    return <Component {...props} />
-  }} />
+  const { user } = useAuth()
+
+  return (
+    <Route {...rest} render={props => {
+      if (!user) {
+      return( <Redirect to="/home" />)
+      }
+      //console.log('private route', user.user_metadata.ode)        
+      if (typeof(user?.user_metadata?.ode) === 'undefined' ) {
+        console.log('private route ode undefined -> redirige a klubers')        
+        // role not authorised so redirect to home page
+        return <Redirect to='/klubers' />
+      }
+      
+      if (user.user_metadata.ode) {
+        console.log('dashboard de usuario = true')
+        return <Redirect to="/odes" />
+      }
+      
+      // authorised so return component
+      return <Component {...props} />
+    }} />
+  )
 }
 
 /*

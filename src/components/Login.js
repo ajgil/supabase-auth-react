@@ -42,8 +42,9 @@ export function Login() {
       alert('error signing in')
       console.log(error)
     } else {
-      // Redirect user to Dashboard
-      history.push('/')
+      // Redirect to home con registro 
+      // kluber to Dashboard
+      history.push('/klubers')
     }
   }
 

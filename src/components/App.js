@@ -47,7 +47,7 @@ export function App() {
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
         <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/klubers" component={Dashboard} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
           

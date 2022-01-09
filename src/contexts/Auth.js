@@ -1,5 +1,6 @@
 import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
+import { useRouteMatch } from 'react-router-dom'
 import { supabase } from '../supabase'
 //import axios from "axios"
 
@@ -12,9 +13,6 @@ export function AuthProvider({ children }) {
     useEffect(() => {
       // Check active sessions and sets the user
       const session = supabase.auth.session()
-
-      // Add properties OdEs or Klubers to user
-      
   
       setUser(session?.user ?? null)
       setLoading(false)
@@ -31,31 +29,14 @@ export function AuthProvider({ children }) {
       }
 
     }, [])
-  
-    // Will be passed down to Signup, Login and Dashboard components
-    /*
-    singUpOde: (datos) => supabase.auth.signUp({
-        datos,
-        data: { ode: true }
-      }),
-    
-      const { user, session, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-    },{
-        data:{
-            phone: phone,
-            name: name,
-            company: company
-        }
-    })
-      
-    
-    */
 
     const value = {
-      // User SingUp
-      signUp: (data) => supabase.auth.signUp(data),
+      // Kluber SingUp
+      signUpKluber: (data) => supabase.auth.signUp({
+        data
+      },{
+        data: { ode: false }
+      }),
         
       //OdEs SingUp methods
       singUpOde: (data) => supabase.auth.signUp({

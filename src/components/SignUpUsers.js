@@ -35,7 +35,7 @@ export function SignUpUsers() {
   const passwordTwoRef = useRef()
 
   // Get signUp function from the auth context
-  const { signUp, signInWithFacebook, signInWithGoogle } = useAuth()
+  const { signUpKluber, signInWithFacebook, signInWithGoogle } = useAuth()
 
   const history = useHistory()
 
@@ -50,7 +50,7 @@ export function SignUpUsers() {
       alert("Passwords don't match");
     } else {
         // Calls `signUp` function from the context
-      const { error } = await signUp({ email, password })
+      const { error } = await signUpKluber({ email, password })
 
       if (error) {
         alert('error signing in')

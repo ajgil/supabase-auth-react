@@ -1,6 +1,6 @@
 // src/components/Dashboard.js
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { supabase } from '../supabase'
 import Avatar from './Avatar'
@@ -49,7 +49,7 @@ export function Dashboard() {
 
   useEffect(() => {
     //getProfile()
-    getData()
+    //getData()
     //updateProperties()
 
   }, [])
@@ -175,8 +175,8 @@ export function Dashboard() {
     }
   }
   */
- console.log('user',user)
- if (user.user_metadata.ode) console.log('metadata true')
+ console.log('Dashboard de usuario', user)
+ 
   return (
     <>
     <div>
