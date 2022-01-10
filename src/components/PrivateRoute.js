@@ -16,7 +16,7 @@ export function PrivateRoute ({ component: Component, ...rest }) {
       if (typeof(user?.user_metadata?.ode) === 'undefined' ) {
         console.log('private route ode undefined -> redirige a klubers')        
         // role not authorised so redirect to home page
-        return <Redirect to='/klubers' />
+        return <Redirect to='/kluberprofile' />
       }
       
       if (user.user_metadata.ode) {

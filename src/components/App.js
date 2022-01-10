@@ -15,8 +15,9 @@ import { Booking } from '../components/Booking'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
 import Home from '../pages/Home'
 import PreLogIn from '../pages/preLogIn'
-import Register from '../pages/register'
-import BasicTabs from './BasicTabs'
+import KluberProfile from '../components/Klubers/Profile'
+//import Register from '../pages/register'
+//import BasicTabs from './BasicTabs'
 
 import './App.css'
 
@@ -48,6 +49,7 @@ export function App() {
         <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/klubers" component={Dashboard} />
+          <PrivateRoute exact path="/kluberprofile" component={KluberProfile} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
           
