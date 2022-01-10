@@ -8,9 +8,7 @@ export function OdeSignup() {
   const odeemailRef = useRef()
   const odepasswordRef = useRef()
   const odephoneNumberRef = useRef()
-  const odenameRef = useRef()
   const tokenNumberRef = useRef()
-  const otpShow = useRef(false)
   
   // Get signUp function from the auth context
   const { signUpPhone } = useAuth()
@@ -70,10 +68,8 @@ export function OdeSignup() {
       <div>
         <h4>Register by email </h4>
         <form onSubmit={handleSubmit}>
-          <label htmlFor='input-name'>Nombre</label>
-          <input id="input-email" type="email" ref={odenameRef} />
           <label htmlFor="input-email">Email</label>
-          <input id="input-email" type="email"ref={odeemailRef} />
+          <input id="input-email" type="email" ref={odeemailRef} />
           <br/>
           <label htmlFor="input-password">Password</label>
           <input id="input-password" type="password" ref={odepasswordRef} />
@@ -81,20 +77,7 @@ export function OdeSignup() {
           <label htmlFor="input-phone">Teléfono</label>
           <input id="input-phone" type="text" ref={odephoneNumberRef} />
           <br />
-          {!otpShow ? <h3>Enter your Phone Number</h3> : <h3>Enter the OTP</h3> }
-          {otpShow ? <p>A One Time Password has been sent to your phone number for verification puposes.</p> : null}
           <button type="submit">Sign up</button>
-
-         {/* {!otpShow ? <div>
-                      <div>
-                      <TextField id="code" label="Code" color="secondary" value={code} onChange={e => {setState({code: e.target.value});}}/>
-                      
-                      https://medium.com/swlh/creating-phone-number-verification-component-using-react-js-and-twilio-services-6a635657ecc9
-                      
-                      </div>
-                      </div>
-                      */}
-                      
         </form>
       </div>
 
