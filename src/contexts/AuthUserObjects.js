@@ -1,38 +1,48 @@
-import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
 import { supabase } from '../supabase'
 //import axios from "axios"
 
-/**
- * Este fichero es un backup 
- * para implementar el RBAC
- */
 const AuthContext = React.createContext()
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(supabase.auth.user());
-  const [isLoading, setIsLoading] = useState(true);
-  const [ode, setOde] = useState()
-  const [customerUser, setCustomerUser] = useState()
+  const [user, setUser] = useState(supabase.auth.user())
+  const [odeProfile, setOdeProfile ] = useState('null')
+  const [userProfile, setUserProfile ] = useState('null')
   const [loading, setLoading] = useState(true)
- 
+  
   useEffect(() => {
     const getUserProfile = async () => {
       const sessionUser = supabase.auth.user();
 
       if (sessionUser) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", sessionUser.id)
-          .single();
 
-        setUser({
-          ...sessionUser,
-          ...profile,
-        });
+        if (sessionUser.user_metadata.ode) {
 
-        setIsLoading(false);
+          const { data: OdeProfile } = await supabase
+            .from("odes")
+            .select("*")
+            .eq("id", sessionUser.id)
+            .single();
+
+          setUser({
+            ...sessionUser,
+            ...OdeProfile,
+          });
+
+        } else {
+          const { data: UserProfile } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", sessionUser.id)
+            .single();
+
+            setUser({
+            ...sessionUser,
+            ...UserProfile,
+          });
+
+        }
+        setLoading(false);
       }
     };
 
@@ -43,68 +53,24 @@ export function AuthProvider({ children }) {
     });
 
   }, [])
-
-  //console.log(user.raw_user_meta_data)
-  useEffect(() => {
-    const getUserProfile = async () => {
-      const session = supabase.auth.session()
-      if (session) {
-        // SELECT id, email FROM auth.users WHERE raw_user_meta_data ->> 'ode' = 'true';
-        //let { data, error } = await supabase
-        //.from('xyz')
-        //.select('*')
-        //.eq('id:jsonb->>id', 999)
-        //.contains('chats:jsonb->>chats', ['chats->id: 66753'])
-            const { data: odeProfile } = await supabase
-              .from("odes")
-              .select("*")
-              .eq("id", session.id)
-              .single();
-            // traer el email y los metadatos de auth.user
-              setOde({
-                ...session,
-                ...odeProfile,
-            });
-            const { data: userProfile } = await supabase
-              .from("profiles")
-              .select("*")
-              .eq("id", session.id)
-              .single();
   
-              setCustomerUser({
-                ...session,
-                ...userProfile,
-              });
-
-        setLoading(false);
-      }
-    };
-
-    getUserProfile();
-
-    supabase.auth.onAuthStateChange(() => {
-      getUserProfile();
-    });
-  }, []);
-
-/*
-  // Will be passed down to Signup, Login and Dashboard components
-  
-  singUpOde: (datos) => supabase.auth.signUp({
-      datos,
-      data: { ode: true }
-    }),
-  
-    const { user, session, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-  },{
-      data:{
-          phone: phone,
-          name: name,
-          company: company
-      }
-  })
+    // Will be passed down to Signup, Login and Dashboard components
+    /*
+    singUpOde: (datos) => supabase.auth.signUp({
+        datos,
+        data: { ode: true }
+      }),
+    
+      const { user, session, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+    },{
+        data:{
+            phone: phone,
+            name: name,
+            company: company
+        }
+    })
       
     
     */
@@ -157,9 +123,9 @@ export function AuthProvider({ children }) {
             //alert(error.message);
           }
         },
+  
       user,
-      ode,
-      customerUser
+      loading
     }
     //console.log('auth user : ', user?.email)
     //console.log(user?.app_metadata.provider)
@@ -169,7 +135,7 @@ export function AuthProvider({ children }) {
 
     return (
       <AuthContext.Provider value={value}>
-        {!loading && children}
+        {!isLoading && children}
       </AuthContext.Provider>
     )
   }

@@ -4,6 +4,7 @@ import { PrivateRoute } from './PrivateRoute'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
+import { KluberOdeProvider } from '../contexts/UsersContext'
 import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
@@ -15,8 +16,9 @@ import { Booking } from '../components/Booking'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
 import Home from '../pages/Home'
 import PreLogIn from '../pages/preLogIn'
-import Register from '../pages/register'
-import BasicTabs from './BasicTabs'
+import KluberProfile from '../components/Klubers/KluberProfile'
+//import Register from '../pages/register'
+//import BasicTabs from './BasicTabs'
 
 import './App.css'
 
@@ -46,8 +48,10 @@ export function App() {
         {/* Wrap routes in the AuthProvider 👇
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
+          <KluberOdeProvider>
         <Switch>
           <PrivateRoute exact path="/klubers" component={Dashboard} />
+          <PrivateRoute exact path="/kluber" component={KluberProfile} />
           <PrivateRoute exact path="/odes" component={OdeDashboard} />
           <PrivateRoute exact path="/booking" component={Booking} />
           
@@ -73,7 +77,7 @@ export function App() {
         <ListEventContainer />
         <AnonCard />
         */}
-        
+          </KluberOdeProvider>
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
