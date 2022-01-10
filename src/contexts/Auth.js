@@ -32,20 +32,6 @@ export function AuthProvider({ children }) {
 
     }, [])
 
-    useEffect(() =>{
-      if (typeof(user?.user_metadata?.ode === "undefined")) {
-      
-        console.log('unedfined true')
-        const update = supabase.auth.update({data: { ode: false }})
-        console.log('user updated')
-        setUser({
-          ...user,
-          ...update,
-        })
-      }
-
-    }, [])
-
     console.log('user', user)
 
     const value = {
@@ -115,7 +101,6 @@ export function AuthProvider({ children }) {
       </AuthContext.Provider>
     )
   }
-
-  export function useAuth() {
-    return useContext(AuthContext)
-  }
+export function useAuth() {
+  return useContext(AuthContext)
+}

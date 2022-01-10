@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 //import ChatOde from '../Chat/ChatOde';
 
 let chatClient;
-export function OdeDashboard() {
+export function EventDashboard({ children }) {
   // Get current OdE and signOut function from context
   const { user, signOut, verifyOTP } = useAuth()
   // Una vez logado el Ode por primera vez hemos de verificar el numero teléfono
@@ -373,5 +373,5 @@ export function OdeDashboard() {
       </div>
       </>
     )
-                        }
+    }
 }
