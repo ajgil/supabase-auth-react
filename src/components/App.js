@@ -21,6 +21,8 @@ import KluberProfile from '../components/Klubers/KluberProfile'
 //import BasicTabs from './BasicTabs'
 
 import './App.css'
+//import OdeSignupPhone from './Odes/OdeSignUpPhone'
+import SecondStep from './Odes/SignUpform/SecondStep'
 
 export function App() {
 
@@ -66,6 +68,7 @@ export function App() {
           */}
           
           <Route path="/odesignup" component={OdeSignup} />
+          <Route path="/secondstep" component={SecondStep} />
           <Route path="/odelogin" component={OdeLogin} />
           <Route path="/verify" component={VerifyOTP} />
           <Route path="/" component={Home} />

@@ -5,10 +5,13 @@ import { useAuth } from '../../contexts/Auth'
 import { supabase } from '../../supabase'
 
 export function OdeSignup() {
+  
+  const odenameRef = useRef()
   const odeemailRef = useRef()
   const odepasswordRef = useRef()
+  const odePasswordConfirmRef = useRef()
   const odephoneNumberRef = useRef()
-  const odenameRef = useRef()
+  
   const tokenNumberRef = useRef()
   const otpShow = useRef(false)
   
@@ -23,26 +26,36 @@ export function OdeSignup() {
     // Get email and password input values
     const email = odeemailRef.current.value
     const password = odepasswordRef.current.value
+    const passwordTwo = odePasswordConfirmRef.current.value
     const phone = odephoneNumberRef.current.value
+    const name = odenameRef.current.value
 
-    //console.log('odeSingUp pass:', password)
-    // Calls `signUp` function from the context
-    //const { error } = await singUpOde({ email, password })
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      },{
-          data:{
-              ode: true
-          }
-      })
-
-    if (error) {
-      console.log(error)
-      alert('error signing in')
+    if (password !== passwordTwo) {
+      alert("Passwords don't match");
     } else {
-      // Redirect user to OdeDashboard
-      history.push('/odes')
+          const { error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            },{
+                data:{
+                    ode: true,
+                    firstname: name,
+                    phone: phone,
+                }
+            })
+
+          if (error) {
+            console.log(error)
+            /* ToDo -> Si recibimos el mensaje 
+            * message: "User already registered"
+            * Es que ese usuario ya se había registrado con mail o teléfono
+            */
+            alert('error signing in')
+          } else {
+            alert("Check your email for your login link!")
+            // Redirect user to OdeDashboard
+            history.push('/odes')
+          }
     }
   }
 
@@ -71,16 +84,26 @@ export function OdeSignup() {
         <h4>Register by email </h4>
         <form onSubmit={handleSubmit}>
           <label htmlFor='input-name'>Nombre</label>
-          <input id="input-email" type="email" ref={odenameRef} />
+          <input id="input-name" type="text" ref={odenameRef} />
+          <br/>
           <label htmlFor="input-email">Email</label>
           <input id="input-email" type="email"ref={odeemailRef} />
           <br/>
           <label htmlFor="input-password">Password</label>
           <input id="input-password" type="password" ref={odepasswordRef} />
           <br/>
+          <label htmlFor="input-password">Confirmar Password</label>
+          <input id="input-password" type="password" ref={odePasswordConfirmRef} />
+          <br/>
           <label htmlFor="input-phone">Teléfono</label>
           <input id="input-phone" type="text" ref={odephoneNumberRef} />
           <br />
+          {!odephoneNumberRef.current.value ? (
+            <input id="code" type="text" placeholder="Código sms" ref={tokenNumberRef} />
+          ) : ( 
+            <div></div>
+          )}
+
           {!otpShow ? <h3>Enter your Phone Number</h3> : <h3>Enter the OTP</h3> }
           {otpShow ? <p>A One Time Password has been sent to your phone number for verification puposes.</p> : null}
           <button type="submit">Sign up</button>
