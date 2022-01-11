@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
@@ -20,19 +20,20 @@ export default function SecondStep() {
 	const odeemailRef = useRef()
 	const odepasswordRef = useRef()
 	const odePasswordConfirmRef = useRef()
-	const odephoneNumberRef = useRef()
-	const tokenNumberRef = useRef()
-	const otpShow = useRef('false')
+	const [odephone, setOdePhone] = useState(null)
+	const [token, setToken] = useState(null)
+	const [otpShow, setOptShow] = useState(false)
 
   const theme = useTheme();
   
+	console.log('step', activeStep)
   const steps = GetSteps();
 
 	function GetStepContent(step) {
 		switch (step) {
 			case 0:
 				return (
-					<form class="form-group">
+					<form id="form-step0" onSubmit={handleFormSubmit}>
 					<label>Nombre</label>
 					<input type="text" placeholder="Introduzca un nombre" ref={odenameRef}></input>
 					<br></br>
@@ -46,14 +47,14 @@ export default function SecondStep() {
 					<input id="input-password" type="password" placeholder="Confirmar contraseña" ref={odePasswordConfirmRef} />
 					<br></br>
 					<label htmlFor="input-phone">Teléfono</label>
-					<input id="input-phone" type="text" placeholder="ejem. 612345789" ref={odephoneNumberRef} />
+					<input id="input-phone" type="text" placeholder="ejem. +34612345789" onChange={e => setOdePhone(e.target.value)} />
 					</form>
 				)
 			case 1:
 				return (
-					<form class="form-group">
+					<form id="form-step1" onSubmit={handleFormSubmit1}>
 					<label>Código de confirmación</label>
-					<input type="text" placeholder="Introduzca código recibido por sms" ref={tokenNumberRef}></input>
+					<input type="text" placeholder="Introduzca código recibido por sms" onChange={e => setToken(e.target.value)}></input>
 					</form>
 				)
 			case 2:
@@ -80,15 +81,6 @@ export default function SecondStep() {
   };
 
   const handleNext = () => {
-		//handle 1 step
-    const otpShow = false
-		if (!otpShow) { 
-			getToken()
-		//handle 2 step
-		} else {
-			verifyOTP()
-		}
-		// handle last step
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? steps.findIndex((step, i) => !(i in completed))
@@ -114,12 +106,32 @@ export default function SecondStep() {
     setCompleted({});
   };
 
+	const handleFormSubmit =() => {
+		//handle 1 step
+		if (activeStep === 0) {
+			//console.log('step', activeStep)
+			if (otpShow === false) { 
+				console.log('llamando a getToken')
+				getToken()
+			}
+		}
+	}
+
+	const handleFormSubmit1 = () => {
+		//handle 2 step
+		if (activeStep === 1) {
+			console.log('llamando a verifyOTP')
+			verifyOTP()
+		}
+		// handle last step
+	}
+
   async function getToken() {
     const name = odenameRef.current.value
 		const email = odeemailRef.current.value
 		const pass = odepasswordRef.current.value
 		const pass2 = odePasswordConfirmRef.current.value
-    const phone = odephoneNumberRef.current.value
+    const phone = odephone
 
 		if (pass !== pass2) {
       alert("Passwords don't match");
@@ -154,14 +166,19 @@ export default function SecondStep() {
 						console.log(error)
 						alert('error en el registro con teléfono')
 				}
-				otpShow(true) 
     }
+		setOptShow(true) 
   }
 
 	async function verifyOTP() {
-		const phone = odephoneNumberRef.current.value
-		const token = tokenNumberRef.current.value
+		console.log('dentro VerifyOTP')
+		const phone = odephone
+		const token = token
 
+		console.log('verifyOTP', phone)
+		console.log('verifyOTP', token)
+
+		console.log('verify otp datos', phone, token)
 		const { error } = await supabase.auth.verifyOTP({
 			phone: phone,
 			token: token, 
@@ -209,7 +226,7 @@ return (
                 )}
                 Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button variant="contained" color="primary" onClick={handleNext} type="submit" form={`form-step${activeStep}`}>
               Next
                 {theme.direction === 'rtl' ? (
                     <KeyboardArrowLeft />
