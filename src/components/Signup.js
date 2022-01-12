@@ -45,7 +45,6 @@ export function Signup() {
     const email = emailRef.current.value
     const password = passwordRef.current.value
     const passwordTwo = passwordTwoRef.current.value
-    console.log('user data', email, password)
 
     if (password !== passwordTwo) {
       alert("Passwords don't match");

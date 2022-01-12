@@ -1,5 +1,5 @@
 // src/components/Login.js
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
@@ -44,7 +44,7 @@ export function Login() {
     } else {
       // Redirect to home con registro 
       // kluber to Dashboard
-      history.push('/klubers')
+      history.push('/')
     }
   }
 
@@ -97,7 +97,7 @@ export function Login() {
               name="email"
               autoComplete="email"
               autoFocus
-              ref={emailRef}
+              inputRef={emailRef}
             />
             <TextField
               margin="normal"
@@ -108,7 +108,7 @@ export function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-              ref={passwordRef}
+              inputRef={passwordRef}
             />
             <FormControlLabel
               control={<Checkbox value="remember" />}

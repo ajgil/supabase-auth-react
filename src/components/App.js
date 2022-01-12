@@ -54,6 +54,8 @@ export function App() {
         {/* Wrap routes in the AuthProvider 👇
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
+          <KluberOdeProvider>
+
             <Switch>
             <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute exact path="/klubers" component={Dashboard} />
@@ -87,6 +89,7 @@ export function App() {
 
             </Switch>
             {/*<ListEventContainer />*/}
+            </KluberOdeProvider>
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}

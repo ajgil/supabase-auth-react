@@ -4,8 +4,7 @@ import { supabase } from '../lib/supabase'
 const KluberOdeContext = React.createContext()
 
 export function KluberOdeProvider({ children }) {
-  const [ode, setOde ] = useState('null')
-  const [kluber, setKluber ] = useState('null')
+  const [odekluber, setOdeKluber ] = useState('null')
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
@@ -13,31 +12,24 @@ export function KluberOdeProvider({ children }) {
       const session = supabase.auth.user();
 
       if (session) {
-        const { data: OdeProfile } = await supabase
-            .from("odes")
+        const { data: profile } = await supabase
+            .from("klubers")
             .select("*")
             .eq("id", session.id)
             .single();
 
-          setOde({
-            ...OdeProfile,
-          });
-
-          const { data: kluberProfile } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", session.id)
-            .single();
-
-            setKluber({
-              ...kluberProfile,
+          // si ode -> objeto ode
+            setOdeKluber({
+              ...profile,
             });
+
         }
         setLoading(false);
       }
 
     getUserProfile();
 
+    console.log(odekluber)
     supabase.auth.onAuthStateChange(() => {
       getUserProfile();
     });
@@ -48,9 +40,7 @@ export function KluberOdeProvider({ children }) {
   //console.log('objeto ode', ode)
   
     const value = {
-      ode,
-      kluber,
-      loading
+      odekluber,
     }
 
     return (

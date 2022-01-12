@@ -1,19 +1,19 @@
 // src/klubers/KlubersProfile.js
 import { useState, useEffect } from 'react'
 //import { useHistory, Redirect } from 'react-router-dom'
-import { useAuth } from '../../contexts/Auth'
 import { KluberOde } from '../../contexts/UsersContext'
 
 import { supabase } from '../../lib/supabase'
 //import Avatar from './Avatar'
+import { KluberMenuPopupState } from './KluberMenu'
 
 export default function KluberProfile() {
-  const { kluber } = KluberOde()
+  const { odekluber } = KluberOde()
 
-  console.log('kluber', kluber)
+  console.log('kluber', odekluber)
 
   useEffect(() =>{
-    if (typeof(kluber?.user_metadata?.ode === "undefined")) {
+    if (typeof(odekluber?.user_metadata?.ode === "undefined")) {
     
       console.log('unedfined true')
       const update = supabase.auth.update({data: { ode: false }})
@@ -28,6 +28,10 @@ export default function KluberProfile() {
   }, [])
 
   return (
+    <>
     <h1>Kluber profile</h1>
+    <KluberMenuPopupState />
+    </>
   )
 }
+
