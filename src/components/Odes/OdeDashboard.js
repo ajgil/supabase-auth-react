@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { supabase } from "../../supabase";
 import { StreamChat } from 'stream-chat';
-import { supabase } from '../../lib/supabase'
+//import { supabase } from '../../lib/supabase'
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -169,6 +169,7 @@ export function OdeDashboard() {
   const addEvent = async (title, description) => {
     setAdding(true);
     //console.log(user.id)
+    // Si el evento es de pago add Stripe
     try {
       const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
       if (price) {
@@ -224,6 +225,7 @@ export function OdeDashboard() {
 
       if (error) throw error;
 
+      // Crea chat channel con nombre ode y titulo del evento
       await createChannel(user.id, firstname, title);
 
       if (data) data.map((item) => {
@@ -249,11 +251,12 @@ export function OdeDashboard() {
     //console.log(update_stripe)
 
     const { error } = await supabase
-    .from("stripe_products_prices")
-    .insert( update_stripe ); //insert an object with the key value pair, the key being the column on the table
+      .from("stripe_products_prices")
+      .insert( update_stripe ); //insert an object with the key value pair, the key being the column on the table
 
     if (error) console.log(error) 
       alert(error.error_description || error.message);
+  
   };
 
   // canal chat
