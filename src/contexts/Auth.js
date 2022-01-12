@@ -1,12 +1,13 @@
 //import { eachDayOfInterval } from 'date-fns'
 import React, { useContext, useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import axios from "axios"
 
 const AuthContext = React.createContext()
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState()
+    //const [odeProfile, setOdeProfile ] = useState('null')
+    //const [userProfile, setUserProfile ] = useState('null')
     const [loading, setLoading] = useState(true)
     const [activeEvents, setActiveEvents] = useState([]); 
     //const [loading, setLoading] = useState(false);
@@ -30,69 +31,16 @@ export function AuthProvider({ children }) {
       }
 
     }, [])
-    
-    const getActiveEvents = async () => {
-      setLoading(true);
-      try {
-  
-        const { error, data } = await supabase
-            .from('eventos')
-            .select('id, ode_id, title, description, release_date, free_event, price');
 
-        if (error) throw error; //check if there was an error fetching the data and move the execution to the catch block
-  
-        if (data) setActiveEvents(data)
-        //console.log('Context auth getActiveEvents function', activeEvents)
-      } catch (error) {
-            console.log(error)
-            alert(error.error_description || error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    useEffect(()=> {
-      getActiveEvents()
-    },[])
-
-
-    /*
-    // Para crear cookies
-    useEffect(() => {
-      axios.post("/api/set-supabase-cookie", {
-        event: user ? "SIGNED_IN" : "SIGNED_OUT",
-        session: supabase.auth.session(),
-      });
-    }, [user]);
-
-    // Will be passed down to Signup, Login and Dashboard components
-
-    singUpOde: (datos) => supabase.auth.signUp({
-        datos,
-        data: { ode: true }
-      }),
-    
-      const { user, session, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-    },{
-        data:{
-            phone: phone,
-            name: name,
-            company: company
-        }
-    })
-      
-    
-    */
+    console.log('user', user)
 
     const value = {
-      // Eventos
-      activeEvents,
-
-      // Usuarios y OdEs
-      // User SingUp
-      signUp: (data) => supabase.auth.signUp(data),
+      // Kluber SingUp
+      signUpKluber: (data) => supabase.auth.signUp({
+        data
+      },{
+        data: { ode: false }
+      }),
         
       //OdEs SingUp methods
       singUpOde: (data) => supabase.auth.signUp({
@@ -153,7 +101,6 @@ export function AuthProvider({ children }) {
       </AuthContext.Provider>
     )
   }
-
-  export function useAuth() {
-    return useContext(AuthContext)
-  }
+export function useAuth() {
+  return useContext(AuthContext)
+}

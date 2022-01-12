@@ -120,3 +120,34 @@ Test anonCard
 
 https://www.bitcoininsider.org/article/67526/react-native-chat-chuck-norris
 https://github.com/GetStream/react-native-chat-chucky
+https://getstream.io/blog/processing-webhooks-with-stream-chat-lambda-and-node-js/
+https://www.google.es/search?q=serverless+getstream+chat&biw=1309&bih=750&sxsrf=AOaemvKPEoXyCQ8wzXat7T0extUZ3ltFTQ%3A1640882387440&ei=0-DNYd6gGoaPlwS_7pboCg&ved=0ahUKEwie1sie-4v1AhWGx4UKHT-3Ba04FBDh1QMIDw&uact=5&oq=serverless+getstream+chat&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABMgUIIRCgATIFCCEQoAE6BwgjELADECc6BwghEAoQoAFKBAhBGAFKBAhGGABQ7A1YwVBgg2ZoAnAAeACAAYICiAGBC5IBBTUuMy4ymAEAoAEByAEBwAEB&sclient=gws-wiz
+
+STREAM_KEY: 'dj4bn8c565ua'
+STREAM_SECRET: '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum'
+STREAM_APP_ID: '1158197'
+
+https://getstream.io/blog/build-a-medical-pager-app/
+https://github.com/adrianhajdin/project_medical_pager_chat/blob/master/server/controllers/auth.js
+
+
+
+Actualizar email de usuarios
+const { user, error } = await supabase.auth.update({email: 'new@email.com'})
+
+This will send an email to both the user's current and new email with a confirmation link.
+
+const updateCardFav = (favId) =>
+      supabase.auth.update({
+      data: { user_faved: favId },
+});
+
+https://github.com/cornflourblue/react-role-based-authorization-example
+
+https://github.com/isaidspaghetti/stream-hubspot-contacts
+https://github.com/isaidspaghetti/stream-support-dashboard
+
+https://codesandbox.io/s/njzig?file=/src/App.tsx
+
+
+https://codesandbox.io/embed/stepper-with-react-hook-form-qpjc1

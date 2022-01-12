@@ -1,6 +1,10 @@
 // src/index.js
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from "react-router-dom";
+import Footer from './components/footer'
+import Navbar from './components/navbar';
+
 import { App } from './components/App'
 
 // import Stripe antifraude
@@ -12,8 +16,10 @@ import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+    <Navbar/>
     <App />
-  </React.StrictMode>,
+    <Footer/>
+  </BrowserRouter>,
   document.getElementById('root')
 )

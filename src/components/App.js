@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-import { Signup } from './Signup'
+//import { Signup } from './Signup'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
+import { KluberOdeProvider } from '../contexts/UsersContext'
 import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
@@ -12,7 +13,17 @@ import { VerifyOTP } from './Odes/VerifyOTP'
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
 import Success from './checkout/Success'
+//import ChatUserController from '../components/Chat/ChatUserController'
+//import ChatEjemplo from '../components/Chat/ChatEjemplo'
+import Home from '../pages/Home'
+import PreLogIn from '../pages/preLogIn'
+import KluberProfile from '../components/Klubers/KluberProfile'
+//import Register from '../pages/register'
+//import BasicTabs from './BasicTabs'
+
 import './App.css'
+//import OdeSignupPhone from './Odes/OdeSignUpPhone'
+import SecondStep from './Odes/SignUpform/SecondStep'
 
 export function App() {
 
@@ -33,30 +44,38 @@ export function App() {
   */
   return (
     <div>
-      <h1>Welcome to Hiklub</h1>
-      {/* Add routes here👇 */}
+      
+      {/* <h1>Welcome to Hiklub</h1>
+      Add routes here👇 */}
       <Router>
-        {/* Wrap routes in the AuthProvider 👇 */}
+        {/* Wrap routes in the AuthProvider 👇
+        <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute exact path="/odes" component={OdeDashboard} />
+              <PrivateRoute exact path="/kluber" component={KluberProfile} />
               <PrivateRoute exact path="/booking" component={Booking} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/odesignup" component={OdeSignup} />
+              <Route path="/secondstep" component={SecondStep} />
               <Route path="/odelogin" component={OdeLogin} />
               <Route path="/verify" component={VerifyOTP} />
               <Route path="/success" component={Success} />
+              <Route path="/PreLogIn" component={PreLogIn} />
+              {/* Victoria pahts */}
+              {/* Rutas que no funcionan :
+                <Route path="/Register" element={Register} />
+                  He creado un basicTab alternativo y tampoco se muestra
+                <Route path="/registeralt" element={BasicTabs} />
+              */}
+
             </Switch>
-            {/*
-            <ListEventContainer />
-            */}
-            <AnonCard />
+            {/*<ListEventContainer />*/}
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}
-      
     </div>
   )
 }
