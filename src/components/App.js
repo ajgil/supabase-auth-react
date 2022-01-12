@@ -55,17 +55,19 @@ export function App() {
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/home" component={Dashboard} />
+              <PrivateRoute exact path="/klubers" component={Dashboard} />
               <PrivateRoute exact path="/odes" component={OdeDashboard} />
               <PrivateRoute exact path="/kluber" component={KluberProfile} />
               <PrivateRoute exact path="/booking" component={Booking} />
               
-              <Route path="/" component={Home} />
+              <Route path="/home" component={Home} />
+              
               {/* Klubers */}
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/prelogin" component={PreLogIn} />
-              {/* Klubers */}
+
+              {/* Odes */}
               <Route path="/odesignup" component={OdeSignup} />
               <Route path="/secondstep" component={SecondStep} />
               <Route path="/odelogin" component={OdeLogin} />
