@@ -45,15 +45,24 @@ export function Signup() {
     const email = emailRef.current.value
     const password = passwordRef.current.value
     const passwordTwo = passwordTwoRef.current.value
+    console.log('user data', email, password)
 
     if (password !== passwordTwo) {
       alert("Passwords don't match");
     } else {
         // Calls `signUp` function from the context
-      const { error } = await signUpKluber({ email, password })
+      const { error } = await signUpKluber({ 
+        email,
+        password 
+        },{  
+          data: { ode: false }
+        })
 
       if (error) {
         alert('error signing in')
+        console.log(error)
+        //code: 422
+        //msg: "Signup requires a valid password"
       } else {
         alert("Check your email for your login link!")
         // Redirect user to Dashboard
@@ -75,7 +84,7 @@ export function Signup() {
                             label="Correo Electrónico"
                             name="email"
                             autoComplete="email"
-                            ref={emailRef}
+                            inputRef={emailRef}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -87,7 +96,7 @@ export function Signup() {
                             type="password"
                             id="password"
                             autoComplete="new-password"
-                            ref={passwordRef}
+                            inputRef={passwordRef}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -99,7 +108,7 @@ export function Signup() {
                             type="password"
                             id="password"
                             autoComplete="new-password"
-                            ref={passwordTwoRef}
+                            inputRef={passwordTwoRef}
                         />
                     </Grid>
                     <Grid item xs={12}>

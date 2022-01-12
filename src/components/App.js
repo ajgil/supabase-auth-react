@@ -55,11 +55,13 @@ export function App() {
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
             <Switch>
+            <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute exact path="/klubers" component={Dashboard} />
               <PrivateRoute exact path="/odes" component={OdeDashboard} />
               <PrivateRoute exact path="/kluber" component={KluberProfile} />
               <PrivateRoute exact path="/booking" component={Booking} />
               
+              {/* Publicas */}
               <Route path="/home" component={Home} />
               
               {/* Klubers */}

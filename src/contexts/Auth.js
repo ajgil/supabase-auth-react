@@ -36,11 +36,7 @@ export function AuthProvider({ children }) {
 
     const value = {
       // Kluber SingUp
-      signUpKluber: (data) => supabase.auth.signUp({
-        data
-      },{
-        data: { ode: false }
-      }),
+      signUpKluber: (data) => supabase.auth.signUp(data),
         
       //OdEs SingUp methods
       singUpOde: (data) => supabase.auth.signUp({

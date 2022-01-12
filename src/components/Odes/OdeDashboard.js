@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
-import { supabase } from "../../supabase";
+import { supabase } from "../../lib/supabase";
 import { StreamChat } from 'stream-chat';
 //import { supabase } from '../../lib/supabase'
 import Box from '@mui/material/Box';

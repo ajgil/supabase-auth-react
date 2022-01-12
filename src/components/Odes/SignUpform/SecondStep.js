@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { supabase } from '../../../supabase'
+import { supabase } from '../../../lib/supabase'
 
 function GetSteps() {
   return ["step 1", "step 2", "step 3"];
