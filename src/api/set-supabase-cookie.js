@@ -1,4 +1,4 @@
-import { supabase } from "../supabase";
+import { supabase } from '../lib/supabase';
 
 const handler = async (req, res) => {
   await supabase.auth.api.setAuthCookie(req, res);

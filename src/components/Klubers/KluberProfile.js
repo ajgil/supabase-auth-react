@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../../contexts/Auth'
 import { KluberOde } from '../../contexts/UsersContext'
 
-import { supabase } from '../../supabase'
+import { supabase } from '../../lib/supabase'
 //import Avatar from './Avatar'
 
 export default function KluberProfile() {

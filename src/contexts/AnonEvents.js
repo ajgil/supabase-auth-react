@@ -1,6 +1,6 @@
 // src/contexts/Events.js
 import React, { useEffect, useState } from "react";
-import { supabase } from '../supabase'
+import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/Auth'
 import { Eventos } from './Eventos'
 

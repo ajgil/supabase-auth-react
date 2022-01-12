@@ -1,6 +1,6 @@
 import initStripe from "stripe";
 import { buffer } from "micro";
-import { getServiceSupabase } from "../supabase";
+import { getServiceSupabase } from "../lib/supabase";
 
 export const config = { api: { bodyParser: false } };
 

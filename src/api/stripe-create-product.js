@@ -1,5 +1,5 @@
 import initStripe from "stripe";
-import { getServiceSupabase } from "../../utils/supabase";
+import { getServiceSupabase } from "../lib/supabase";
 
 const handler = async (req, res) => {
   const stripe = initStripe(process.env.STRIPE_SECRET_KEY);

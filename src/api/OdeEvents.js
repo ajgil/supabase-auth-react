@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/Auth'
 
 export default function OdeEvents() {
