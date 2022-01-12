@@ -12,6 +12,51 @@ async changeEmail(email) {
     });
   }
 
+JSON.stringify(): Convierte JS Object a JSON Object.
+JSON.parse(): Convierte JSON Object a JS Object.
+
+SUPABASE 
+    /*
+    https://supabase.com/docs/reference/javascript/select#query-foreign-tables
+        const { data, error } = await supabase
+        .from('eventos')
+        .select(`
+            id,
+            supplier:supplier_id ( name ),
+            purchaser:purchaser_id ( name )
+        `)
+
+        const { data, error } = await supabase
+        .from('eventos')
+        .select(`
+            id,
+            user_id,
+            event,
+            description,
+            profiles:profiles (
+            id
+            ),
+        `)
+        .from("eventos, profiles:id = eq.$user.id") //the table you want to work with
+                  .from("profiles", "eventos") //the table you want to work with
+          .select('*') //columns to select from the database
+          .eq('profiles.id', user.id)
+          ; // sort the data so the last item comes on top;
+
+
+          const datos = data.map(object => ({
+            id: object.id,
+            user_id: object.user_id,
+            event: object.event,
+            description: object.description,
+            release_date: object.release_date,
+            done: object.done
+          }));
+          setDatos(datos);
+          console.log('datos eventos:', datos)
+
+    */
+    
 "react-router-dom": "^5.2.0",
 "react-router-dom": "^6.1.1",
 
@@ -27,34 +72,51 @@ https://database.dev/
 
 https://mui.com/guides/routing/#link
 
+process.env.REACT_APP_SUPABASE_PUBLIC_URL,
 
-https://getstream.io/blog/processing-webhooks-with-stream-chat-lambda-and-node-js/
-https://www.google.es/search?q=serverless+getstream+chat&biw=1309&bih=750&sxsrf=AOaemvKPEoXyCQ8wzXat7T0extUZ3ltFTQ%3A1640882387440&ei=0-DNYd6gGoaPlwS_7pboCg&ved=0ahUKEwie1sie-4v1AhWGx4UKHT-3Ba04FBDh1QMIDw&uact=5&oq=serverless+getstream+chat&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABMgUIIRCgATIFCCEQoAE6BwgjELADECc6BwghEAoQoAFKBAhBGAFKBAhGGABQ7A1YwVBgg2ZoAnAAeACAAYICiAGBC5IBBTUuMy4ymAEAoAEByAEBwAEB&sclient=gws-wiz
+// CREAR una api route secret env --> desde terminal
+node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 
-STREAM_KEY: 'dj4bn8c565ua'
-STREAM_SECRET: '6nm2z8whbex2m5qtf4vqbeyn2u3y6wtfctskmbpz5wewe4t4b2hz3uufwjsucqum'
-STREAM_APP_ID: '1158197'
+// Para testear url local y poder recibir http request 
+// desde servicios externos utilizamos ngrok que nos 
+// da un endpoint para poder utilizarlo mientras no dispongamos de 
+// dominio propio
 
-https://getstream.io/blog/build-a-medical-pager-app/
-https://github.com/adrianhajdin/project_medical_pager_chat/blob/master/server/controllers/auth.js
+npm install ngrok -g
 
+https://dev.to/jereef/como-usar-react-context-de-manera-efectiva-1h6l
 
+https://github.com/MelvinManni/react_supabase/blob/master/src/ItemsContext.js
 
-user 
-{id: '9e1c9f15-fd61-4d8f-b246-d85bf8847d48', aud: 'authenticated', role: 'authenticated', email: 'lafiebreamarilla@hotmail.com', email_confirmed_at: '2021-12-18T13:10:47.39397Z', …}
-app_metadata: {provider: 'email', providers: Array(1)}
-aud: "authenticated"
-confirmation_sent_at: "2021-12-18T13:10:14.116749Z"
-confirmed_at: "2021-12-18T13:10:47.39397Z"
-created_at: "2021-12-18T13:10:14.112014Z"
-email: "lafiebreamarilla@hotmail.com"
-email_confirmed_at: "2021-12-18T13:10:47.39397Z"
-id: "9e1c9f15-fd61-4d8f-b246-d85bf8847d48"
-identities: [{…}]
-last_sign_in_at: "2022-01-07T22:38:17.503893Z"
-phone: ""
-role: "authenticated"
-updated_at: "2022-01-08T08:04:34.461124Z"
-user_metadata:
-ode: true
-[[Prototype]]: Object
+https://github.com/beezeebly/gatsby-stripe-checkout-amplify-example/blob/master/amplify/backend/function/stripeCheckout/src/index.js
+
+https://dev.to/beezfedia/using-the-new-stripe-checkout-in-gatsby-aws-amplify-return-a-session-server-side-3egi
+
+https://medium.com/dzolo38/https-medium-com-dzolo38-implement-the-new-stripe-checkout-workflow-with-a-react-amplify-project-serverless-78eccaac26e0
+
+https://www.zeromolecule.com/blog/5-utility-react-hooks-for-every-project/
+
+ficheros que utilizan supabase
+anonCard
+Dashboard
+Auth
+OdeSingUp
+OdeDashboard
+Avatar
+UserBookingContainer
+
+STRIPE AMPLIFY DEV
+checkout endpoint 
+https://juw1zt4xbl.execute-api.us-east-1.amazonaws.com/dev
+
+webhook endpoint
+https://juw1zt4xbl.execute-api.us-east-1.amazonaws.com/dev/webhook
+
+webhook checkout session ended secret
+whsec_MsYERYY4jsntoMFx28Lqd59IX8Z7o1jV
+
+Test anonCard
+4242 4242 4242 4242
+
+https://www.bitcoininsider.org/article/67526/react-native-chat-chuck-norris
+https://github.com/GetStream/react-native-chat-chucky

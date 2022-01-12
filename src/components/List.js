@@ -9,8 +9,14 @@ export default function List({ eventdata }) {
             <h1>List datos eventos </h1>
                 
             {eventdata.map((evento, index) => {
-                return <EventCard key={index} id={evento.id} evento={evento.evento} description={evento.description}
-                ode_id={evento.ode_id}/>
+                return <EventCard key={index} id={evento.id} 
+                evento={evento.evento} 
+                description={evento.description}
+                ode_id={evento.ode_id}
+                free_event={evento.free_event}
+                price={evento.price}
+                release_date={evento.release_date}
+                />
             })}
         </>
     )

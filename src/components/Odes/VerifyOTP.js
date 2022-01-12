@@ -48,8 +48,6 @@ export function VerifyOTP(props, ref) {
           Already have an account? <Link to="/login">Log In</Link>
         </p>
       </div>
-      
-
     </>
   )
 }

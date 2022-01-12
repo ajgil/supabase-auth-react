@@ -11,9 +11,7 @@ import { VerifyOTP } from './Odes/VerifyOTP'
 //import { AnonEvents } from '../contexts/AnonEvents' //Anon Events solo se muestran en home
 import AnonCard from '../components/AnonCard'
 import { Booking } from '../components/Booking'
-//import ChatUserController from '../components/Chat/ChatUserController'
-//import ChatEjemplo from '../components/Chat/ChatEjemplo'
-
+import Success from './checkout/Success'
 import './App.css'
 
 export function App() {
@@ -40,23 +38,21 @@ export function App() {
       <Router>
         {/* Wrap routes in the AuthProvider 👇 */}
         <AuthProvider>
-        <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
-          <PrivateRoute exact path="/odes" component={OdeDashboard} />
-          <PrivateRoute exact path="/booking" component={Booking} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/odesignup" component={OdeSignup} />
-          <Route path="/odelogin" component={OdeLogin} />
-          <Route path="/verify" component={VerifyOTP} />
-          
-        </Switch>
-        {/* 
-        <Route path="/chat" component={ChatEjemplo} />
-        <AnonEvents /> 
-        <ListEventContainer />
-        */}
-        <AnonCard />
+            <Switch>
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="/odes" component={OdeDashboard} />
+              <PrivateRoute exact path="/booking" component={Booking} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route path="/odesignup" component={OdeSignup} />
+              <Route path="/odelogin" component={OdeLogin} />
+              <Route path="/verify" component={VerifyOTP} />
+              <Route path="/success" component={Success} />
+            </Switch>
+            {/*
+            <ListEventContainer />
+            */}
+            <AnonCard />
         </AuthProvider>
       </Router>
       {/* Mostrar eventos anónimos geolocalizados */}

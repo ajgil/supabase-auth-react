@@ -21,7 +21,6 @@ export function OdeLogin() {
     const password = passwordRef.current.value
     const phone = phoneRef.current.value
 
-    console.log(password)
     // Calls `signIn` function from the context
     const { error } = await signIn({ email, password })
 

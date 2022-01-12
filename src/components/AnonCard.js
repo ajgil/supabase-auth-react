@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { supabase } from '../supabase'
+import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/Auth'
 //import { GetEventos } from '../api/GetEvents'
 
@@ -50,6 +50,7 @@ export default function AnonCard() {
   if (!user){
   return (
     <>
+    <h3>Eventos anonimos</h3>
     <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
@@ -63,7 +64,7 @@ export default function AnonCard() {
             </Card>
           ) : (
              evento.map((item, index) => (
-              <Card style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+              <Card key={index} style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {/* dato.id */}

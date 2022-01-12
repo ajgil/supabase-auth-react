@@ -9,11 +9,12 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { supabase } from '../supabase'
 import { useAuth } from '../contexts/Auth'
+import initStripe from "stripe";
 //import { GetEventos } from '../api/GetEvents'
-import axios from 'axios';
-import { StreamChat } from 'stream-chat'
+import axios from 'axios'
 
-export default function EventCard({id, evento, description, ode_id}) {
+
+export default function EventCard({id, evento, description, ode_id, free_event, price}) {
 
   const { user } = useAuth()
   const [token, setToken] = useState('null')
@@ -51,14 +52,29 @@ export default function EventCard({id, evento, description, ode_id}) {
     } finally {
     }
   }
-
   */
 
-  const handleJoinEvent = (event, id, ode_id) => {
+  const handleJoinEvent = (event, id, ode_id, free_event, price) => {
     event.preventDefault()
-    joinEvent()
+    if (price) {
+      // go payment
+      const token = 'sk_test_51K9SOrEXK2ZVYO77vOeeXfSwVwC41KvH71KGDRIY03Fzvow3wAhkSr4C2TuiKDYlmSYIAadgPbtLJc3QFeBf401X00H9ArEbXb'
+      const params = new URLSearchParams({
+        "price": priceId
+      })
 
-    async function joinEvent() {
+      axios.post('https://rmlnkikje1.execute-api.us-east-1.amazonaws.com/dev/checkout', params
+          ,{
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(function(response) {
+            console.log(response)
+         })
+    }
+
+    async function joinFreeEvent() {
       try {
         const insert = {
           ode_id: ode_id,
@@ -96,8 +112,7 @@ export default function EventCard({id, evento, description, ode_id}) {
     }
   }
 
-
-
+  console.log('Free Event', free_event)
   return(
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> 
@@ -115,10 +130,21 @@ export default function EventCard({id, evento, description, ode_id}) {
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   OdE: {ode_id}
               </Typography>
+              {/*If free_event = true then Free text else paid and price*/}
+                {free_event ? (
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                It is free!
+              </Typography>
+              ):(
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Price: {price} €
+                Nos lleva a pasarela de pago
+              </Typography>
+              )}
               </CardContent>
                 <CardActions>
                     {/*<Link href="/booking">Join Event</Link>*/}
-                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id)}>Join Event</Button>
+                    <Button size="small" onClick = {(event) => handleJoinEvent(event, id, ode_id, free_event, price)}>Join this amazing Event</Button>
                 </CardActions>
               </Card>
       </Grid>
