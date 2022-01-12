@@ -1,15 +1,31 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-
 import { useAuth } from '../contexts/Auth'
 
+export function PrivateRoute({ component: Component, ...rest }) {
+  const { user } = useAuth()
+
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return (
+           user ? <Component {...props} /> : <Redirect to="/" />
+        )
+      }}
+    />
+  )
+}
+
+
+/*
 export function PrivateRoute ({ component: Component, ...rest }) {
   const { user } = useAuth()
 
   return (
     <Route {...rest} render={props => {
       if (!user) {
-      return( <Redirect to="/home" />)
+      return( <Redirect to="/" />)
       }
       // si ode es undefined ir a home
       // si ode true ir a /odes
@@ -34,22 +50,6 @@ export function PrivateRoute ({ component: Component, ...rest }) {
       // authorised so return component
       return <Component {...props} />
     }} />
-  )
-}
-
-/*
-export function PrivateRoute({ component: Component, ...rest }) {
-  const { user } = useAuth()
-
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        return (
-           user ? <Component {...props} /> : <Redirect to="/home" />
-        )
-      }}
-    ></Route>
   )
 }
 */

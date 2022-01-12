@@ -230,7 +230,7 @@ export function OdeDashboard() {
       if (error) throw error;
 
       // Crea chat channel con nombre ode y titulo del evento
-      await createChannel(user.id, firstname, title);
+      //await createChannel(user.id, firstname, title);
 
       if (data) data.map((item) => {
         eventoIdRef.current = item.id
@@ -359,12 +359,13 @@ export function OdeDashboard() {
       </div>
 
       <div>
-        {/* Change it to display the user ID too 👇*/}
+        {/* Change it to display the user ID too 👇
         <h2>Datos recuperados de la tabla principal de Odes</h2>
         <p>Usuario: {username}</p>
         <p>Phone: {phone}</p>
         <p>Website: {website}</p>
         <p>Verificado: {verified}</p>
+        */}
         <form onSubmit={updateProfile}>
             <label htmlFor="input-username">username</label>
             <input id="input-phone" type="text" ref={userNameRef}/>

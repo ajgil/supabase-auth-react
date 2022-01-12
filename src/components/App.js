@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-//import { Signup } from './Signup'
+// klubers
+import { Signup } from '../components/Signup'
+import PreLogIn from '../pages/preLogIn'
 import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
 import { KluberOdeProvider } from '../contexts/UsersContext'
+// odes
 import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
@@ -16,7 +19,7 @@ import Success from './checkout/Success'
 //import ChatUserController from '../components/Chat/ChatUserController'
 //import ChatEjemplo from '../components/Chat/ChatEjemplo'
 import Home from '../pages/Home'
-import PreLogIn from '../pages/preLogIn'
+
 import KluberProfile from '../components/Klubers/KluberProfile'
 //import Register from '../pages/register'
 //import BasicTabs from './BasicTabs'
@@ -52,20 +55,27 @@ export function App() {
         <Route path="/signup" component={Signup} /> */}
         <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="/home" component={Dashboard} />
               <PrivateRoute exact path="/odes" component={OdeDashboard} />
               <PrivateRoute exact path="/kluber" component={KluberProfile} />
               <PrivateRoute exact path="/booking" component={Booking} />
+              
+              <Route path="/" component={Home} />
+              {/* Klubers */}
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
+              <Route path="/prelogin" component={PreLogIn} />
+              {/* Klubers */}
               <Route path="/odesignup" component={OdeSignup} />
               <Route path="/secondstep" component={SecondStep} />
               <Route path="/odelogin" component={OdeLogin} />
               <Route path="/verify" component={VerifyOTP} />
+               {/* Stripe */}
               <Route path="/success" component={Success} />
-              <Route path="/PreLogIn" component={PreLogIn} />
+              
               {/* Victoria pahts */}
               {/* Rutas que no funcionan :
+              
                 <Route path="/Register" element={Register} />
                   He creado un basicTab alternativo y tampoco se muestra
                 <Route path="/registeralt" element={BasicTabs} />

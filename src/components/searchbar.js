@@ -58,7 +58,7 @@ const SearchBar = () => {
             <StyleTitleSearch>¡ENCUENTRA TU ACTIVIDAD FAVORITA!</StyleTitleSearch>
             <Container>
                 <StyledContainer container>
-                    <Grid md={3}>
+                    <Grid item={true} md={3}>
                         <Box sx={{ minWidth: 120 }}>
                             <StyledFormControl>
                                 <InputLabel id="demo-simple-select-label">Selecciona Lugar</InputLabel>
@@ -76,7 +76,7 @@ const SearchBar = () => {
                             </StyledFormControl>
                         </Box>
                     </Grid>
-                    <Grid md={3}justifyContent="center">
+                    <Grid item={true} md={3}justifyContent="center">
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
                                 label="Selecciona Fecha"
@@ -88,7 +88,7 @@ const SearchBar = () => {
                             />
                         </LocalizationProvider>
                     </Grid>
-                    <Grid md={3} justifyContent="center">
+                    <Grid item={true} md={3} justifyContent="center">
                         <Box sx={{ minWidth: 120 }}>
                             <StyledFormControl >
                                 <InputLabel id="demo-simple-select-label">Selecciona Categoría</InputLabel>
