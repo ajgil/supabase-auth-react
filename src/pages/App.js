@@ -1,13 +1,21 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
+import '../styles/App.css';
+
+// General - comunes
+import PreRegister from '../pages/preRegister'
+import { Login } from './login'
+
 // klubers
+import Register from './register'
+
 import { Signup } from '../components/Signup'
-import PreLogIn from '../pages/preLogIn'
-import { Login } from './Login'
 import { Dashboard } from './Dashboard'
 import { AuthProvider } from '../contexts/Auth'
 import { KluberOdeProvider } from '../contexts/UsersContext'
+
 // odes
+import RegisterODE from './registerODE'
 import { OdeSignup} from './Odes/Odesignup'
 import { OdeLogin } from './Odes/OdeLogin'
 import { OdeDashboard } from './Odes/OdeDashboard'
@@ -21,10 +29,9 @@ import Success from './checkout/Success'
 import Home from '../pages/Home'
 
 import KluberProfile from '../components/Klubers/KluberProfile'
-//import Register from '../pages/register'
+
 //import BasicTabs from './BasicTabs'
 
-import './App.css'
 //import OdeSignupPhone from './Odes/OdeSignUpPhone'
 import SecondStep from './Odes/SignUpform/SecondStep'
 
@@ -63,15 +70,18 @@ export function App() {
               <PrivateRoute exact path="/kluber" component={KluberProfile} />
               <PrivateRoute exact path="/booking" component={Booking} />
               
-              {/* Publicas */}
+              {/* Publicas comunues */}
               <Route path="/home" component={Home} />
+              <Route path="/preregister" component={PreRegister}/>
+              <Route path="/login" component={Login} />
               
               {/* Klubers */}
               <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
-              <Route path="/prelogin" component={PreLogIn} />
+              
+              <Route path="/register" component={Register} />
 
               {/* Odes */}
+              <Route path="/registerode" component={RegisterODE} />
               <Route path="/odesignup" component={OdeSignup} />
               <Route path="/secondstep" component={SecondStep} />
               <Route path="/odelogin" component={OdeLogin} />

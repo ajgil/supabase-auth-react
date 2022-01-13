@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import Footer from './components/footer'
 import Navbar from './components/navbar';
 
-import { App } from './components/App'
+import { App } from './pages/App'
 
 // import Stripe antifraude
 import "@stripe/stripe-js"

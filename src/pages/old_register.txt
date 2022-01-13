@@ -9,9 +9,10 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import HikLogoNoTxt from '../resources/hikLogoNoText.jpg';
-import SignUp from '../components/signUp';
+//import { Signup } from '../components/Signup';
+import { SignUpUsers } from '../components/SignUpUsers'
+import SignUpODES from '../components/SignUpODES';
 import '../styles/register.scss';
-
 
 function a11yProps(index) {
 	return {
@@ -19,7 +20,6 @@ function a11yProps(index) {
 		"aria-controls": `simple-tabpanel-${index}`
 	};
 }
-
 
 const Register = () => {
 
@@ -38,7 +38,10 @@ const Register = () => {
     });
   };*/
 
+  console.log('Estoy en register')
   return (
+    <>
+    <h1>register</h1>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -55,11 +58,26 @@ const Register = () => {
           <Typography component="h1" variant="h3">
             Registrate
           </Typography>
-
-					<SignUp/>
-
+          <AppBar position="static" sx={{backgroundColor:'transparent', boxShadow:'none'}}>
+					<Tabs
+						centered
+						value={value}
+						onChange={handleChange}
+						aria-label="simple tabs">
+              
+            <Tab label="Usuario" {...a11yProps(0)} />
+						<Tab label="Empresa" {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+          <div role="tabpanel" hidden={value !== 0} id={`simple-tabpanel-${0}`}>
+					<SignUpUsers />
+				</div>
+				<div role="tabpanel" hidden={value !== 1} id={`simple-tabpanel-${1}`}>
+          <SignUpODES/>
+				</div>
         </Box>
       </Container>
+      </>
   );
 }
 export default Register;

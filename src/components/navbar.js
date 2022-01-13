@@ -48,16 +48,13 @@ const Navbar = () => {
 
         <Grid container item md={10} display="flex" justifyContent="flex-end">
         <Toolbar className="signUpButtonHome" >
-          <img className="Hiklub__SpanishFlag" src={SpainFlag} alt="SpanishFlag" style={{ width: "2rem", padding:"0.5rem"}}/>
+          <img className="Hiklub__SpanishFlag" src={SpainFlag} alt="SpanishFlag" style={{ width: "2rem", padding:"0.5rem", boxShadow:'none'}}/>
             <StyledButtonsLogSign className="button-LogIn">Blog</StyledButtonsLogSign>
-            <Link to='/Register'>
-            <StyledButtonsLogSign className="signUpButtonHome" >Registrarse</StyledButtonsLogSign>
+            <Link to='/PreRegister'>
+            <StyledButtonsLogSign variant='contained'style={{ backgroundColor: "#93C01F" }} className="signUpButtonHome" >Empezar</StyledButtonsLogSign>
             </Link>
-            <Link to="/PreLogIn">
+            <Link to ="/Login">
             <StyledButtonsLogSign className="button-LogIn">Iniciar Sesión</StyledButtonsLogSign>
-            </Link>
-            <Link to="/odelogin">
-            <StyledButtonEvent style={{ backgroundColor: "#93C01F" }} className="button-Event" variant='contained'>Crear Evento</StyledButtonEvent>
             </Link>
         </Toolbar>
         </Grid>
