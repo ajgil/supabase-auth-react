@@ -24,7 +24,19 @@ https://reactjs.org/docs/faq-structure.html
 * Agrupar por tipo de fichero
 
 ### Hiklub estructura
-Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista Controlador)
+Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista Controlador).
+En ningún caso se superarán 2 niveles de anidación
+
+```
+src/
+--- hiklub/
+----- klubers/
+------- profile/
+------- avatar/
+----- bookings/
+------- bookingsItem/
+------- bookingsList/
+```
 
 * `hiklub` contendrá todos aquellos componentes relacionados con la unidad funcional que corresponda
 
@@ -49,6 +61,17 @@ Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista
 * `api` backend 
 
 ## Codificación
+
+### Ramas y features
+
+* La rama principal es `develop`
+
+* Nuevas funcionalidades `feature/funcionalidad`
+
+* Integrar servicios de terceros `integration/servicio`
+
+* Bugs / errores / correcciones `bug/error`
+
 
 ### Rutas
 Se utilizarán siempre rutas absolutas
