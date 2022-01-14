@@ -1,6 +1,6 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 
 import Button from '@mui/material/Button';
@@ -37,8 +37,8 @@ export function SignUpKluber() {
   // Get signUp function from the auth context
   const { signUpKluber, signInWithFacebook, signInWithGoogle } = useAuth()
 
-  const history = useHistory()
-
+  let navigate = useNavigate();
+  
   async function handleSubmit(e) {
     e.preventDefault()
 

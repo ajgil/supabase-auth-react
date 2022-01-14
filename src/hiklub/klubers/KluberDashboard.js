@@ -1,6 +1,6 @@
 // src/components/Dashboard.js
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/Auth'
 import { KluberOde } from '../contexts/UsersContext'
 import { supabase } from '../lib/supabase'
@@ -49,7 +49,7 @@ export function Dashboard() {
   }
   */
   
-  const history = useHistory()
+  let navigate = useNavigate();
 
   useEffect(() => {
     //getProfile()

@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react'
-import { useHistory   } from 'react-router-dom'
+import { useNavigate   } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../contexts/Auth'
 //import { InsertPaymentEvent } from '../../helpers/Helpers'
@@ -14,7 +14,7 @@ const Success = () => {
   // Get signUp function from the auth context
   const { user } = useAuth()
 
-  //const history = useHistory()
+  //let navigate = useNavigate();
 
   async function joinPaidEvent() {
       // remove all

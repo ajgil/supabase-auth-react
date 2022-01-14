@@ -1,6 +1,6 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState, useRef } from "react";
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { supabase } from "../../lib/supabase";
 import { StreamChat } from 'stream-chat';
@@ -51,7 +51,7 @@ export function OdeDashboard() {
 
   const [channel, setChannel] = useState(null);
   
-  const history = useHistory()
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (user === null) {
