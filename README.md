@@ -52,7 +52,7 @@ src/
 * `lib` recursos de backend y otros servicios
 
 * `utils` es sinónimo de `helpers` todas las funciones que sean transversales
-- funciones de fecha
+    - funciones de fecha
 
 * `resources`
 
