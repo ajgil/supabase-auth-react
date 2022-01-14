@@ -2,10 +2,8 @@
 import { useState, useEffect } from 'react'
 //import { useHistory, Redirect } from 'react-router-dom'
 import { KluberOde } from '../../contexts/UsersContext'
-
 import { supabase } from '../../lib/supabase'
 //import Avatar from './Avatar'
-import { KluberMenuPopupState } from './KluberMenu'
 
 export default function KluberProfile() {
   const { odekluber } = KluberOde()
@@ -30,7 +28,7 @@ export default function KluberProfile() {
   return (
     <>
     <h1>Kluber profile</h1>
-    <KluberMenuPopupState />
+
     </>
   )
 }

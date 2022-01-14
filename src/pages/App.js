@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { PrivateRoute } from './PrivateRoute'
+import { PrivateRoute } from '../components/PrivateRoute'
 import '../styles/App.css';
 
 // General - comunes
