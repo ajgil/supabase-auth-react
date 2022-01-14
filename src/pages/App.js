@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from '../context/Auth'
+import { AuthProvider } from '../contexts/Auth'
 
 import '../styles/App.css';
 import Home from './Home';
