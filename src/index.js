@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from "react-router-dom";
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
-import Footer from './components/footer'
-import Navbar from './components/navbar';
+import App from './pages/App'
+import reportWebVitals from './reportWebVitals'
+import Footer from './components/Footer'
+import Navbar from './components/NavBar'
 
 ReactDOM.render(
   <BrowserRouter>
