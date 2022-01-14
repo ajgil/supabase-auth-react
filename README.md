@@ -26,27 +26,27 @@ https://reactjs.org/docs/faq-structure.html
 ### Hiklub estructura
 Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista Controlador)
 
-** `hiklub` contendrá todos aquellos componentes relacionados con la unidad funcional que corresponda
+* `hiklub` contendrá todos aquellos componentes relacionados con la unidad funcional que corresponda
 
-** `components` todos aquellos componentes y vistas comunes a la aplicación
-- Botones
-- Listas
-- layouts (sidebar, navbar)
+* `components` todos aquellos componentes y vistas comunes a la aplicación
+    - Botones
+    - Listas
+    - layouts (sidebar, navbar)
 
-** `context` los contextos de aplicación
+* `context` los contextos de aplicación
 
-** `pages` las estructuras de página que contendrán componentes visuales
+* `pages` las estructuras de página que contendrán componentes visuales
 
-** `lib` recursos de backend y otros servicios
+* `lib` recursos de backend y otros servicios
 
-** `utils` es sinónimo de `helpers` todas las funciones que sean transversales
+* `utils` es sinónimo de `helpers` todas las funciones que sean transversales
 - funciones de fecha
 
-** `resources`
+* `resources`
 
 ** `styles`
 
-** `api` backend 
+* `api` backend 
 
 
 #### Guia de estilo de Airbnb TLDR
