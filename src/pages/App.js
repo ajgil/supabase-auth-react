@@ -2,12 +2,12 @@ import React from 'react';
 import '../styles/App.css';
 import Home from './Home';
 import LogIn from './LogIn'
-import Register from './Register'
-import PreLogIn from './preLogIn'
-import PreRegister from './preRegister'
-import UserProfileEdit from './UserProfieEdit'
+//import Register from './Register'
+//import PreLogIn from './PreLogIn.js'
+//import PreRegister from './PreRegister'
+//import UserProfileEdit from './UserProfieEdit'
 import { Routes, Route, Link } from "react-router-dom";
-import RegisterODE from './registerODE';
+//import RegisterODE from './registerODE';
 
 const App = () => {
   return (
@@ -15,12 +15,18 @@ const App = () => {
        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<LogIn />} />
-        <Route path="register" element={<Register />} />
+        
+        {/* <Route path="PreLogIn" element={<PreLogIn />}/> 
+            <Route path="PreLogIn" element={<PreLogIn />} />
+            <Route path="register" element={<Register />} />
         <Route path="RegisterODE" element={<RegisterODE/> } />
-        <Route path="PreLogIn" element={<PreLogIn />}/>
-        <Route path="PreRegister" element={<PreRegister />}/>
-        <Route path="PreLogIn" element={<PreLogIn />} />
+        <Route path="preregister" element={<PreRegister />}/>
+
         <Route path="User" element={<UserProfileEdit />} />
+        
+        */}
+        
+       
        </Routes>
        
   );
