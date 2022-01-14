@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../components/navbar'
+//import Navbar from '../components/Navbar'
 import { Fragment } from 'react';
 import AffinityButton from '../components/AffinityButton';
 import SearchBar from '../components/SearchBar';
 import Divider from '@mui/material/Divider';
 import EventDest from '../components/EventDest';
-import EventFuturo from '../components/eventFuturo';
+import EventFuturo from '../components/EventFuturo';
 import { Container } from '@mui/material';
 import { Grid } from '@mui/material';
 
