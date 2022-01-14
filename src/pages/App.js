@@ -3,7 +3,6 @@ import '../styles/App.css';
 import Home from './Home';
 import LogIn from './LogIn'
 import Register from './Register'
-//import PreLogIn from './PreLogIn.js'
 import PreRegister from './PreRegister'
 //import UserProfileEdit from './UserProfieEdit'
 import { Routes, Route, Link } from "react-router-dom";
@@ -19,13 +18,10 @@ const App = () => {
         <Route path="registerode" element={<RegisterOde/> }/>
         <Route path="register" element={<Register />} />
         
-        {/* <Route path="PreLogIn" element={<PreLogIn />}/> 
+        {/*
         <Route path="User" element={<UserProfileEdit />} />
-  */}
-        
-       
+  */}  
        </Routes>
-       
   );
 }
 
