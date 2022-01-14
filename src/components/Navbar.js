@@ -34,7 +34,7 @@ const StyledButtonEvent = styled(Button, {})({
 
 })
 
-const NavBar = () => {
+const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <StyledNavbar elevation={0}>

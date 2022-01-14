@@ -1,10 +1,10 @@
 import React from 'react';
 import Navbar from '../components/navbar'
 import { Fragment } from 'react';
-import AffinityButton from '../components/affinitybutton.js';
-import SearchBar from '../components/searchbar';
+import AffinityButton from '../components/AffinityButton';
+import SearchBar from '../components/SearchBar';
 import Divider from '@mui/material/Divider';
-import EventDest from '../components/eventDest.js';
+import EventDest from '../components/EventDest';
 import EventFuturo from '../components/eventFuturo';
 import { Container } from '@mui/material';
 import { Grid } from '@mui/material';

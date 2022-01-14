@@ -4,15 +4,15 @@ New 2022 FrontEnd repository
 # Guia de Nomenclatura y codificación 
 
 ## Directorios
-se escriben siempre en minúscula
+Se escriben siempre en minúscula
 
 ## Ficheros
 
 ### Componentes
-Se utilizará notación PasalCase
+Se utilizará notación `PasalCase`
 
 ### páginas
-Se utilizará notación PasalCase para el fichero, y la ruta será siempre en minúscula
+Se utilizará notación `PasalCase` para el fichero, y la ruta web será siempre en _minúscula_
 
 ## Estructura de la aplicación
 Según indica React no existe un sistema estructura definida. Recomiendan:

@@ -5,11 +5,11 @@ import { BrowserRouter } from "react-router-dom";
 import App from './pages/App'
 import reportWebVitals from './reportWebVitals'
 import Footer from './components/Footer'
-import NavBar from './components/NavBar'
+import Navbar from './components/Navbar'
 
 ReactDOM.render(
   <BrowserRouter>
-    <NavBar/>
+    <Navbar/>
     <App />
     <Footer/>
   </BrowserRouter>,
