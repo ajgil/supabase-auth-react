@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import Home from './Home';
 import LogIn from './LogIn'
-import Register from './register'
+import Register from './Register'
 import PreLogIn from './preLogIn'
 import PreRegister from './preRegister'
 import UserProfileEdit from './UserProfieEdit'
@@ -14,8 +14,8 @@ const App = () => {
 
        <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="LogIn" element={<LogIn />} />
-        <Route path="Register" element={<Register />} />
+        <Route path="login" element={<LogIn />} />
+        <Route path="register" element={<Register />} />
         <Route path="RegisterODE" element={<RegisterODE/> } />
         <Route path="PreLogIn" element={<PreLogIn />}/>
         <Route path="PreRegister" element={<PreRegister />}/>
