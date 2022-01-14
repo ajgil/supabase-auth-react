@@ -32,7 +32,7 @@ src/
 --- hiklub/
 ----- klubers/
 ------- profile/
-------- avatar/
+------- preferences/
 ----- bookings/
 ------- bookingsItem/
 ------- bookingsList/
@@ -44,6 +44,7 @@ src/
     - Botones
     - Listas
     - layouts (sidebar, navbar)
+    - Avatar (es común a odes y klubers)
 
 * `context` los contextos de aplicación
 
