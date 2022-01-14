@@ -1,8 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import SignUpOdeDetails from './SignUpOdeDetails';
-import OdeNumbConfirm from './odeNumbConfirm';
-import OdeSignUpSuccess from './odeSignUpSuccess';
+import OdeNumbConfirm from './OdeNumbConfirm';
+import OdeSignUpSuccess from './OdeSignUpSuccess';
 
 export class SignUpOde extends Component {
     state = {
@@ -66,4 +66,4 @@ export class SignUpOde extends Component {
     }
 }
 
-export default SignUpODE;
+export default SignUpOde;

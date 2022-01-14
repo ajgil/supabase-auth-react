@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import { Typography } from "@mui/material";
 import { styled } from '@mui/styles';
 
-const odeNumbConfirm = ({prevStep, nextStep, handleChange, values}) => {
+const OdeNumbConfirm = ({prevStep, nextStep, handleChange, values}) => {
 
     const StyledSignInButtons = styled(Button, {})({
         backgroundColor: '#7C378A',
@@ -69,4 +69,4 @@ const odeNumbConfirm = ({prevStep, nextStep, handleChange, values}) => {
     )
 }
 
-export default odeNumbConfirm;
+export default OdeNumbConfirm;

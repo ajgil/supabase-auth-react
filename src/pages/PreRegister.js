@@ -77,12 +77,12 @@ const PreRegister = () => {
         </Grid>
         <Grid container sx= {{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <Grid item md={6} sx={{ m:'1rem'}}>
-            <Link to='/RegisterODE'>
+            <Link to='/registerode'>
             <StyledButton variant='contained'> Hacer Eventos </StyledButton>
             </Link>
             </Grid>
             <Grid item md={6}>
-            <Link  to='/Register'>
+            <Link  to='/register'>
             <StyledButton sx={{ m:'1rem', mb:'5rem'}} variant='contained'> Asistir a Eventos </StyledButton>
             </Link>
             </Grid>
