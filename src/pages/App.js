@@ -1,4 +1,6 @@
 import React from 'react';
+import { AuthProvider } from '../context/Auth'
+
 import '../styles/App.css';
 import Home from './Home';
 import LogIn from './LogIn'
@@ -12,15 +14,17 @@ const App = () => {
   return (
 
        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<LogIn />} />
-        <Route path="preregister" element={<PreRegister />}/>
-        <Route path="registerode" element={<RegisterOde/> }/>
-        <Route path="register" element={<Register />} />
-        
-        {/*
-        <Route path="User" element={<UserProfileEdit />} />
-  */}  
+          <AuthProvider>
+               <Route path="/" element={<Home />} />
+               <Route path="login" element={<LogIn />} />
+               <Route path="preregister" element={<PreRegister />}/>
+               <Route path="registerode" element={<RegisterOde/> }/>
+               <Route path="register" element={<Register />} />
+               
+               {/*
+               <Route path="User" element={<UserProfileEdit />} />
+               */}  
+          </AuthProvider>
        </Routes>
   );
 }

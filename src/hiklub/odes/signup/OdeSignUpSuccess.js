@@ -4,7 +4,7 @@ import { styled } from "@mui/styles";
 import Container from '@mui/material/Container'
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
-import BikeGirl from '../resources/bikegirl.png';
+import BikeGirl from '../../../resources/bikegirl.png';
 import { Link } from "react-router-dom";
 
 const OdeSignUpSuccess = () => {

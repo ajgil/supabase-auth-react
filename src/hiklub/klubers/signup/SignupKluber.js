@@ -1,7 +1,7 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import { useAuth } from '../contexts/Auth'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '../../../context/Auth'
 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +16,7 @@ import { styled } from '@mui/styles';
 import { Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
-import '../styles/register.scss';
+import '../../../styles/register.scss';
 
 
 export function SignUpKluber() {
@@ -37,7 +37,7 @@ export function SignUpKluber() {
   // Get signUp function from the auth context
   const { signUpKluber, signInWithFacebook, signInWithGoogle } = useAuth()
 
-  const history = useHistory()
+  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -65,7 +65,7 @@ export function SignUpKluber() {
       } else {
         alert("Check your email for your login link!")
         // Redirect user to Dashboard
-        history.push('/')
+        navigate('/')
       }
     }
   }
