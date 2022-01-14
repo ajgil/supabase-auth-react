@@ -44,7 +44,7 @@ Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista
 
 * `resources`
 
-** `styles`
+* `styles`
 
 * `api` backend 
 
