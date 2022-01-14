@@ -1,7 +1,7 @@
 # HiklubFrontEnd
 New 2022 FrontEnd repository
 
-# Guia de Nomenclatura y codificación
+# Guia de Nomenclatura y codificación 
 
 ## Directorios
 se escriben siempre en minúscula
@@ -48,6 +48,10 @@ Se opta por una estructura mixta, intentando seguir el patrón MVC (Modelo Vista
 
 * `api` backend 
 
+## Codificación
+
+### Rutas
+Se utilizarán siempre rutas absolutas
 
 #### Guia de estilo de Airbnb TLDR
 https://github.com/airbnb/javascript/tree/master/react#naming
