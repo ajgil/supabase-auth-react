@@ -11,6 +11,7 @@
     "@mui/material": "^5.2.4",
     "@mui/styled-engine-sc": "^5.1.0",
     "@mui/styles": "^5.2.1",
+    "@supabase/supabase-js": "^1.29.1",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -24,6 +25,9 @@
     "react-scripts": "^4.0.3",
     "sass": "^1.44.0",
     "scss": "^0.2.4",
+    "stream-chat": "^5.1.2",
+    "stream-chat-react": "^6.12.2",
+    "stripe": "^8.197.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },
