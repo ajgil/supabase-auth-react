@@ -9,11 +9,10 @@ import { AuthProvider } from './contexts/Auth'
 
 ReactDOM.render(
   <BrowserRouter>
-  <Navbar/>
-  <AuthProvider>
-      
+    <Navbar/>
+      <AuthProvider>
         <App />
-    </AuthProvider>
+      </AuthProvider>
     <Footer/>
   </BrowserRouter>,
   document.getElementById('root')
