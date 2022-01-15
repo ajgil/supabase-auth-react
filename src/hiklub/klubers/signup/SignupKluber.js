@@ -19,7 +19,7 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import '../../../styles/register.scss';
 
 
-export function SignUpKluber() {
+export default function SignUpKluber() {
 
   const StyledSignInButtons = styled(Button, {})({
     backgroundColor: '#93C01F',
