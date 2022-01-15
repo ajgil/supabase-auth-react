@@ -127,7 +127,7 @@ const SignUpOdeDetails = ({nextStep, handleChange, values}) => {
             </Grid>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link href="/LogIn" variant="body2">
+                <Link href="/login" variant="body2">
                   ¿Ya tienes una cuenta? ¡Entonces accede aquí!
                 </Link>
               </Grid>

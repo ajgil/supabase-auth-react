@@ -30,14 +30,15 @@ export default function SignUpKluber() {
     width: '100%'
   })
 
+  let navigate = useNavigate();
+
+  // Get signUp function from the auth context
+  const { signUp, signInWithFacebook, signInWithGoogle } = useAuth()
+
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordTwoRef = useRef()
 
-  // Get signUp function from the auth context
-  const { signUpKluber, signInWithFacebook, signInWithGoogle } = useAuth()
-
-  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -50,7 +51,7 @@ export default function SignUpKluber() {
       alert("Passwords don't match");
     } else {
         // Calls `signUp` function from the context
-      const { error } = await signUpKluber({ 
+      const { error } = await signUp({ 
         email,
         password 
         },{  
