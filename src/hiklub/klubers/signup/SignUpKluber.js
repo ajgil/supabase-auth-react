@@ -1,7 +1,7 @@
 // src/components/Signup.js
 import { useRef, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../../../context/Auth'
+import { useAuth } from '../../../contexts/Auth'
 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
