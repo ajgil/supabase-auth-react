@@ -139,12 +139,18 @@ export default function SignUpKluber() {
               <Typography sx={{fontWeight: 'bold'}}>
                 Tambien puedes registrarte con:
               </Typography>
-              <StyledFBGoogleButton  fullWidth sx={{ mt:'1rem', mb: 2, boxShadow: 'none', backgroundColor:'#DF4B38', textDecoration: 'none'}} variant='contained' > 
+              <StyledFBGoogleButton 
+                fullWidth sx={{ mt:'1rem', mb: 2, boxShadow: 'none', backgroundColor:'#DF4B38', textDecoration: 'none'}} 
+                variant='contained' 
+                onClick={signInWithGoogle}> 
              <GoogleIcon sx={{m:'0.5rem'}}/> Registrarse con Google
               </StyledFBGoogleButton>
               </Grid>
               <Grid item  sx={{width:'100%'}}>
-              <StyledFBGoogleButton fullWidth sx={{ mb: 2, boxShadow: 'none', backgroundColor:'#3E5C9A', textDecoration: 'none'}} variant='contained'>
+              <StyledFBGoogleButton 
+                fullWidth sx={{ mb: 2, boxShadow: 'none', backgroundColor:'#3E5C9A', textDecoration: 'none'}} 
+                variant='contained'
+                onClick={signInWithFacebook}>
               <FacebookRoundedIcon sx={{m:'0.5rem'}}/>Registrarse con Facebook
               </StyledFBGoogleButton>
               </Grid>

@@ -1,13 +1,13 @@
 // src/components/Dashboard.js
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/Auth'
-import { KluberOde } from '../contexts/UsersContext'
-import { supabase } from '../lib/supabase'
-import Avatar from './Avatar'
+import { useAuth } from '../../contexts/Auth'
+import { KluberOde } from '../../contexts/UsersContext'
+import { supabase } from '../../lib/supabase'
+import Avatar from '../../components/Avatar'
 //import ListEventContainer from '../container/ListEventContainer'
-import AllEventsCard from './Eventos/AllEventsCard'
-import UserBookingsContainer from "../container/UserBookingsContainer"
+import AllEventsCard from '../events/AllEventsCard'
+import UserBookingsContainer from "../../container/UserBookingsContainer"
 import axios from 'axios'
 
 export function Dashboard() {
@@ -164,7 +164,8 @@ export function Dashboard() {
     await signOut()
 
     // Redirects the user to Login page
-    history.push('/login')
+    //history.push('/login')
+    navigate('/login')
   }
 
   /*

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from '../supabase'
+import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/Auth'
-import ListBookings from '../components/Bookings/ListBookings'
+import ListBookings from '../hiklub/Bookings/ListBookings'
 //import ListUserBoooking from "../components/Bookings/ListUserBooking";
 
 export default function UserBookingsContainer() {
