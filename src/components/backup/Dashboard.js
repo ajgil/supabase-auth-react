@@ -1,20 +1,16 @@
 // src/components/Dashboard.js
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/Auth'
-import { KluberOde } from '../../contexts/UsersContext'
-import { supabase } from '../../lib/supabase'
-import Avatar from '../../components/Avatar'
-//import ListEventContainer from '../container/ListEventContainer'
-import AllEventsCard from '../events/AllEventsCard'
-import UserBookingsContainer from "../../container/UserBookingsContainer"
+import { useAuth } from '../contexts/Auth'
+import { supabase } from '../supabase'
+import Avatar from './Avatar'
+import ListEventContainer from '../container/ListEventContainer'
+import UserBookingsContainer from "../container/UserBookingsContainer"
 import axios from 'axios'
 
 export function Dashboard() {
   // Get current user and signOut function from context
-  const { user, signOut, activeEvents } = useAuth()
-  const { odekluber } = KluberOde()
-
+  const { user, userProfile, signOut } = useAuth()
 
   const [loading, setLoading] = useState(null)
   const [username, setUsername] = useState(null)
@@ -49,22 +45,20 @@ export function Dashboard() {
   }
   */
   
-  let navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     //getProfile()
-    //getData()
+    getData()
     //updateProperties()
 
   }, [])
-
-  //console.log('eventos activos dasboard usuario', activeEvents)
 
   async function getProfile() {
     try {
 
       let { data, error } = await supabase
-        .from('klubers')
+        .from('profiles')
         .select(`username, full_name, avatar_url, provider`)
         .eq('id', user.id)
         .single()
@@ -164,8 +158,7 @@ export function Dashboard() {
     await signOut()
 
     // Redirects the user to Login page
-    //history.push('/login')
-    navigate('/login')
+    navigate.push('/login')
   }
 
   /*
@@ -178,25 +171,27 @@ export function Dashboard() {
       console.log(error)
     } else {
       // Redirect user to Dashboard
-      history.push('/bookings')
+      navigate.push('/bookings')
     }
   }
   */
- console.log('Dashboard de usuario user', user)
- console.log('Dashboard de usuario kluber', odekluber)
- 
+ console.log('user',user)
+ console.log('userProfile', userProfile)
+ if (user.user_metadata.ode) console.log('metadata true')
   return (
     <>
     <div>
       {/* Change it to display the user ID too 👇*/}
-      <h2>Datos Kluber</h2>
-      <p>Nombre completo: {odekluber?.full_name}</p>
-      <p>Usuario: {odekluber?.username}</p>
-      <p>Provider: {odekluber?.provider}</p>
-      <p>Avatar: {odekluber?.avatar_url}</p>
-      <p>Your id, {odekluber?.id}!</p>
-      <p>Kluber email: {odekluber.email}</p>
-      <p>Your phone: {odekluber?.phone}</p>
+      <h2>Datos recuperados de la tabla de Perfiles de usuario</h2>
+      <p>Nombre: {userProfile.full_name}</p>
+      <p>Usuario: {username}</p>
+      <p>Provider: {provider}</p>
+      <p>Avatar: {avatar_url}</p>
+      <h2>Datos recuperados de la tabla maestra Users</h2>
+      <p>Your id, {user?.id}!</p>
+      <p>Your email: {user?.email}</p>
+      <p>Your phone: {user?.phone}</p>
+      <p>you metadata:</p>
       {/* 
       <p>Welcome, {user?.user_metadata.full_name}!</p>
       <p>Provider: {user?.app_metadata.provider}</p>
@@ -205,8 +200,9 @@ export function Dashboard() {
       <p>{user?.aud}</p>
       */}
     </div>
+
+    <h2>Actualizar perfil de usuario</h2>
     <div>
-      <h2>Actualizar perfil de usuario</h2>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={user.email} disabled />
@@ -229,6 +225,7 @@ export function Dashboard() {
             }}
           />
       </div>
+
       <div>
         <button
           className="button block primary"
@@ -244,6 +241,7 @@ export function Dashboard() {
     <div>
       <h2>Test Afinidad</h2>
       <div>
+      <div>
         <label htmlFor="username">Pregunta 1</label>
         <input
           id="test-1"
@@ -252,6 +250,7 @@ export function Dashboard() {
           onChange={(e) => setTest(e.target.value)}
         />
       </div>
+
       <div>
         <button
           className="button block primary"
@@ -264,19 +263,18 @@ export function Dashboard() {
         </button>
       </div>
     </div>
-      <div>
-        <h2>Eventos cerca de ti</h2>
-        {/*<ListEventContainer />  
-        <AllEventsCard />
-        */}
-      </div>  
+
+    <div>
+    </div>
+      <ListEventContainer />
+    </div>
     <div>
       <h2>Mis Eventos</h2>
       <h3>Accede al chat</h3>
       <UserBookingsContainer />
     </div>
     <div>
-      <button onClick={handleSignOut}>Sign out</button>
+    <button onClick={handleSignOut}>Sign out</button>
     </div>
     </>
   )

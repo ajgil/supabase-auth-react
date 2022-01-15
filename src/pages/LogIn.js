@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet
+} from "react-router-dom";
+import { useAuth } from '../contexts/Auth'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,6 +24,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../styles/LogIn.scss';
 
 const LogIn = () => {
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let user = useAuth();
+
+  let from = location.state?.from?.pathname || "/";
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -84,7 +99,7 @@ const LogIn = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/Register" variant="body2">
+                <Link to="/register" variant="body2">
                   {"¿No tienes una cuenta? ¡Regístrate!"}
                 </Link>
               </Grid>
