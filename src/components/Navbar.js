@@ -50,10 +50,10 @@ const Navbar = () => {
         <Toolbar className="signUpButtonHome" >
           <img className="Hiklub__SpanishFlag" src={SpainFlag} alt="SpanishFlag" style={{ width: "2rem", padding:"0.5rem", boxShadow:'none'}}/>
             <StyledButtonsLogSign className="button-LogIn">Blog</StyledButtonsLogSign>
-            <Link to='/PreRegister'>
+            <Link to='/preregister'>
             <StyledButtonsLogSign variant='contained'style={{ backgroundColor: "#93C01F" }} className="signUpButtonHome" >Empezar</StyledButtonsLogSign>
             </Link>
-            <Link to ="/PreLogIn">
+            <Link to ="/login">
             <StyledButtonsLogSign className="button-LogIn">Iniciar Sesión</StyledButtonsLogSign>
             </Link>
         </Toolbar>
